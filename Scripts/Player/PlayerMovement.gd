@@ -3,22 +3,21 @@ extends Node2D
 var velocity = Vector2(0,0)
 const speed = 350
 const focusedSpeed = 200
+var deadZone = 0.2
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
 
-func moveAround(obj):
+func moveAround(obj, nb):
 	velocity = Vector2(0, 0)
-
-	var horizontal = (Input.get_action_strength("right") - Input.get_action_strength("left"))
-	var vertical = (Input.get_action_strength("down") - Input.get_action_strength("up"))
+	var horizontal = Input.get_joy_axis(nb, JOY_AXIS_0)
+	var vertical = Input.get_joy_axis(nb, JOY_AXIS_1)
+	if abs(horizontal) < deadZone:
+		horizontal = 0
+	if abs(vertical) < deadZone:
+		vertical = 0
 	var actualSpeed = 0
-	if Input.is_action_pressed("focus"):
+	if Input.is_joy_button_pressed(nb, JOY_L3):
 		actualSpeed = focusedSpeed
 		$Core.visible = true
 	else:

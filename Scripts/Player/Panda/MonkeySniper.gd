@@ -1,6 +1,6 @@
 extends Node
 
-var cd = 200
+var cd = 1200
 onready var projectile_obj = preload("res://Prefabs/Panda/Projectile.tscn")
 
 var time_last_used = 0
@@ -26,5 +26,7 @@ func skill():
 	var bullet = projectile_obj.instance()
 	world.add_child(bullet)
 	bullet.direction = skill_manager.angle_aim
+	bullet.speed = 2000
+	bullet.distance_max = 2000
 	bullet.spawn_pos = player.position
 	bullet.position = player.position
