@@ -1,11 +1,13 @@
 extends Camera2D
 
+export var active = true
+
 func calculateOffsetZoom(players):
 	var screenSize = OS.window_size
 	var maxX = 0.0
 	var maxY = 0.0
-	var minX = 1280.0
-	var minY = 1280.0
+	var minX = 1920.0
+	var minY = 1080.0
 	var scaling = 1.0
 	var Xscaling = 1.0
 	var Yscaling = 1.0
@@ -18,7 +20,6 @@ func calculateOffsetZoom(players):
 	Xscaling = (maxX - minX) / screenSize.x
 	Yscaling = (maxY - minY) / screenSize.y
 	scaling = max(Xscaling, Yscaling)
-
 	offset.x = minX + screenSize.x * (Xscaling - scaling) / 2
 	offset.y = minY + screenSize.y * (Yscaling - scaling) / 2
 	zoom = Vector2(scaling, scaling)
@@ -26,6 +27,8 @@ func calculateOffsetZoom(players):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if (!active):
+		return
 	var players = get_node("/root/MainScene/Players").get_children()
 	var screenSize = OS.window_size
 

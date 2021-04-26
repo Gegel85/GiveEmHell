@@ -32,6 +32,7 @@ animations = [ {
 show_behind_parent = true
 collision_layer = 2147483649
 script = ExtResource( 2 )
+color = Color( 0, 1, 0.905882, 1 )
 
 [node name="Collider" type="Area2D" parent="." groups=[
 "Player",

@@ -37,8 +37,8 @@ func skill():
 		bullet.duplicate(true)
 		bullet.position = player.position
 		bullet.player = player.name
-		bullet.size = 0.75
-		bullet.speed = 100
+		bullet.size = 1
+		bullet.speed = 300
 		bullet.set_values()
 		bullet.move_dir = s.global_rotation
 
@@ -49,7 +49,7 @@ func _process(delta):
 
 func useSkill():
 	actual_time = OS.get_ticks_msec()
-	if (actual_time - time_last_used < cd):
+	if (actual_time - time_last_used < cd && time_last_used > 0):
 		return
 	time_last_used = actual_time
 	skill()
