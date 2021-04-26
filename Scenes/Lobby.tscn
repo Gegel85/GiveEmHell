@@ -31,14 +31,6 @@ margin_bottom = 146.909
 text = "Back"
 next_scene_path = "res://Scenes/Menu.tscn"
 
-[node name="ChangeSceneButton4" parent="." instance=ExtResource( 2 )]
-margin_left = 1294.98
-margin_top = 30.2722
-margin_right = 1553.98
-margin_bottom = 150.272
-text = "Start"
-next_scene_path = "res://Scenes/MainScene.tscn"
-
 [node name="GridContainer" type="GridContainer" parent="."]
 anchor_left = 0.5
 anchor_top = 1.0
