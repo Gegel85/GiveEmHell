@@ -6,7 +6,6 @@
 [node name="MainScene" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-visible = false
 anchor_mode = 0
 script = ExtResource( 2 )
 active = false
@@ -14,9 +13,6 @@ active = false
 [node name="Players" type="Node" parent="."]
 
 [node name="Projectiles" type="Node" parent="."]
-
-[node name="Camera2D2" type="Camera2D" parent="."]
-current = true
 
 [node name="SpawnSystem" type="Node" parent="."]
 script = ExtResource( 4 )
