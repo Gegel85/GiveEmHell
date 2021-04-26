@@ -33,6 +33,8 @@ func bounce_balls(object):
 			obj_parent.player = player_name
 			obj_parent.move_dir += PI
 			obj_parent.color = player.color
+			obj_parent.set_color_to_player()
+			obj_parent.spawn_pos = obj_parent.position
 
 func useSkill():
 	actual_time = OS.get_ticks_msec()
