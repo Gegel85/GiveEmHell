@@ -19,10 +19,9 @@ func _init():
 		var file = dir.get_next()
 		if file == "":
 			break
-		if !file.ends_with(".import"):
+		if !file.ends_with(".import") && file.ends_with(".png"):
 			characterList.append("res://Textures/CharactersIcons/" + file)
 	dir.list_dir_end()
-	print(characterList)
 	for i in range(0, characterList.size()):
 		characterList[i] = load(characterList[i])
 
@@ -42,6 +41,12 @@ func changeState():
 		state = Panel.IDLE
 		getLabel().visible = true
 		getTexture().visible = false
+
+func getChar():
+	var name = characterList[characterIndex].get_load_path().split(".png")[0]
+	name = name.split("/")
+	name = name[name.size() - 1]
+	return name
 
 func rightChar():
 	if characterIndex == (characterList.size() - 1):

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tortoise.png-7de8ac1529382703f450038a3d5ffc4d.stex"
+path="res://.import/Tortoise.png-df806e6f289ddc9f633e0a8535275e7e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/CharactersIcons/tortoise.png"
-dest_files=[ "res://.import/tortoise.png-7de8ac1529382703f450038a3d5ffc4d.stex" ]
+source_file="res://Textures/CharactersIcons/Tortoise.png"
+dest_files=[ "res://.import/Tortoise.png-df806e6f289ddc9f633e0a8535275e7e.stex" ]
 
 [params]
 

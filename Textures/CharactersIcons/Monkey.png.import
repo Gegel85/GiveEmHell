@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/monke.png-2470d2e2fce3ba18189f1cb971b570f6.stex"
+path="res://.import/Monkey.png-3e2ed0aa6b289f13c954c428ff876180.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/CharactersIcons/monke.png"
-dest_files=[ "res://.import/monke.png-2470d2e2fce3ba18189f1cb971b570f6.stex" ]
+source_file="res://Textures/CharactersIcons/Monkey.png"
+dest_files=[ "res://.import/Monkey.png-3e2ed0aa6b289f13c954c428ff876180.stex" ]
 
 [params]
 

@@ -56,8 +56,23 @@ func _process(delta):
 					elapsedTime[i] = OS.get_ticks_msec()
 			if (Input.is_joy_button_pressed(deviceList[i], JOY_BUTTON_0) && !playerRdy.has(deviceList[i])):
 				playerRdy.append(deviceList[i])
-	if playerRdy.size() == nbOfPlayer && playerRdy.size() > player.MIN:
-		get_tree().change_scene(next_scene_path)
+	if playerRdy.size() == nbOfPlayer && playerRdy.size() >= player.MIN:
+		var root = get_tree().get_root()
+		var next_level_resource = load("res://Scenes/MainScene.tscn")
+		var next_level = next_level_resource.instance()
+		root.add_child(next_level)
+		for i in range(deviceList.size()):
+			addPlayer(panelList[i].getChar(), i + 1)
+		root.get_node("MainScene/SpawnSystem").spawn_players()
+		var level = root.get_node("MainScreen")
+		root.remove_child(level)
+		level.call_deferred("free")
+		
+func addPlayer(name:String, nb: int):
+	var c = load("res://Prefabs/Characters/" + name + ".tscn").instance()
+	c.name = "Player" + str(nb)
+	get_tree().get_root().get_node("MainScene/Players").add_child(c)
 
 func _get_configuration_warning() -> String:
 	return "next scene path must be set for the game to start" if next_scene_path == "" else ""
+
