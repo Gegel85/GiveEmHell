@@ -4,9 +4,13 @@ var velocity = Vector2(0,0)
 const speed = 350
 const focusedSpeed = 200
 var deadZone = 0.2
+var instance
 
 func _ready():
-	pass # Replace with function body.
+	instance = instance_from_id(get_instance_id())
+
+func spawnAt(pos):
+	instance.set_pos(pos)
 
 func moveAround(obj, nb):
 	velocity = Vector2(0, 0)
