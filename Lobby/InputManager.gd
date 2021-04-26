@@ -37,17 +37,17 @@ func _input(event):
 	print(event.device)
 	if (event is InputEventJoypadButton) or (event is InputEventJoypadMotion):
 		actualMode = controlModes.JOYSTICK
-		
 		join(event.device)
 #		if playerRdy.size() == nbOfPlayer:
 # warning-ignore:return_value_discarded
 #			get_tree().change_scene(next_scene_path)
 
+# warning-ignore:unused_argument
 func _process(delta):
 	for i in range(deviceList.size()):
 			var hor = Input.get_joy_axis(deviceList[i], JOY_AXIS_0)
 			if (playerRdy.has(deviceList[i])):
-				break
+				continue
 			if (OS.get_ticks_msec() - elapsedTime[i]) > 500:
 				if hor > 0.2:
 					panelList[i].rightChar()
