@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Textures/core.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Player/PlayerManager.gd" type="Script" id=2]
@@ -8,10 +8,9 @@
 [ext_resource path="res://Textures/arrow.png" type="Texture" id=6]
 [ext_resource path="res://Scripts/Player/PlayerMovement.gd" type="Script" id=7]
 [ext_resource path="res://Scripts/Player/SkillManager.gd" type="Script" id=8]
-[ext_resource path="res://Scripts/Player/Panda/PandaBasicShoot.gd" type="Script" id=9]
-[ext_resource path="res://Scripts/Player/Panda/MonkeySniper.gd" type="Script" id=10]
-[ext_resource path="res://Scripts/Player/Panda/PandaRoll.gd" type="Script" id=11]
+[ext_resource path="res://Prefabs/Characters/ShellBlast.gd" type="Script" id=9]
 [ext_resource path="res://Scripts/Player/Lifebar.gd" type="Script" id=12]
+[ext_resource path="res://Prefabs/Characters/GrannysCookies.gd" type="Script" id=13]
 
 [sub_resource type="GDScript" id=1]
 
@@ -74,14 +73,15 @@ texture = ExtResource( 6 )
 
 [node name="SkillList" type="Node" parent="SkillsModule"]
 
-[node name="PandaBasicShoot" type="Node" parent="SkillsModule/SkillList"]
+[node name="ShellBlast" type="Node" parent="SkillsModule/SkillList"]
 script = ExtResource( 9 )
 
-[node name="MonkeySniper" type="Node" parent="SkillsModule/SkillList"]
-script = ExtResource( 10 )
+[node name="Rotater" type="Node2D" parent="SkillsModule/SkillList/ShellBlast"]
 
-[node name="PandaRoll" type="Node" parent="SkillsModule/SkillList"]
-script = ExtResource( 11 )
+[node name="GrannysCookies" type="Node" parent="SkillsModule/SkillList"]
+script = ExtResource( 13 )
+
+[node name="Rotater" type="Node2D" parent="SkillsModule/SkillList/GrannysCookies"]
 
 [node name="Lifebar" type="Sprite" parent="."]
 self_modulate = Color( 1, 1, 1, 0.313726 )

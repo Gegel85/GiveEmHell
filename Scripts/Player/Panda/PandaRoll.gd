@@ -1,7 +1,7 @@
 extends Node
 
 var cd = 1000
-onready var load_path = "res://Prefabs/Panda/Projectile.tscn"
+onready var load_path = "res://Prefabs/Projectile.tscn"
 
 var time_last_used = 0
 var actual_time = 0
@@ -42,10 +42,10 @@ func _process(delta):
 	bullet.position = player.position	
 	bullet.player = player.name
 	bullet.lifetime = 50
-	bullet.damage = 25
+	bullet.damage = 40
 	bullet.size = 2.5
 	bullet.speed = 0
 	bullet.set_values()
-	var horizontal = Input.get_joy_axis(nb, JOY_AXIS_0)
-	var vertical = Input.get_joy_axis(nb, JOY_AXIS_1)
+	var horizontal = Input.get_action_strength("right_" + str(nb + 1)) - Input.get_action_strength("left_" + str(nb + 1))
+	var vertical = Input.get_action_strength("down_" + str(nb + 1)) - Input.get_action_strength("up_" + str(nb + 1))
 	player.move_and_slide(Vector2(horizontal, vertical) * speed)
