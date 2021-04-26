@@ -4,16 +4,21 @@ var number
 var invincible = false
 var invincibility_duration = 1000
 var start_invincible = 0
+export var color = Color()
 
 func _ready():
 	number = int(self.get_name().split("Player")[1])
+
+func make_invincible_for(duration):
+	invincible = true
+	start_invincible = OS.get_ticks_msec()
+	invincibility_duration = duration
 
 func take_damage(dmg):
 	if (invincible):
 		return
 	$Lifebar.take_damage(dmg)
-	invincible = true
-	start_invincible = OS.get_ticks_msec()
+	make_invincible_for(1000)
 	$Appearance.modulate.a = 0.5
 
 func _physics_process(delta):

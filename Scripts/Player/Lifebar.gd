@@ -21,7 +21,10 @@ func display_health_bar():
 	$Energy.position.x = pos_min + ((pos_max + (pos_min * -1)) * percent)
 
 func out_of_life():
-	get_parent().queue_free()
+	var spawner_pos = get_tree().get_root().get_child(0).get_node("SpawnSystem").get_random_spawn()
+	get_parent().position = spawner_pos
+	HP = HP_max
+	display_health_bar()
 
 func take_damage(nb):
 	if (HP - nb <= HP_max):

@@ -21,7 +21,7 @@ func _ready():
 
 func useSkill():
 	actual_time = OS.get_ticks_msec()
-	if (actual_time - time_last_used < cd):
+	if (actual_time - time_last_used < cd && time_last_used > 0):
 		return
 	use_time = actual_time
 	time_last_used = actual_time
@@ -33,6 +33,8 @@ func _process(delta):
 	actual_time = OS.get_ticks_msec()
 	if (actual_time - use_time >= active_time):
 		active_skill = false
+		player.get_node("MovementModule").useForcedSpeed = false
+		player.get_node("MovementModule").forcedSpeed = 0
 		return
 	var nb = player.number - 1
 	var bullet = load(load_path).instance()
@@ -46,6 +48,5 @@ func _process(delta):
 	bullet.size = 2.5
 	bullet.speed = 0
 	bullet.set_values()
-	var horizontal = Input.get_action_strength("right_" + str(nb + 1)) - Input.get_action_strength("left_" + str(nb + 1))
-	var vertical = Input.get_action_strength("down_" + str(nb + 1)) - Input.get_action_strength("up_" + str(nb + 1))
-	player.move_and_slide(Vector2(horizontal, vertical) * speed)
+	player.get_node("MovementModule").useForcedSpeed = true
+	player.get_node("MovementModule").forcedSpeed = speed

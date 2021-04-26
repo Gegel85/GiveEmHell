@@ -1,11 +1,14 @@
 extends Node2D
 
 var velocity = Vector2(0,0)
-const speed = 350
+export var speed = 350
 export var focused = false
-const focusedSpeed = 200
+export var focusedSpeed = 200
 var deadZone = 0.2
 var instance
+var actualSpeed = 0
+var forcedSpeed = 0
+var useForcedSpeed = false 
 
 func _ready():
 	instance = instance_from_id(get_instance_id())
@@ -21,7 +24,6 @@ func moveAround(obj, nb):
 		horizontal = 0
 	if abs(vertical) < deadZone:
 		vertical = 0
-	var actualSpeed = 0
 	if Input.is_action_pressed("focus_" + str(nb)):
 		focused = true
 		actualSpeed = focusedSpeed
@@ -30,6 +32,8 @@ func moveAround(obj, nb):
 		focused = false
 		actualSpeed = speed
 		$Core.visible = false
+	if (useForcedSpeed):
+		actualSpeed = forcedSpeed
 	velocity.y = vertical * actualSpeed
 	velocity.x = horizontal * actualSpeed
 

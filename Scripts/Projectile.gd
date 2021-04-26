@@ -10,9 +10,14 @@ var lifetime = 99999
 var size = 1
 var spawn_time = 0
 var vector
+var color = Color(255, 255, 255)
 
 func _ready():
 	set_values()
+
+func set_color_to_player():
+	color = get_tree().get_root().get_child(0).get_node("Players").get_node(player).color
+	$Appearance.modulate = color
 
 func set_values():
 	spawn_pos = position
@@ -20,6 +25,8 @@ func set_values():
 	$Collider.get_node("CollisionShape2D").scale = Vector2(size * 2, size * 2)
 	$Collider.connect("area_entered", self, "on_collision")
 	spawn_time = OS.get_ticks_msec()
+	if (player != ""):
+		set_color_to_player()
 
 func on_collision(object):
 	var obj_parent = object.get_parent()
@@ -29,7 +36,7 @@ func on_collision(object):
 			queue_free()
 
 func _process(delta):
-	var actual_time = OS.get_ticks_msec()	
+	var actual_time = OS.get_ticks_msec()
 	vector = Vector2(cos(move_dir), sin(move_dir))
 	move_and_slide(vector  * speed)
 	if (spawn_pos.distance_to(position) > distance_max):
