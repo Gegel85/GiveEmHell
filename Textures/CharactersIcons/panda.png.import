@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Panda.png-fa14c840018050d782c964b1201a8744.stex"
+path="res://.import/panda.png-6afe0fc15c7a2320c0dc1e976c17f7e7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/CharactersIcons/Panda.png"
-dest_files=[ "res://.import/Panda.png-fa14c840018050d782c964b1201a8744.stex" ]
+source_file="res://Textures/CharactersIcons/panda.png"
+dest_files=[ "res://.import/panda.png-6afe0fc15c7a2320c0dc1e976c17f7e7.stex" ]
 
 [params]
 
