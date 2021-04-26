@@ -1,7 +1,7 @@
 extends Node
 
 var cd = 200
-onready var projectile_obj = preload("res://Prefabs/Panda/Projectile.tscn")
+onready var load_path = "res://Prefabs/Panda/Projectile.tscn"
 
 var time_last_used = 0
 var actual_time = 0
@@ -23,8 +23,11 @@ func useSkill():
 	skill()
 
 func skill():
-	var bullet = projectile_obj.instance()
+	var bullet = load(load_path).instance()
 	world.add_child(bullet)
-	bullet.direction = skill_manager.angle_aim
-	bullet.spawn_pos = player.position
+	bullet.duplicate(true)
+	bullet.move_dir = skill_manager.angle_aim
 	bullet.position = player.position
+	bullet.player = player.name
+	bullet.size = 0.75
+	bullet.set_values()
