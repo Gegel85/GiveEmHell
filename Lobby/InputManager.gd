@@ -7,7 +7,8 @@ enum controlModes {
 }
 
 enum player {
-	MAX = 4
+	MAX = 4,
+	MIN = 2
 }
 
 export(String, FILE) var next_scene_path = ""
@@ -37,17 +38,15 @@ func _input(event):
 	print(event.device)
 	if (event is InputEventJoypadButton) or (event is InputEventJoypadMotion):
 		actualMode = controlModes.JOYSTICK
-		
 		join(event.device)
-#		if playerRdy.size() == nbOfPlayer:
-# warning-ignore:return_value_discarded
-#			get_tree().change_scene(next_scene_path)
+#		
 
+# warning-ignore:unused_argument
 func _process(delta):
 	for i in range(deviceList.size()):
 			var hor = Input.get_joy_axis(deviceList[i], JOY_AXIS_0)
 			if (playerRdy.has(deviceList[i])):
-				break
+				continue
 			if (OS.get_ticks_msec() - elapsedTime[i]) > 500:
 				if hor > 0.2:
 					panelList[i].rightChar()
@@ -57,6 +56,8 @@ func _process(delta):
 					elapsedTime[i] = OS.get_ticks_msec()
 			if (Input.is_joy_button_pressed(deviceList[i], JOY_BUTTON_0) && !playerRdy.has(deviceList[i])):
 				playerRdy.append(deviceList[i])
+	if playerRdy.size() == nbOfPlayer && playerRdy.size() > player.MIN:
+		get_tree().change_scene(next_scene_path)
 
 func _get_configuration_warning() -> String:
 	return "next scene path must be set for the game to start" if next_scene_path == "" else ""
