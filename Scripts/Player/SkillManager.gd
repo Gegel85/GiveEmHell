@@ -7,7 +7,7 @@ enum controlModes {
 
 var mouseLastPos = Vector2.ZERO
 var joyLastDir = Vector2.ZERO
-var deadZone = 0.2
+var deadZone = 0.1
 var actualMode = controlModes.JOYSTICK
 export var angle_aim = 0
 
@@ -46,11 +46,11 @@ func SkillActivator(nb):
 	if ($SkillList.is_inside_tree()):
 		 skills = $SkillList.get_children()
 	var nb_skills = skills.size()
-	if (nb_skills > 0 && Input.is_joy_button_pressed(nb, JOY_R2)):
+	if (nb_skills > 0 && Input.is_action_pressed("basic_shoot_" + str(nb))):
 		$SkillList.get_child(0).useSkill()
-	if (nb_skills > 1 && Input.is_joy_button_pressed(nb, JOY_R)):
+	if (nb_skills > 1 && Input.is_action_pressed("skill1_" + str(nb))):
 		$SkillList.get_child(1).useSkill()
-	if (nb_skills > 2 && Input.is_joy_button_pressed(nb, JOY_L)):
+	if (nb_skills > 2 && Input.is_action_pressed("skill2_" + str(nb))):
 		$SkillList.get_child(2).useSkill()
-	if (nb_skills > 3 && Input.is_joy_button_pressed(nb, JOY_L2)):
+	if (nb_skills > 3 && Input.is_action_pressed("skill3_" + str(nb))):
 		$SkillList.get_child(3).useSkill()
