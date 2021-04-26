@@ -11,6 +11,13 @@ enum player {
 	MIN = 2
 }
 
+const playerColors = [
+	Color(1, 0.7, 0),
+	Color(0, 0, 1),
+	Color(0.4, 1, 0),
+	Color(1, 0, 0.8)
+]
+
 export(String, FILE) var next_scene_path = ""
 var actualMode = controlModes.JOYSTICK
 var nbOfPlayer = 0
@@ -19,14 +26,14 @@ var panelList = []
 var playerRdy = []
 var elapsedTime = []
 
-func _init():
+func _ready():
 	panelList = get_children()
+	for i in range(panelList.size()):
+		panelList[i].setColorTexture(playerColors[i])
 
 func join(device):
 	if (nbOfPlayer > player.MAX || deviceList.has(device)):
 		return
-	if (panelList.size() == 0):
-		panelList = get_children()
 	deviceList.append(device)
 	elapsedTime.append(0)
 	panelList[nbOfPlayer].changeState()
@@ -62,15 +69,16 @@ func _process(delta):
 		var next_level = next_level_resource.instance()
 		root.add_child(next_level)
 		for i in range(deviceList.size()):
-			addPlayer(panelList[i].getChar(), i + 1)
-		root.get_node("MainScene/SpawnSystem").spawn_players()
+			addPlayer(panelList[i].getChar(), deviceList[i], i)
+		root.get_node("MainScene/Map/SpawnSystem").spawn_players()
 		var level = root.get_node("MainScreen")
 		root.remove_child(level)
 		level.call_deferred("free")
 		
-func addPlayer(name:String, nb: int):
+func addPlayer(name:String, nb: int, i):
 	var c = load("res://Prefabs/Characters/" + name + ".tscn").instance()
-	c.name = "Player" + str(nb)
+	c.name = "Player" + str(nb + 1)
+	c.color = playerColors[i]
 	get_tree().get_root().get_node("MainScene/Players").add_child(c)
 
 func _get_configuration_warning() -> String:

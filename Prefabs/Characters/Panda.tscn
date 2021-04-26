@@ -33,7 +33,7 @@ animations = [ {
 show_behind_parent = true
 collision_layer = 2147483649
 script = ExtResource( 2 )
-color = Color( 1, 0.701961, 0, 1 )
+color = Color( 1, 0, 0.866667, 1 )
 
 [node name="Collider" type="Area2D" parent="." groups=[
 "Player",
@@ -48,9 +48,9 @@ shape = SubResource( 2 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2( 1.2, 1.2 )
 shape = SubResource( 3 )
-disabled = true
 
 [node name="Appearance" type="AnimatedSprite" parent="."]
+modulate = Color( 1, 0.690196, 0, 1 )
 show_behind_parent = true
 light_mask = 2
 position = Vector2( -0.111367, -1.90735e-06 )

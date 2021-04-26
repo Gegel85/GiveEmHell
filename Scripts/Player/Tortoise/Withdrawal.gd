@@ -5,7 +5,7 @@ var cd = 5000
 var time_last_used = 0
 var actual_time = 0
 var use_time = 0
-var active_time = 2000
+var active_time = 1500
 
 var active_skill = false
 var skill_manager

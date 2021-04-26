@@ -11,7 +11,7 @@ var player
 var world
 
 func _ready():
-	world = get_tree().get_root().get_child(0).get_node("Projectiles")
+	world = get_tree().get_root().get_node("MainScene").get_node("Projectiles")
 	skill_manager = get_parent().get_parent()
 	player = skill_manager.get_parent()
 

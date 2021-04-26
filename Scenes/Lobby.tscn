@@ -24,10 +24,10 @@ __meta__ = {
 }
 
 [node name="ChangeSceneButton3" parent="." instance=ExtResource( 2 )]
-margin_left = 57.1809
-margin_top = 26.9087
-margin_right = 316.181
-margin_bottom = 146.909
+margin_left = 57.0
+margin_top = 27.0
+margin_right = 215.0
+margin_bottom = 100.0
 text = "Back"
 next_scene_path = "res://Scenes/Menu.tscn"
 
@@ -36,10 +36,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -676.0
-margin_top = -718.272
-margin_right = 676.0
-margin_bottom = -30.2722
+margin_left = -366.5
+margin_top = -435.0
+margin_right = 366.5
 custom_constants/vseparation = 20
 custom_constants/hseparation = 20
 columns = 2
@@ -50,17 +49,21 @@ __meta__ = {
 next_scene_path = "res://Scenes/MainScene.tscn"
 
 [node name="Panel" parent="GridContainer" instance=ExtResource( 5 )]
+margin_right = 356.0
+margin_bottom = 207.0
 
 [node name="Panel2" parent="GridContainer" instance=ExtResource( 5 )]
-margin_left = 686.0
-margin_right = 1352.0
+margin_left = 376.0
+margin_right = 732.0
+margin_bottom = 207.0
 
 [node name="Panel3" parent="GridContainer" instance=ExtResource( 5 )]
-margin_top = 353.0
-margin_bottom = 686.0
+margin_top = 227.0
+margin_right = 356.0
+margin_bottom = 434.0
 
 [node name="Panel4" parent="GridContainer" instance=ExtResource( 5 )]
-margin_left = 686.0
-margin_top = 353.0
-margin_right = 1352.0
-margin_bottom = 686.0
+margin_left = 376.0
+margin_top = 227.0
+margin_right = 732.0
+margin_bottom = 434.0

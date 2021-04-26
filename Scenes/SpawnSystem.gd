@@ -10,7 +10,7 @@ func spawn_players():
 	nb_spawns = get_child_count()	
 	rng.randomize()
 	var start_spawn = rng.randf_range(0, nb_spawns)
-	var players = get_parent().get_node("Players").get_children()
+	var players = get_parent().get_parent().get_node("Players").get_children()
 	var nb_player = 0
 	for player in players:
 		player.position = get_child(int(int(start_spawn + nb_player) % nb_spawns)).position

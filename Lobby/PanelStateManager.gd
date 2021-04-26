@@ -62,3 +62,5 @@ func leftChar():
 		characterIndex -= 1
 	getTexture().texture = characterList[characterIndex]
 	
+func setColorTexture(color):
+	getTexture().modulate = color

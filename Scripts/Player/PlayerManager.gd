@@ -8,6 +8,7 @@ export var color = Color()
 
 func _ready():
 	number = int(self.get_name().split("Player")[1])
+	$Appearance.modulate = color
 
 func make_invincible_for(duration):
 	invincible = true

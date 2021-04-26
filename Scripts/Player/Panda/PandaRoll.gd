@@ -1,12 +1,12 @@
 extends Node
 
-var cd = 1000
+var cd = 5000
 onready var load_path = "res://Prefabs/Projectile.tscn"
 
 var time_last_used = 0
 var actual_time = 0
 var use_time = 0
-var active_time = 300
+var active_time = 500
 
 var active_skill = false
 var speed = 1000
@@ -15,7 +15,7 @@ var player
 var world
 
 func _ready():
-	world = get_tree().get_root().get_child(0).get_node("Projectiles")
+	world = get_tree().get_root().get_node("MainScene").get_node("Projectiles")
 	skill_manager = get_parent().get_parent()
 	player = skill_manager.get_parent()
 

@@ -7,8 +7,8 @@
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
+current = true
 script = ExtResource( 2 )
-active = false
 
 [node name="Players" type="Node" parent="."]
 
