@@ -11,12 +11,19 @@ func calculateOffsetZoom(players):
 	var scaling = 1.0
 	var Xscaling = 1.0
 	var Yscaling = 1.0
+	var map = get_node("/root/MainScene/Map")
+	var topLeft = map.get_node("TopLeftCorner")
+	var bottomRight = map.get_node("BottomRightCorner")
 
 	for player in players:
-		maxX = max(player.position.x + 40, maxX)
-		maxY = max(player.position.y + 40, maxY)
 		minX = min(player.position.x - 40, minX)
 		minY = min(player.position.y - 40, minY)
+		maxX = max(player.position.x + 40, maxX)
+		maxY = max(player.position.y + 40, maxY)
+	minX = min(minX, topLeft.position.x)
+	minX = min(minY, topLeft.position.y)
+	maxX = max(maxX, bottomRight.position.x)
+	maxY = max(maxY, bottomRight.position.y)
 	Xscaling = (maxX - minX) / screenSize.x
 	Yscaling = (maxY - minY) / screenSize.y
 	scaling = max(max(Xscaling, Yscaling), 0.5)
