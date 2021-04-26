@@ -9,7 +9,7 @@
 [ext_resource path="res://Scripts/Player/PlayerMovement.gd" type="Script" id=7]
 [ext_resource path="res://Scripts/Player/SkillManager.gd" type="Script" id=8]
 [ext_resource path="res://Scripts/Player/Panda/PandaBasicShoot.gd" type="Script" id=9]
-[ext_resource path="res://Scripts/Player/Panda/MonkeySniper.gd" type="Script" id=10]
+[ext_resource path="res://Scripts/Player/Monkey/MonkeySniper.gd" type="Script" id=10]
 [ext_resource path="res://Scripts/Player/Panda/PandaRoll.gd" type="Script" id=11]
 [ext_resource path="res://Scripts/Player/Lifebar.gd" type="Script" id=12]
 
