@@ -8,22 +8,29 @@ enum Panel {
 var state = Panel.IDLE
 var characterList = []
 var characterIndex = 0
+var label: Label
+var texture: TextureRect
+const CHARACTER_ICON_PATH = "res://Textures/CharactersIcons/"
 
 func _init():
 	var dir = Directory.new()
 
-	dir.open("res://Textures/CharactersIcons/")
+	dir.open(CHARACTER_ICON_PATH)
 	dir.list_dir_begin(true, true)
 
 	while true:
 		var file = dir.get_next()
 		if file == "":
 			break
-		if !file.ends_with(".import") && file.ends_with(".png"):
-			characterList.append("res://Textures/CharactersIcons/" + file)
+		if file.ends_with(".import"):
+			characterList.append(CHARACTER_ICON_PATH + file.replace(".import", ""))
 	dir.list_dir_end()
-	for i in range(0, characterList.size()):
+	for i in range(characterList.size()):
 		characterList[i] = load(characterList[i])
+
+func _ready():
+	label = getLabel()
+	texture = getTexture()
 
 func getLabel():
 	return get_child(0)
@@ -34,16 +41,17 @@ func getTexture():
 func changeState():
 	if (state == Panel.IDLE):
 		state = Panel.FOCUS
-		getLabel().visible = false
-		getTexture().visible = true
-		getTexture().texture = characterList[characterIndex]
+		label.visible = false
+		texture.visible = true
+		texture.texture = characterList[characterIndex]
 	else:
 		state = Panel.IDLE
-		getLabel().visible = true
-		getTexture().visible = false
+		label.visible = true
+		texture.visible = false
 
 func getChar():
 	var name = characterList[characterIndex].get_load_path().split(".png")[0]
+#	print(characterList[characterIndex].get_name())
 	name = name.split("/")
 	name = name[name.size() - 1]
 	return name
@@ -53,14 +61,14 @@ func rightChar():
 		characterIndex = 0
 	else:
 		characterIndex += 1
-	getTexture().texture = characterList[characterIndex]
+	texture.texture = characterList[characterIndex]
 
 func leftChar():
 	if characterIndex == 0:
 		characterIndex = (characterList.size() - 1)
 	else:
 		characterIndex -= 1
-	getTexture().texture = characterList[characterIndex]
+	texture.texture = characterList[characterIndex]
 	
 func setColorTexture(color):
 	getTexture().modulate = color
