@@ -29,6 +29,13 @@ func _init():
 		panelList[i].setColorTexture(playerColors[i])
 		add_child(panelList[i])
 
+func disconnectJoy(device, connected):
+	if !connected && deviceList.has(device):
+		leave(device)
+		
+func _ready():
+	Input.connect("joy_connection_changed", self, "disconnectJoy")
+
 func join(device):
 	if nbOfPlayer > player.MAX || deviceList.has(device):
 		return
