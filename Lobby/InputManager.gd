@@ -71,7 +71,7 @@ func _input(event):
 		if Input.is_action_just_released("ui_accept"):
 			join(device)
 #Leave the lobby
-		elif Input.is_action_just_released("ui_cancel"):
+		elif Input.is_action_just_released("ui_cancel") && !playerRdy.has(device):
 			leave(device)
 
 func _unhandled_input(event):
@@ -93,15 +93,23 @@ func _unhandled_input(event):
 				panelList[i].leftChar()
 				elapsedTime[i] = OS.get_ticks_msec()
 #Start game
-	if playerRdy.size() == nbOfPlayer && playerRdy.size() >= player.MIN:
-		var root = get_tree().get_root()
-		
-		loadScene(next_scene_path)
-		for i in range(player.MAX):
-			if deviceList[i] != -1:
-				addPlayer(panelList[i].getChar(), deviceList[i], i)
-		root.get_node("MainScene/Map/SpawnSystem").spawn_players()
-		unloadScene("MainScreen")
+	if playerRdy.size() >= player.MIN:
+		start()
+
+func isRdy() -> bool:
+	return playerRdy.size() == nbOfPlayer && nbOfPlayer != 0
+
+func start():
+	var root = get_tree().get_root()
+	
+	if !isRdy():
+		return
+	loadScene(next_scene_path)
+	for i in range(player.MAX):
+		if deviceList[i] != -1:
+			addPlayer(panelList[i].getChar(), deviceList[i], i)
+	root.get_node("MainScene/Map/SpawnSystem").spawn_players()
+	unloadScene("MainScreen")	
 
 func loadScene(path):
 	var root = get_tree().get_root()
