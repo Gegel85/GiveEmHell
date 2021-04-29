@@ -51,7 +51,7 @@ func changeState():
 
 func getChar():
 	var name = characterList[characterIndex].get_load_path().split(".png")[0]
-#	print(characterList[characterIndex].get_name())
+
 	name = name.split("/")
 	name = name[name.size() - 1]
 	return name
