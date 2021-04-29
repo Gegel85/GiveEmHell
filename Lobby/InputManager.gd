@@ -12,18 +12,17 @@ const playerColors = [
 	Color(0.4, 1, 0),
 	Color(1, 0, 0.8)
 ]
-
 const UIPlayer = preload("res://Lobby/Panel.tscn")
-const TIME_BETWEEN_CHAR_CHANGE = 300#in ms
+const TIME_BETWEEN_CHAR_CHANGE:int = 300#in ms
 
 export(String, FILE) var next_scene_path = ""
-var nbOfPlayer = 0
+var nbOfPlayer: int = 0
 var deviceList = []
 var panelList = []
 var playerRdy = []
 var elapsedTime = []
 
-func _init():
+func _init() -> void:
 	panelList.resize(player.MAX)
 	deviceList.resize(player.MAX)
 	elapsedTime.resize(player.MAX)
@@ -34,14 +33,15 @@ func _init():
 		panelList[i].setColorTexture(playerColors[i])
 		add_child(panelList[i])
 
-func disconnectJoy(device, connected):
+func disconnectJoy(device, connected) -> void:
 	if !connected && deviceList.has(device):
 		leave(device)
 		
-func _ready():
+func _ready() -> void:
+# warning-ignore:return_value_discarded
 	Input.connect("joy_connection_changed", self, "disconnectJoy")
 
-func join(device):
+func join(device) -> void:
 	if nbOfPlayer > player.MAX || deviceList.has(device):
 		return
 	var i = deviceList.find(-1)
@@ -51,7 +51,7 @@ func join(device):
 	nbOfPlayer += 1
 	get_tree().set_input_as_handled()	
 
-func leave(device):
+func leave(device) -> void:
 	if nbOfPlayer == 0 || !deviceList.has(device):
 		return
 	var i = deviceList.find(device)
@@ -63,8 +63,8 @@ func leave(device):
 	nbOfPlayer -= 1
 	get_tree().set_input_as_handled()	
 
-func _input(event):
-	var device = event.device
+func _input(event: InputEvent) -> void:
+	var device: int = event.device
 	
 	if (event is InputEventJoypadButton || event is InputEventKey):
 #Join the lobby
@@ -74,8 +74,8 @@ func _input(event):
 		elif Input.is_action_just_released("ui_cancel") && !playerRdy.has(device):
 			leave(device)
 
-func _unhandled_input(event):
-	var device = event.device
+func _unhandled_input(event: InputEvent) -> void:
+	var device: int = event.device
 
 	if deviceList.has(device):
 		var i = deviceList.find(device)
@@ -99,7 +99,7 @@ func _unhandled_input(event):
 func isRdy() -> bool:
 	return playerRdy.size() == nbOfPlayer && nbOfPlayer != 0
 
-func start():
+func start() -> void:
 	var root = get_tree().get_root()
 	
 	if !isRdy():
@@ -111,21 +111,21 @@ func start():
 	root.get_node("MainScene/Map/SpawnSystem").spawn_players()
 	unloadScene("MainScreen")	
 
-func loadScene(path):
+func loadScene(path: String):
 	var root = get_tree().get_root()
 	var next_level = load(path).instance()
 
 	root.add_child(next_level)
 	return next_level
 
-func unloadScene(node):
+func unloadScene(node: String) -> void:
 	var root = get_tree().get_root()
 	var level = root.get_node(node)
 
 	root.remove_child(level)
 	level.call_deferred("free")
 
-func addPlayer(name:String, nb: int, i: int):
+func addPlayer(name:String, nb: int, i: int) -> void:
 	var c = load("res://Prefabs/Characters/" + name + ".tscn").instance()
 	var root = get_tree().get_root()
 	

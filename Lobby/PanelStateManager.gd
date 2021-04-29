@@ -5,14 +5,14 @@ enum Panel {
 	FOCUS
 }
 
-var state = Panel.IDLE
+var state: Panel = Panel.IDLE
 var characterList = []
-var characterIndex = 0
+var characterIndex: int = 0
 var label: Label
 var texture: TextureRect
 const CHARACTER_ICON_PATH = "res://Textures/CharactersIcons/"
 
-func _init():
+func _init() -> void:
 	var dir = Directory.new()
 
 	dir.open(CHARACTER_ICON_PATH)
@@ -28,17 +28,17 @@ func _init():
 	for i in range(characterList.size()):
 		characterList[i] = load(characterList[i])
 
-func _ready():
+func _ready() -> void:
 	label = getLabel()
 	texture = getTexture()
 
-func getLabel():
+func getLabel() -> Node:
 	return get_child(0)
 
-func getTexture():
+func getTexture() -> Node:
 	return get_child(1)
 
-func changeState():
+func changeState() -> void:
 	if (state == Panel.IDLE):
 		state = Panel.FOCUS
 		label.visible = false
@@ -49,26 +49,26 @@ func changeState():
 		label.visible = true
 		texture.visible = false
 
-func getChar():
+func getChar() -> String:
 	var name = characterList[characterIndex].get_load_path().split(".png")[0]
 
 	name = name.split("/")
 	name = name[name.size() - 1]
 	return name
 
-func rightChar():
+func rightChar() -> void:
 	if characterIndex == (characterList.size() - 1):
 		characterIndex = 0
 	else:
 		characterIndex += 1
 	texture.texture = characterList[characterIndex]
 
-func leftChar():
+func leftChar() -> void:
 	if characterIndex == 0:
 		characterIndex = (characterList.size() - 1)
 	else:
 		characterIndex -= 1
 	texture.texture = characterList[characterIndex]
 	
-func setColorTexture(color):
+func setColorTexture(color) -> void:
 	getTexture().modulate = color
