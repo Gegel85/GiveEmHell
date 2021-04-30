@@ -26,12 +26,6 @@ func _init() -> void:
 	panelList.resize(player.MAX)
 	deviceList.resize(player.MAX)
 	elapsedTime.resize(player.MAX)
-	for i in range(player.MAX):
-		panelList[i] = UIPlayer.instance()
-		deviceList[i] = -1
-		elapsedTime[i] = 0
-		panelList[i].setColorTexture(playerColors[i])
-		add_child(panelList[i])
 
 func disconnectJoy(device, connected) -> void:
 	if !connected && deviceList.has(device):
@@ -40,6 +34,12 @@ func disconnectJoy(device, connected) -> void:
 func _ready() -> void:
 # warning-ignore:return_value_discarded
 	Input.connect("joy_connection_changed", self, "disconnectJoy")
+	for i in range(player.MAX):
+		panelList[i] = UIPlayer.instance()
+		deviceList[i] = -1
+		elapsedTime[i] = 0
+		panelList[i].setColorTexture(playerColors[i])
+		add_child(panelList[i])
 
 func join(device) -> void:
 	if nbOfPlayer > player.MAX || deviceList.has(device):
@@ -81,9 +81,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		var i = deviceList.find(device)
 #Rdy management
 		if Input.is_action_just_released("ui_accept") && !playerRdy.has(device):
-			playerRdy.append(device)
+			toggleRdy(device)
 		if Input.is_action_just_released("ui_cancel") && playerRdy.has(device):
-			playerRdy.erase(device)
+			toggleRdy(device)
 #Swap character	
 		if !playerRdy.has(device) && (OS.get_ticks_msec() - elapsedTime[i]) >= TIME_BETWEEN_CHAR_CHANGE:
 			if Input.is_action_pressed("ui_right"):
@@ -96,6 +96,15 @@ func _unhandled_input(event: InputEvent) -> void:
 	if playerRdy.size() >= player.MIN:
 		start()
 
+func toggleRdy(device) -> void: 
+	var i = deviceList.find(device)
+	
+	if playerRdy.has(device):
+		playerRdy.erase(device)
+	else:
+		playerRdy.append(device)
+	panelList[i].toggleRdy()
+	
 func isRdy() -> bool:
 	return playerRdy.size() == nbOfPlayer && nbOfPlayer != 0
 

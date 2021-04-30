@@ -5,11 +5,13 @@ enum Panel {
 	FOCUS
 }
 
-var state: Panel = Panel.IDLE
+var state: int = Panel.IDLE
 var characterList = []
 var characterIndex: int = 0
-var label: Label
-var texture: TextureRect
+onready var container: ReferenceRect = getContainer()
+onready var label: Label = getLabel()
+onready var texture: TextureRect = getTexture()
+onready var rdy: Label = getRdy()
 const CHARACTER_ICON_PATH = "res://Textures/CharactersIcons/"
 
 func _init() -> void:
@@ -28,15 +30,17 @@ func _init() -> void:
 	for i in range(characterList.size()):
 		characterList[i] = load(characterList[i])
 
-func _ready() -> void:
-	label = getLabel()
-	texture = getTexture()
-
-func getLabel() -> Node:
+func getContainer() -> Node:
 	return get_child(0)
 
-func getTexture() -> Node:
+func getLabel() -> Node:
 	return get_child(1)
+
+func getTexture() -> Node:
+	if container:
+		return container.getTexture()
+	else:
+		return getContainer().getTexture()
 
 func changeState() -> void:
 	if (state == Panel.IDLE):
@@ -72,3 +76,16 @@ func leftChar() -> void:
 	
 func setColorTexture(color) -> void:
 	getTexture().modulate = color
+
+func toggleRdy():
+	if rdy.visible:
+		rdy.visible = false
+	else:
+		rdy.visible = true
+
+func getRdy() -> Node:
+	if container:
+		return container.getLabel()
+	else:
+		return getContainer().getLabel()
+	

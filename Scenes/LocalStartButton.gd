@@ -2,7 +2,7 @@ extends Button
 
 class_name InputManager
 
-var panelContainer: InputManager
+var panelContainer
 
 func _ready() -> void:
 	if !OS.is_debug_build():
