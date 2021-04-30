@@ -82,6 +82,7 @@ func toggleRdy():
 		rdy.visible = false
 	else:
 		rdy.visible = true
+		$AnimationPlayer.play("Ready")
 
 func getRdy() -> Node:
 	if container:

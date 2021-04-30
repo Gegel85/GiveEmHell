@@ -24,6 +24,10 @@ config/name="GiveEmHell"
 run/main_scene="res://Scenes/Menu.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+MenuMusic="*res://Sounds/MenuMusic.tscn"
+
 [debug]
 
 settings/stdout/print_fps=true

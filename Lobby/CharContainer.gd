@@ -1,7 +1,7 @@
 extends ReferenceRect
 
 func getTexture():
-	return get_child(0)
+	return $TextureRect
 
 func getLabel():
-	return get_child(1)
+	return $Label
