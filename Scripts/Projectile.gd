@@ -16,7 +16,7 @@ func _ready():
 	set_values()
 
 func set_color_to_player():
-	color = get_tree().get_root().get_child(0).get_node("Players").get_node(player).color
+	color = get_tree().get_root().get_node("MainScene/Players").get_node(player).color
 	$Appearance.modulate = color
 
 func set_values():

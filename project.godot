@@ -26,7 +26,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-MenuMusic="*res://Sounds/MenuMusic.tscn"
+TitleScreenMusic="*res://Musics/TitleScreenMusic.tscn"
 
 [debug]
 

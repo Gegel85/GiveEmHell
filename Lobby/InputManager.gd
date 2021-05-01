@@ -49,7 +49,7 @@ func join(device) -> void:
 	elapsedTime[0] = 0
 	panelList[i].changeState()
 	nbOfPlayer += 1
-	get_tree().set_input_as_handled()	
+	get_tree().set_input_as_handled()
 
 func leave(device) -> void:
 	if nbOfPlayer == 0 || !deviceList.has(device):
@@ -118,7 +118,8 @@ func start() -> void:
 		if deviceList[i] != -1:
 			addPlayer(panelList[i].getChar(), deviceList[i], i)
 	root.get_node("MainScene/Map/SpawnSystem").spawn_players()
-	unloadScene("MainScreen")	
+	root.get_node("TitleScreenMusic").stop()
+	unloadScene("MainScreen")
 
 func loadScene(path: String):
 	var root = get_tree().get_root()

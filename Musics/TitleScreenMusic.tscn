@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Assets/Musics/in-the-jungle-the-mighty-jungle.mp3" type="AudioStream" id=1]
+[ext_resource path="res://Musics/in-the-jungle-the-mighty-jungle.mp3" type="AudioStream" id=1]
 
 [node name="MusicPlayer" type="AudioStreamPlayer"]
 stream = ExtResource( 1 )
