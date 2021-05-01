@@ -71,8 +71,11 @@ func _input(event: InputEvent) -> void:
 		if Input.is_action_just_released("ui_accept"):
 			join(device)
 #Leave the lobby
-		elif Input.is_action_just_released("ui_cancel") && !playerRdy.has(device):
-			leave(device)
+		elif Input.is_action_just_released("ui_cancel"):
+			if nbOfPlayer == 0:
+				get_tree().change_scene("res://Scenes/Menu.tscn")
+			if !playerRdy.has(device):
+				leave(device)
 
 func _unhandled_input(event: InputEvent) -> void:
 	var device: int = event.device
