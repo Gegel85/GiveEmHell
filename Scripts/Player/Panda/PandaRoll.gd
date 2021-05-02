@@ -27,6 +27,12 @@ func useSkill():
 	time_last_used = actual_time
 	active_skill = true
 
+func getWorld():
+	if world:
+		return world
+	world = get_tree().get_root().get_node("MainScene").get_node("Projectiles")
+	return world
+
 func _process(delta):
 	if (!active_skill):
 		return
@@ -38,9 +44,9 @@ func _process(delta):
 		return
 	var nb = player.number - 1
 	var bullet = load(load_path).instance()
-	world.add_child(bullet)
+	getWorld().add_child(bullet)
 	bullet.get_node("Appearance").modulate.a = 0
-	bullet.duplicate(true)
+#	bullet.duplicate(true)
 	bullet.position = player.position	
 	bullet.player = player.name
 	bullet.lifetime = 50

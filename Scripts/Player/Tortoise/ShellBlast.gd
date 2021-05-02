@@ -30,11 +30,17 @@ func _ready():
 		spawn_point.rotation = pos.angle()
 		rotater.add_child(spawn_point)
 
+func getWorld():
+	if world:
+		return world
+	world = get_tree().get_root().get_node("MainScene").get_node("Projectiles")
+	return world
+	
 func skill():
 	for s in rotater.get_children():
 		var bullet = load(load_path).instance()
-		world.add_child(bullet)
-		bullet.duplicate(true)
+		getWorld().add_child(bullet)
+#		bullet.duplicate(true)
 		bullet.position = player.position
 		bullet.player = player.name
 		bullet.size = 1

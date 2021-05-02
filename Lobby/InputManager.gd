@@ -58,7 +58,7 @@ func leave(device) -> void:
 	panelList[i].changeState()
 	elapsedTime[i] = 0
 	if playerRdy.has(device):
-		playerRdy.erase(device)
+		toggleRdy(device)
 	deviceList[i] = -1
 	nbOfPlayer -= 1
 	get_tree().set_input_as_handled()	
