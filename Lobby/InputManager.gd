@@ -116,7 +116,8 @@ func start() -> void:
 	
 	if !isRdy():
 		return
-	loadScene(next_scene_path)
+	var level = loadScene(next_scene_path)
+	get_tree().set_current_scene(level)
 	for i in range(player.MAX):
 		if deviceList[i] != -1:
 			addPlayer(panelList[i].getChar(), deviceList[i], i)

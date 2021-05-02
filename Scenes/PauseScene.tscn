@@ -1,0 +1,70 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://UserInterface/theme.tres" type="Theme" id=1]
+[ext_resource path="res://Scenes/PausePopup.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/ContinueButton.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/BackToMenuButton.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/QuitButton.gd" type="Script" id=5]
+
+[node name="PauseContainer" type="CanvasLayer"]
+pause_mode = 2
+
+[node name="Popup" type="Popup" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+focus_mode = 2
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VerticalAlign" type="VBoxContainer" parent="Popup"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -93.5
+margin_top = -53.5
+margin_right = 93.5
+margin_bottom = 53.5
+focus_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ContinueButton" type="Button" parent="Popup/VerticalAlign"]
+margin_right = 187.0
+margin_bottom = 33.0
+focus_neighbour_top = NodePath("../QuitButton")
+focus_neighbour_bottom = NodePath("../BackToMenuButton")
+text = "Continue"
+script = ExtResource( 3 )
+
+[node name="BackToMenuButton" type="Button" parent="Popup/VerticalAlign"]
+margin_top = 37.0
+margin_right = 187.0
+margin_bottom = 70.0
+focus_neighbour_top = NodePath("../ContinueButton")
+focus_neighbour_bottom = NodePath("../QuitButton")
+text = "Back to menu"
+script = ExtResource( 4 )
+
+[node name="QuitButton" type="Button" parent="Popup/VerticalAlign"]
+margin_top = 74.0
+margin_right = 187.0
+margin_bottom = 107.0
+focus_neighbour_top = NodePath("../BackToMenuButton")
+focus_neighbour_bottom = NodePath("../ContinueButton")
+text = "Quit"
+script = ExtResource( 5 )
+
+[connection signal="button_up" from="Popup/VerticalAlign/ContinueButton" to="Popup/VerticalAlign/ContinueButton" method="_on_button_up"]
+[connection signal="button_up" from="Popup/VerticalAlign/BackToMenuButton" to="Popup/VerticalAlign/BackToMenuButton" method="_on_button_up"]
+[connection signal="button_up" from="Popup/VerticalAlign/QuitButton" to="Popup/VerticalAlign/QuitButton" method="_on_button_up"]

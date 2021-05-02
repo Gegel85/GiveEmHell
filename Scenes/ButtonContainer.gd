@@ -20,7 +20,5 @@ func focusPlay():
 func focusQuit():
 	lastFocus = $QuitButton
 	lastFocus.grab_focus()
-	
-func reFocus():
-	lastFocus.grab_focus()
+
 

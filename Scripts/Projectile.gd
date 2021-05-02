@@ -13,6 +13,8 @@ var vector
 var color = Color(255, 255, 255)
 
 func _ready():
+	$Collider.connect("area_entered", self, "on_area_collision")
+	$Collider.connect("body_entered", self, "on_body_collision")
 	set_values()
 
 func set_color_to_player():
@@ -23,8 +25,7 @@ func set_values():
 	spawn_pos = position
 	$Appearance.scale = Vector2(size, size)
 	$Collider.get_node("CollisionShape2D").scale = Vector2(size * 2, size * 2)
-	$Collider.connect("area_entered", self, "on_area_collision")
-	$Collider.connect("body_entered", self, "on_body_collision")
+	
 	spawn_time = OS.get_ticks_msec()
 	if (player != ""):
 		set_color_to_player()

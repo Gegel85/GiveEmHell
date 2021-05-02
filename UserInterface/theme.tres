@@ -2,7 +2,7 @@
 
 [ext_resource path="res://UserInterface/readyfont.tres" type="DynamicFont" id=1]
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.231373, 0.231373, 0.231373, 1 )
 border_width_left = 5
 border_width_top = 5
@@ -10,7 +10,7 @@ border_width_right = 5
 border_width_bottom = 5
 border_color = Color( 0.647059, 0.0313726, 0.0313726, 1 )
 
-[sub_resource type="StyleBoxFlat" id=1]
+[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.231373, 0.231373, 0.231373, 1 )
 border_width_left = 5
 border_width_top = 5
@@ -20,6 +20,6 @@ border_color = Color( 0.647059, 0.0313726, 0.0313726, 1 )
 
 [resource]
 default_font = ExtResource( 1 )
-Button/styles/focus = SubResource( 2 )
-Button/styles/hover = SubResource( 1 )
+Button/styles/focus = SubResource( 1 )
+Button/styles/hover = SubResource( 2 )
 Button/styles/normal = null
