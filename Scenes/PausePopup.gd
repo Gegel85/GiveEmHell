@@ -15,9 +15,14 @@ func _input(event):
 func _ready():
 	var btns = $VerticalAlign.get_children()
 	
+	get_tree().get_root().connect("size_changed", self, "resize")
 	for b in btns:
 		b.connect("mouse_entered", self, "selfFocus", [b])
 		b.connect("focus_entered", self, "selfFocus", [b])
+	
+func resize():
+	visible = !visible
+	visible = !visible
 	
 func selfFocus(b):
 	lastFocus = b
