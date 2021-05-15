@@ -7,7 +7,7 @@ var shoot_time = 0
 var active_time = 1200
 var active_skill = false
 
-onready var load_path = "res://Prefabs/Projectile.tscn"
+onready var load_path = "res://Prefabs/Characters/Projectile.tscn"
 
 var time_last_used = 0
 var actual_time = 0

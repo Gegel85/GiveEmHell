@@ -2,7 +2,7 @@ extends Node
 
 const cd = 400
 
-onready var load_path = "res://Prefabs/Projectile.tscn"
+onready var load_path = "res://Prefabs/Characters/Projectile.tscn"
 
 var time_last_used = 0
 var actual_time = 0
