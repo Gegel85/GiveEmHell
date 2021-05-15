@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Musics/battling-in-the-jungle-gogo1isle-battle-theme-tokyo-afterschool-summoners-original-soundtrack.mp3" type="AudioStream" id=1]
+[ext_resource path="res://Assets/Musics/TitleScreenMusic.tscn" type="PackedScene" id=2]
+
+[node name="MusicPlayerContainer" type="Node2D"]
+
+[node name="MusicPlayer" parent="." instance=ExtResource( 2 )]
+stream = ExtResource( 1 )

@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "Button",
 "class": "InputManager",
 "language": "GDScript",
-"path": "res://Scenes/LocalStartButton.gd"
+"path": "res://Scenes/Lobby/LocalStartButton.gd"
 } ]
 _global_script_class_icons={
 "InputManager": ""
@@ -21,12 +21,12 @@ _global_script_class_icons={
 [application]
 
 config/name="GiveEmHell"
-run/main_scene="res://Scenes/Menu.tscn"
+run/main_scene="res://Scenes/TitleScreen/TitleScreen.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-TitleScreenMusic="*res://Musics/TitleScreenMusic.tscn"
+TitleScreenMusic="*res://Assets/Musics/TitleScreenMusic.tscn"
 
 [debug]
 
