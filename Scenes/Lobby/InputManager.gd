@@ -65,7 +65,7 @@ func leave(device) -> void:
 
 func _input(event: InputEvent) -> void:
 	var device: int = event.device
-	
+
 	if (event is InputEventJoypadButton || event is InputEventKey):
 #Join the lobby
 		if Input.is_action_just_released("ui_accept"):
