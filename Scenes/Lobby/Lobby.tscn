@@ -71,12 +71,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ChangeSceneButton3" parent="ButtonContainer" instance=ExtResource( 1 )]
+[node name="BackButton" parent="ButtonContainer" instance=ExtResource( 1 )]
 margin_right = 172.0
 margin_bottom = 87.0
 size_flags_horizontal = 3
 text = "Back"
-next_scene_path = "res://Scenes/TitleScreen/TitleScreen.tscn"
+next_scene_path = "res://Scenes/ModeSelection/ModeSelection.tscn"
 
 [node name="Space" type="Panel" parent="ButtonContainer"]
 modulate = Color( 1, 1, 1, 0 )

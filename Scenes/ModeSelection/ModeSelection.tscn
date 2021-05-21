@@ -1,0 +1,97 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/Theme/theme.tres" type="Theme" id=1]
+[ext_resource path="res://Assets/Textures/background.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/TitleScreen/ChangeSceneButton.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/ModeSelection/ControllerFocus.gd" type="Script" id=4]
+
+[node name="MainScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="background" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 2 )
+expand = true
+
+[node name="MainButtonContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -234.0
+margin_top = -150.0
+margin_right = 234.0
+margin_bottom = 150.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HostButton" type="Button" parent="MainButtonContainer" groups=[
+"Button",
+]]
+margin_right = 468.0
+margin_bottom = 97.0
+focus_neighbour_left = NodePath("../../BackButtonContainer/BackButton")
+focus_neighbour_top = NodePath("../OfflineButton")
+focus_neighbour_bottom = NodePath("../JoinButton")
+size_flags_vertical = 3
+text = "Host"
+
+[node name="JoinButton" type="Button" parent="MainButtonContainer" groups=[
+"Button",
+]]
+margin_top = 101.0
+margin_right = 468.0
+margin_bottom = 198.0
+focus_neighbour_left = NodePath("../../BackButtonContainer/BackButton")
+focus_neighbour_top = NodePath("../HostButton")
+focus_neighbour_bottom = NodePath("../OfflineButton")
+size_flags_vertical = 3
+text = "Join"
+
+[node name="OfflineButton" parent="MainButtonContainer" groups=[
+"Button",
+] instance=ExtResource( 3 )]
+margin_top = 202.0
+margin_bottom = 300.0
+focus_neighbour_left = NodePath("../../BackButtonContainer/BackButton")
+focus_neighbour_top = NodePath("../JoinButton")
+focus_neighbour_bottom = NodePath("../HostButton")
+text = "Offline"
+next_scene_path = "res://Scenes/Lobby/Lobby.tscn"
+
+[node name="BackButtonContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+margin_left = 34.0
+margin_top = 17.0
+margin_right = -37.0
+margin_bottom = 104.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackButton" parent="BackButtonContainer" groups=[
+"Button",
+] instance=ExtResource( 3 )]
+margin_right = 172.0
+margin_bottom = 87.0
+focus_neighbour_right = NodePath("../../MainButtonContainer/HostButton")
+size_flags_horizontal = 3
+text = "Back"
+next_scene_path = "res://Scenes/TitleScreen/TitleScreen.tscn"
+
+[node name="Panel" type="Panel" parent="BackButtonContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 176.0
+margin_right = 1209.0
+margin_bottom = 87.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 6.0
