@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/TitleScreen/ChangeSceneButton.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Lobby/LocalStartButton.gd" type="Script" id=2]
+
+[node name="ButtonContainer" type="HBoxContainer"]
+anchor_right = 1.0
+margin_left = 34.0
+margin_top = 17.0
+margin_right = -37.0
+margin_bottom = 104.0
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackButton" parent="." instance=ExtResource( 1 )]
+margin_right = 172.0
+margin_bottom = 87.0
+size_flags_horizontal = 3
+text = "Back"
+next_scene_path = "res://Scenes/ModeSelection/ModeSelection.tscn"
+
+[node name="Space" type="Panel" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 172.0
+margin_right = 1036.0
+margin_bottom = 87.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.0
+
+[node name="StartButton" type="Button" parent="."]
+margin_left = 1036.0
+margin_right = 1209.0
+margin_bottom = 87.0
+size_flags_horizontal = 3
+text = "Start"
+script = ExtResource( 2 )
+
+[connection signal="button_up" from="StartButton" to="StartButton" method="_on_button_up"]

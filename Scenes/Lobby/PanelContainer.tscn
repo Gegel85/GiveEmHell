@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scenes/Lobby/InputManager.gd" type="Script" id=1]
+
+[node name="PanelContainer" type="GridContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 30.0
+margin_top = 128.0
+margin_right = -24.0
+margin_bottom = -30.0
+custom_constants/vseparation = 20
+custom_constants/hseparation = 20
+columns = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+next_scene_path = "res://Scenes/InGame/MainScene.tscn"
