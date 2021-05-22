@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/Textures/background.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/ModeSelection/BackButtonContainer.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Theme/theme.tres" type="Theme" id=3]
+[ext_resource path="res://Scenes/Settings/SettingsOptionButton.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/ModeSelection/ControllerFocus.gd" type="Script" id=5]
+
+[node name="MainScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 3 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackButtonContainer" parent="." instance=ExtResource( 2 )]
+focus_neighbour_right = NodePath("../OptionButton")
+
+[node name="BackButton" parent="BackButtonContainer" index="0"]
+focus_neighbour_right = NodePath("../../OptionButton")
+focus_neighbour_bottom = NodePath("../../OptionButton")
+
+[node name="OptionButton" type="OptionButton" parent="." groups=[
+"Button",
+]]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -98.5
+margin_top = -16.5
+margin_right = 98.5
+margin_bottom = 16.5
+focus_neighbour_left = NodePath("../BackButtonContainer/BackButton")
+focus_neighbour_top = NodePath("../BackButtonContainer/BackButton")
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="item_selected" from="OptionButton" to="OptionButton" method="_on_OptionButton_item_selected"]
+
+[editable path="BackButtonContainer"]

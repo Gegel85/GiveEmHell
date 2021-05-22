@@ -1,4 +1,4 @@
-extends VBoxContainer
+extends Control
 
 func _ready():
 	var btns = get_tree().get_nodes_in_group("Button")

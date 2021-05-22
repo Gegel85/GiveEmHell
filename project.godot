@@ -27,6 +27,7 @@ config/icon="res://icon.png"
 [autoload]
 
 TitleScreenMusic="*res://Assets/Musics/TitleScreenMusic.tscn"
+Settings="*res://Scenes/Settings/Settings.gd"
 
 [debug]
 

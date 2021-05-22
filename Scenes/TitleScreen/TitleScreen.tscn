@@ -70,16 +70,15 @@ focus_neighbour_bottom = NodePath("../SettingsButton")
 keep_pressed_outside = true
 next_scene_path = "res://Scenes/ModeSelection/ModeSelection.tscn"
 
-[node name="SettingsButton" type="Button" parent="Menu" groups=[
+[node name="SettingsButton" parent="Menu" groups=[
 "Button",
-]]
+] instance=ExtResource( 1 )]
 margin_top = 101.0
-margin_right = 468.0
 margin_bottom = 198.0
 focus_neighbour_top = NodePath("../PlayButton")
 focus_neighbour_bottom = NodePath("../QuitButton")
-size_flags_vertical = 3
 text = "Settings"
+next_scene_path = "res://Scenes/Settings/SettingsScreen.tscn"
 
 [node name="QuitButton" parent="Menu" groups=[
 "Button",

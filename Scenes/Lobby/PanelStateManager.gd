@@ -12,7 +12,10 @@ onready var container: ReferenceRect = getContainer()
 onready var label: Label = getLabel()
 onready var texture: TextureRect = getTexture()
 onready var rdy: Label = getRdy()
+onready var settingsNode = get_node("/root/Settings")
+onready var changeChar = getChangeChar()
 const CHARACTER_ICON_PATH = "res://Assets/Textures/CharactersIcons/"
+var _isOwner = false
 
 func _init() -> void:
 	var dir = Directory.new()
@@ -31,7 +34,7 @@ func _init() -> void:
 		characterList[i] = load(characterList[i])
 
 func getContainer() -> Node:
-	return get_child(0)
+	return get_child(0).get_child(1)
 
 func getLabel() -> Node:
 	return get_child(1)
@@ -42,16 +45,25 @@ func getTexture() -> Node:
 	else:
 		return getContainer().getTexture()
 
+func setIsOwner(isOwner):
+		_isOwner = isOwner
+		
 func changeState() -> void:
 	if (state == Panel.IDLE):
 		state = Panel.FOCUS
 		label.visible = false
 		texture.visible = true
 		texture.texture = characterList[characterIndex]
+		if !settingsNode.get_setting("keybind", "controller") && _isOwner:
+			changeChar[0].visible = true
+			changeChar[1].visible = true
 	else:
 		state = Panel.IDLE
 		label.visible = true
 		texture.visible = false
+		changeChar[0].visible = false
+		changeChar[1].visible = false
+
 
 func getChar() -> String:
 	var name = characterList[characterIndex].get_load_path().split(".png")[0]
@@ -90,3 +102,13 @@ func getRdy() -> Node:
 	else:
 		return getContainer().getLabel()
 	
+func getChangeChar():
+	return [get_child(0).get_child(0), get_child(0).get_child(2)]
+
+
+func _on_TriangleButton_left_button_up():
+	leftChar()
+
+
+func _on_TriangleButton_right_button_up():
+	rightChar()

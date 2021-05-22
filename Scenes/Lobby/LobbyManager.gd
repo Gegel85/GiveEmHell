@@ -46,6 +46,8 @@ func join(device) -> void:
 	var i = deviceList.find(-1)
 	deviceList[i] = device
 	elapsedTime[0] = 0
+	if device == 0:
+		panelList[i].setIsOwner(true)	
 	panelList[i].changeState()
 	nbOfPlayer += 1
 	get_tree().set_input_as_handled()

@@ -13,7 +13,7 @@ const playerColors = [
 	Color(1, 0, 0.8)
 ]
 const UIPlayer = preload("res://Scenes/Lobby/Panel.tscn")
-const TIME_BETWEEN_CHAR_CHANGE:int = 300#in ms
+const TIME_BETWEEN_CHAR_CHANGE:int = 150#in ms
 
 export(String, FILE) var next_scene_path = ""
 var nbOfPlayer: int = 0
@@ -47,6 +47,8 @@ func join(device) -> void:
 	var i = deviceList.find(-1)
 	deviceList[i] = device
 	elapsedTime[0] = 0
+	if device == 0:
+		panelList[0].setIsOwner(true)
 	panelList[i].changeState()
 	nbOfPlayer += 1
 	get_tree().set_input_as_handled()
