@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/thomp2.wav-cf8a0f5fb6487d066f6d2c7b8a7e0008.sample"
+
+[deps]
+
+source_file="res://Assets/SoundEffects/Panda/thomp2.wav"
+dest_files=[ "res://.import/thomp2.wav-cf8a0f5fb6487d066f6d2c7b8a7e0008.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

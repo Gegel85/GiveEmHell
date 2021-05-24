@@ -42,7 +42,6 @@ func _process(delta):
 		player.get_node("MovementModule").useForcedSpeed = false
 		player.get_node("MovementModule").forcedSpeed = 0
 		return
-	var nb = player.number - 1
 	var bullet = load(load_path).instance()
 	getWorld().add_child(bullet)
 	bullet.get_node("Appearance").modulate.a = 0

@@ -13,8 +13,6 @@
 [ext_resource path="res://Player/Panda/PandaRoll.gd" type="Script" id=11]
 [ext_resource path="res://Player/Lifebar.gd" type="Script" id=12]
 
-
-
 [sub_resource type="GDScript" id=1]
 
 [sub_resource type="CircleShape2D" id=2]
