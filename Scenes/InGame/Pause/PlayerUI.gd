@@ -2,11 +2,9 @@ extends GridContainer
 
 var lives = []
 var skills = []
-var pos_max = 0
-var pos_min = 24
+var pos_max = 24
 
 var dir
-
 
 func _ready():
 	var children = get_children()
@@ -26,14 +24,14 @@ func init(player):
 func setLife(nb):
 	for i in range(lives.size()):
 		if (i < nb):
-			lives[i].get_child(0).visible = true
+			lives[i].get_child(0).get_child(0).visible = true
 		else:
-			lives[i].get_child(0).visible = false
+			lives[i].get_child(0).get_child(0).visible = false
 
 func setCooldownSkill(maxLength, actual, nb):
 	if (nb >= skills.size()):
 		return
 	var cooldown = skills[nb].get_child(0).get_child(0)
 	var percent = float(actual) / maxLength
-	cooldown.scale.y = maxLength * percent
-	cooldown.position.y = pos_min + ((pos_max + (pos_min * -1)) * percent)
+	cooldown.scale.y = 1 - percent
+	cooldown.position.y = pos_max - pos_max * (1 - percent)

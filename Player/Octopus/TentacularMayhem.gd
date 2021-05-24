@@ -11,14 +11,16 @@ export var soundeffect: AudioStream
 onready var bullet_path = "res://Prefabs/Characters/Projectile.tscn"
 onready var sound_path = "res://Prefabs/SoundPlayer.tscn"
 
-var time_last_used = 0
-var actual_time = 0
+export var time_last_used = 0
+export var actual_time = 0
 onready var rotater = $Rotater
 
 const rotate_speed = 120
 const base_rotation = 0
 const spawn_point_count = 8
 const radius = 100
+
+var spawn_pos
 
 var skill_manager
 var player
@@ -57,7 +59,7 @@ func skill():
 		var bullet = load(bullet_path).instance()
 		getWorld().add_child(bullet)
 #		bullet.duplicate(true)
-		bullet.position = player.position
+		bullet.position = spawn_pos
 		bullet.player = player.name
 		bullet.size = 0.75
 		bullet.speed = 100
@@ -85,6 +87,7 @@ func useSkill():
 	use_time = actual_time
 	shoot_time = 0
 	active_skill = true
+	spawn_pos = player.position
 	var sound = load(sound_path).instance()
 	getSound().add_child(sound)
 	sound.init_player(soundeffect)

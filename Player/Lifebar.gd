@@ -1,10 +1,10 @@
 extends Sprite
 
-var HP = 100
-var HP_max = 100
+var HP = 4
+var HP_max = 4
 
-var heal_tic = 500
-var heal_val = 1
+var heal_tic = 0
+var heal_val = 0
 
 var last_heal_time = 0
 var max_scale = 0.978
@@ -14,6 +14,9 @@ var pos_min = -244.37
 func _ready():
 	display_health_bar()
 	pass # Replace with function body.
+
+func get_life():
+	return HP
 
 func display_health_bar():
 	var percent = float(HP) / HP_max
