@@ -9,7 +9,7 @@
 [ext_resource path="res://Player/PlayerMovement.gd" type="Script" id=7]
 [ext_resource path="res://Player/SkillManager.gd" type="Script" id=8]
 [ext_resource path="res://Player/Panda/PandaBasicShoot.gd" type="Script" id=9]
-[ext_resource path="res://Player/Monkey/MonkeySniper.gd" type="Script" id=10]
+[ext_resource path="res://Player/Panda/PandaClawStrike.gd" type="Script" id=10]
 [ext_resource path="res://Player/Panda/PandaRoll.gd" type="Script" id=11]
 [ext_resource path="res://Player/Lifebar.gd" type="Script" id=12]
 [ext_resource path="res://Player/Octopus/TentacularMayhem.gd" type="Script" id=13]
@@ -79,7 +79,7 @@ texture = ExtResource( 6 )
 [node name="PandaBasicShoot" type="Node" parent="SkillsModule/SkillList"]
 script = ExtResource( 9 )
 
-[node name="MonkeySniper" type="Node" parent="SkillsModule/SkillList"]
+[node name="PandaClawStrike" type="Node" parent="SkillsModule/SkillList"]
 script = ExtResource( 10 )
 
 [node name="PandaRoll" type="Node" parent="SkillsModule/SkillList"]
