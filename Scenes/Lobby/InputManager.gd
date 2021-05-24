@@ -28,7 +28,7 @@ func _init() -> void:
 	elapsedTime.resize(player.MAX)
 
 func disconnectJoy(device, connected) -> void:
-	if !connected && deviceList.has(device):
+	if !connected && hasDevice(deviceList, Device.new(device)):
 		leave(device)
 		
 func _ready() -> void:
@@ -42,31 +42,40 @@ func _ready() -> void:
 		add_child(panelList[i])
 
 func join(device) -> void:
-	if nbOfPlayer > player.MAX || deviceList.has(device):
+	if nbOfPlayer > player.MAX || hasDevice(deviceList, device):
 		return
 	var i = deviceList.find(-1)
 	deviceList[i] = device
 	elapsedTime[0] = 0
-	if device == 0:
-		panelList[0].setIsOwner(true)
+	if device.type == Device.DeviceType.MOUSE_KEYBOARD:
+		panelList[i].setIsOwner(true)
 	panelList[i].changeState()
 	nbOfPlayer += 1
 	get_tree().set_input_as_handled()
 
 func leave(device) -> void:
-	if nbOfPlayer == 0 || !deviceList.has(device):
+	if nbOfPlayer == 0 || !hasDevice(deviceList, device):
 		return
-	var i = deviceList.find(device)
+	var i = findDevice(deviceList, device)
 	panelList[i].changeState()
+	panelList[i].setIsOwner(false)
 	elapsedTime[i] = 0
-	if playerRdy.has(device):
+	if hasDevice(playerRdy, device):
 		toggleRdy(device)
 	deviceList[i] = -1
 	nbOfPlayer -= 1
 	get_tree().set_input_as_handled()	
 
+func device_type_from_event(event):
+	if event is InputEventJoypadButton || event is InputEventJoypadMotion:
+			return Device.DeviceType.KEYPAD
+	elif event is InputEventKey:
+			return Device.DeviceType.MOUSE_KEYBOARD
+	else:
+			return Device.DeviceType.NON_RELEVANT
+
 func _input(event: InputEvent) -> void:
-	var device: int = event.device
+	var device = Device.new(event.device, device_type_from_event(event))
 
 	if (event is InputEventJoypadButton || event is InputEventKey):
 #Join the lobby
@@ -75,22 +84,36 @@ func _input(event: InputEvent) -> void:
 #Leave the lobby
 		elif Input.is_action_just_released("ui_cancel"):
 			if nbOfPlayer == 0:
-				get_tree().change_scene("res://Scenes/Menu.tscn")
-			if !playerRdy.has(device):
+				get_tree().change_scene("res://Scenes/ModeSelection/ModeSelection.tscn")
+			if !hasDevice(playerRdy, device):
 				leave(device)
+				
+func hasDevice(dlist, device:Device):
+	for i in range(dlist.size()):
+		if typeof(dlist[i]) == TYPE_INT:
+			continue
+		if device.eq(dlist[i]):
+			return true
+	return false
+
+func findDevice(dlist, device: Device):
+	for i in range(dlist.size()):
+		if device.eq(dlist[i]):
+			return i
+	return -1
 
 func _unhandled_input(event: InputEvent) -> void:
-	var device: int = event.device
-
-	if deviceList.has(device):
-		var i = deviceList.find(device)
+	var device: Device = Device.new(event.device, device_type_from_event(event))
+	
+	if hasDevice(deviceList, device):
+		var i = findDevice(deviceList, device)
 #Rdy management
-		if Input.is_action_just_released("ui_accept") && !playerRdy.has(device):
+		if Input.is_action_just_released("ui_accept") && !hasDevice(playerRdy, device):
 			toggleRdy(device)
-		if Input.is_action_just_released("ui_cancel") && playerRdy.has(device):
+		if Input.is_action_just_released("ui_cancel") && hasDevice(playerRdy, device):
 			toggleRdy(device)
 #Swap character	
-		if !playerRdy.has(device) && (OS.get_ticks_msec() - elapsedTime[i]) >= TIME_BETWEEN_CHAR_CHANGE:
+		if !hasDevice(playerRdy, device) && (OS.get_ticks_msec() - elapsedTime[i]) >= TIME_BETWEEN_CHAR_CHANGE:
 			if Input.is_action_pressed("ui_right"):
 				panelList[i].rightChar()
 				elapsedTime[i] = OS.get_ticks_msec()
@@ -102,10 +125,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		start()
 
 func toggleRdy(device) -> void: 
-	var i = deviceList.find(device)
+	var i = findDevice(deviceList, device)
 	
-	if playerRdy.has(device):
-		playerRdy.erase(device)
+	if hasDevice(playerRdy, device):
+		playerRdy.remove(i)
 	else:
 		playerRdy.append(device)
 	panelList[i].toggleRdy()
@@ -121,8 +144,8 @@ func start() -> void:
 	var level = loadScene(next_scene_path)
 	get_tree().set_current_scene(level)
 	for i in range(player.MAX):
-		if deviceList[i] != -1:
-			addPlayer(panelList[i].getChar(), deviceList[i], i)
+		if typeof(deviceList[i]) != TYPE_INT:
+			addPlayer(panelList[i].getChar(), deviceList[i].id, i)
 	root.get_node("MainScene/Map/SpawnSystem").spawn_players()
 	root.get_node("TitleScreenMusic").stop()
 	unloadScene("MainScreen")

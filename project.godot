@@ -9,13 +9,25 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Reference",
+"class": "Device",
+"language": "GDScript",
+"path": "res://Scenes/Lobby/Device.gd"
+}, {
 "base": "Button",
 "class": "InputManager",
 "language": "GDScript",
 "path": "res://Scenes/Lobby/LocalStartButton.gd"
+}, {
+"base": "Node",
+"class": "Player",
+"language": "GDScript",
+"path": "res://Scenes/Lobby/Player.gd"
 } ]
 _global_script_class_icons={
-"InputManager": ""
+"Device": "",
+"InputManager": "",
+"Player": ""
 }
 
 [application]
