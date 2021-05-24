@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sniper5.wav-0de6be8e14ceaefcb39ee2f30d8d8b53.sample"
+
+[deps]
+
+source_file="res://Assets/SoundEffects/Monkey/sniper5.wav"
+dest_files=[ "res://.import/sniper5.wav-0de6be8e14ceaefcb39ee2f30d8d8b53.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

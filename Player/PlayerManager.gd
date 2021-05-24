@@ -1,6 +1,7 @@
 extends Node2D
 
 var number
+var device = Device.new(0)
 var invincible = false
 var invincibility_duration = 1000
 var start_invincible = 0
@@ -23,9 +24,9 @@ func take_damage(dmg):
 	$Appearance.modulate.a = 0.5
 
 func _physics_process(delta):
-	$MovementModule.moveAround(self, number)
-	$SkillsModule.Aim(number - 1)
-	$SkillsModule.SkillActivator(number)
+	$MovementModule.moveAround()
+	$SkillsModule.Aim()
+	$SkillsModule.SkillActivator()
 	check_still_invincible()
 
 func check_still_invincible():

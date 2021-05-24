@@ -1,34 +1,22 @@
 extends Node2D
 
-enum controlModes {
-	MOUSE,
-	JOYSTICK
-}
-
+var player
 var mouseLastPos = Vector2.ZERO
 var joyLastDir = Vector2.ZERO
 var deadZone = 0.1
-var actualMode = controlModes.JOYSTICK
 export var angle_aim = 0
 
 func _ready():
-	pass # Replace with function body.
+	player = get_parent()
 
-func _input(event):
-	if (event is InputEventJoypadButton) or (event is InputEventJoypadMotion):
-		actualMode = controlModes.JOYSTICK
-		
-func checkForInput():
-	var mouseActualPos = get_global_mouse_position()
-	if (mouseLastPos != mouseActualPos):
-		actualMode = controlModes.MOUSE
-	mouseLastPos = mouseActualPos
-
-func Aim(nb):
-	"""checkForInput()"""
-	if (actualMode == controlModes.MOUSE):
+func Aim():
+	var nb = player.number
+	if (player.device.type == Device.DeviceType.MOUSE_KEYBOARD):
+		mouseLastPos = get_global_mouse_position()
 		$Direction.look_at(mouseLastPos)
-	if (actualMode == controlModes.JOYSTICK):
+		angle_aim = get_angle_to(mouseLastPos)
+	else:
+		nb = nb -1
 		var joyDir = Vector2(Input.get_joy_axis(nb, 2), Input.get_joy_axis(nb, 3))
 		if (abs(joyDir.x) < deadZone):
 			joyDir.x = 0
@@ -41,7 +29,10 @@ func Aim(nb):
 		angle_aim = atan2(joyDir.y, joyDir.x)
 		$Direction.rotation = angle_aim
 	
-func SkillActivator(nb):
+func SkillActivator():
+	var nb = player.number
+	if (player.device.type == Device.DeviceType.MOUSE_KEYBOARD):
+		nb = "KB"
 	var skills
 	if ($SkillList.is_inside_tree()):
 		 skills = $SkillList.get_children()

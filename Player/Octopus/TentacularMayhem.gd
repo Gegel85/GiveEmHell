@@ -6,8 +6,10 @@ var use_time = 0
 var shoot_time = 0
 var active_time = 1200
 var active_skill = false
+export var soundeffect: AudioStream
 
-onready var load_path = "res://Prefabs/Characters/Projectile.tscn"
+onready var bullet_path = "res://Prefabs/Characters/Projectile.tscn"
+onready var sound_path = "res://Prefabs/SoundPlayer.tscn"
 
 var time_last_used = 0
 var actual_time = 0
@@ -20,10 +22,12 @@ const radius = 100
 
 var skill_manager
 var player
-var world
+var projectiles
+var sounds
 
 func _ready():
-	world = get_tree().get_root().get_node("MainScene").get_node("Projectiles")
+	sounds = get_tree().get_root().get_node("MainScene").get_node("Sounds")
+	projectiles = get_tree().get_root().get_node("MainScene").get_node("Projectiles")
 	skill_manager = get_parent().get_parent()
 	player = skill_manager.get_parent()
 	var step = 2 * PI / spawn_point_count
@@ -36,14 +40,21 @@ func _ready():
 		rotater.add_child(spawn_point)
 
 func getWorld():
-	if world:
-		return world
-	world = get_tree().get_root().get_node("MainScene").get_node("Projectiles")
-	return world
+	if projectiles:
+		return projectiles
+	projectiles = get_tree().get_root().get_node("MainScene").get_node("Projectiles")
+	return projectiles
+
+func getSound():
+	if sounds:
+		return sounds
+	sounds = get_tree().get_root().get_node("MainScene").get_node("Sounds")
+	return sounds
+
 
 func skill():
 	for s in rotater.get_children():
-		var bullet = load(load_path).instance()
+		var bullet = load(bullet_path).instance()
 		getWorld().add_child(bullet)
 #		bullet.duplicate(true)
 		bullet.position = player.position
@@ -74,3 +85,6 @@ func useSkill():
 	use_time = actual_time
 	shoot_time = 0
 	active_skill = true
+	var sound = load(sound_path).instance()
+	getSound().add_child(sound)
+	sound.init_player(soundeffect)

@@ -47,7 +47,7 @@ func getTexture() -> Node:
 
 func setIsOwner(isOwner):
 		_isOwner = isOwner
-		
+
 func changeState() -> void:
 	if (state == Panel.IDLE):
 		state = Panel.FOCUS
@@ -92,9 +92,15 @@ func setColorTexture(color) -> void:
 func toggleRdy():
 	if rdy.visible:
 		rdy.visible = false
+		if !settingsNode.get_setting("keybind", "controller") && _isOwner:
+			changeChar[0].visible = true
+			changeChar[1].visible = true
 	else:
 		rdy.visible = true
+		changeChar[0].visible = false
+		changeChar[1].visible = false
 		$AnimationPlayer.play("Ready")
+		
 
 func getRdy() -> Node:
 	if container:
