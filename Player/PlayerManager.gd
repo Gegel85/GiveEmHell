@@ -7,7 +7,10 @@ var start_invincible = 0
 export var color = Color()
 
 func _ready():
-	number = int(self.get_name().split("Player")[1])
+	number = self.get_name().split("Player")[1]
+	if (number != "KB"):
+		number = int(number)
+	print(number)
 	$Appearance.modulate = color
 
 func make_invincible_for(duration):
@@ -24,7 +27,7 @@ func take_damage(dmg):
 
 func _physics_process(delta):
 	$MovementModule.moveAround(self, number)
-	$SkillsModule.Aim(number - 1)
+	$SkillsModule.Aim(number)
 	$SkillsModule.SkillActivator(number)
 	check_still_invincible()
 

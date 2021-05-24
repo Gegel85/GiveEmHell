@@ -1,6 +1,8 @@
 extends VBoxContainer
 
 onready var lastFocus = $PlayButton
+export var soundeffect: AudioStream
+onready var sound_path = "res://Prefabs/SoundPlayer.tscn"
 
 func _ready():
 	$PlayButton.grab_focus()
@@ -16,6 +18,8 @@ func _ready():
 func focusPlay():
 	lastFocus = $PlayButton
 	lastFocus.grab_focus()
+	var sound = load(sound_path).instance()
+	sound.init_player(soundeffect)
 	
 func focusQuit():
 	lastFocus = $QuitButton

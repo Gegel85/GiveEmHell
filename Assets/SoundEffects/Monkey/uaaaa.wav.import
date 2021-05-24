@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/uaaaa.wav-6df6a8da9c16016b4c0048db9ae932cb.sample"
+
+[deps]
+
+source_file="res://Assets/SoundEffects/Monkey/uaaaa.wav"
+dest_files=[ "res://.import/uaaaa.wav-6df6a8da9c16016b4c0048db9ae932cb.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

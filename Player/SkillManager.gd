@@ -25,10 +25,12 @@ func checkForInput():
 	mouseLastPos = mouseActualPos
 
 func Aim(nb):
-	"""checkForInput()"""
-	if (actualMode == controlModes.MOUSE):
+	if (str(nb) == "KB"):
+		mouseLastPos = get_global_mouse_position()
 		$Direction.look_at(mouseLastPos)
-	if (actualMode == controlModes.JOYSTICK):
+		angle_aim = get_angle_to(mouseLastPos)
+	if (str(nb) != "KB" && actualMode == controlModes.JOYSTICK):
+		nb = nb -1
 		var joyDir = Vector2(Input.get_joy_axis(nb, 2), Input.get_joy_axis(nb, 3))
 		if (abs(joyDir.x) < deadZone):
 			joyDir.x = 0

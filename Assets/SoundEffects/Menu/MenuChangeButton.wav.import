@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/MenuChangeButton.wav-79b87b53c727fcaf903163b8d324cb39.sample"
+
+[deps]
+
+source_file="res://Assets/SoundEffects/Menu/MenuChangeButton.wav"
+dest_files=[ "res://.import/MenuChangeButton.wav-79b87b53c727fcaf903163b8d324cb39.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

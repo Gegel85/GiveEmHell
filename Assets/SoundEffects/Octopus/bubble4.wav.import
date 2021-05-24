@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/bubble4.wav-a7113fd31e88751358c97f30b9e72067.sample"
+
+[deps]
+
+source_file="res://Assets/SoundEffects/Octopus/bubble4.wav"
+dest_files=[ "res://.import/bubble4.wav-a7113fd31e88751358c97f30b9e72067.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
