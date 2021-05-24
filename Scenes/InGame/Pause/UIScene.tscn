@@ -19,9 +19,9 @@ pause_mode = 2
 visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -0.23828
+margin_left = -1.18219
 margin_top = -2.75824
-margin_right = -0.238281
+margin_right = -1.18213
 margin_bottom = -2.75824
 focus_mode = 2
 theme = ExtResource( 1 )
@@ -114,6 +114,7 @@ texture = ExtResource( 6 )
 texture = ExtResource( 3 )
 
 [node name="Skill1" type="MarginContainer" parent="Popup/Grid/Player1"]
+margin_left = 345.0
 margin_top = 160.0
 margin_right = 100.0
 margin_bottom = 210.0
@@ -129,6 +130,8 @@ texture = ExtResource( 4 )
 [node name="Cooldown" type="Sprite" parent="Popup/Grid/Player1/Skill1/Icon"]
 self_modulate = Color( 1, 1, 1, 0.764706 )
 texture = ExtResource( 5 )
+centered = false
+offset = Vector2( -24, -24 )
 
 [node name="Input" type="Sprite" parent="Popup/Grid/Player1/Skill1/Icon"]
 position = Vector2( 0, -30 )
@@ -136,7 +139,6 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 10 )
 
 [node name="Skill2" type="MarginContainer" parent="Popup/Grid/Player1"]
-margin_left = 115.0
 margin_top = 160.0
 margin_right = 215.0
 margin_bottom = 210.0
@@ -153,11 +155,13 @@ texture = ExtResource( 4 )
 [node name="Cooldown" type="Sprite" parent="Popup/Grid/Player1/Skill2/Icon"]
 self_modulate = Color( 1, 1, 1, 0.764706 )
 texture = ExtResource( 5 )
+centered = false
+offset = Vector2( -24, -24 )
 
 [node name="Input" type="Sprite" parent="Popup/Grid/Player1/Skill2/Icon"]
 position = Vector2( 0, -30 )
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 
 [node name="Skill3" type="MarginContainer" parent="Popup/Grid/Player1"]
 margin_left = 230.0
@@ -177,14 +181,16 @@ texture = ExtResource( 4 )
 [node name="Cooldown" type="Sprite" parent="Popup/Grid/Player1/Skill3/Icon"]
 self_modulate = Color( 1, 1, 1, 0.764706 )
 texture = ExtResource( 5 )
+centered = false
+offset = Vector2( -24, -24 )
 
 [node name="Input" type="Sprite" parent="Popup/Grid/Player1/Skill3/Icon"]
 position = Vector2( 0, -30 )
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 9 )
+texture = ExtResource( 7 )
 
 [node name="Skill4" type="MarginContainer" parent="Popup/Grid/Player1"]
-margin_left = 345.0
+margin_left = 115.0
 margin_top = 160.0
 margin_right = 445.0
 margin_bottom = 210.0
@@ -201,15 +207,18 @@ texture = ExtResource( 4 )
 [node name="Cooldown" type="Sprite" parent="Popup/Grid/Player1/Skill4/Icon"]
 self_modulate = Color( 1, 1, 1, 0.764706 )
 texture = ExtResource( 5 )
+centered = false
+offset = Vector2( -24, -24 )
 
 [node name="Input" type="Sprite" parent="Popup/Grid/Player1/Skill4/Icon"]
 position = Vector2( 0, -30 )
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 8 )
+texture = ExtResource( 9 )
 
 [node name="Player2" type="GridContainer" parent="Popup/Grid"]
 visible = false
-margin_right = 445.0
+margin_left = 2545.0
+margin_right = 2990.0
 margin_bottom = 210.0
 custom_constants/vseparation = 140
 custom_constants/hseparation = 15
@@ -295,6 +304,8 @@ texture = ExtResource( 4 )
 [node name="Cooldown" type="Sprite" parent="Popup/Grid/Player2/Skill1/Icon"]
 self_modulate = Color( 1, 1, 1, 0.764706 )
 texture = ExtResource( 5 )
+centered = false
+offset = Vector2( -24, -24 )
 
 [node name="Input" type="Sprite" parent="Popup/Grid/Player2/Skill1/Icon"]
 position = Vector2( 0, -30 )
@@ -319,11 +330,13 @@ texture = ExtResource( 4 )
 [node name="Cooldown" type="Sprite" parent="Popup/Grid/Player2/Skill2/Icon"]
 self_modulate = Color( 1, 1, 1, 0.764706 )
 texture = ExtResource( 5 )
+centered = false
+offset = Vector2( -24, -24 )
 
 [node name="Input" type="Sprite" parent="Popup/Grid/Player2/Skill2/Icon"]
 position = Vector2( 0, -30 )
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 
 [node name="Skill3" type="MarginContainer" parent="Popup/Grid/Player2"]
 margin_left = 230.0
@@ -343,11 +356,13 @@ texture = ExtResource( 4 )
 [node name="Cooldown" type="Sprite" parent="Popup/Grid/Player2/Skill3/Icon"]
 self_modulate = Color( 1, 1, 1, 0.764706 )
 texture = ExtResource( 5 )
+centered = false
+offset = Vector2( -24, -24 )
 
 [node name="Input" type="Sprite" parent="Popup/Grid/Player2/Skill3/Icon"]
 position = Vector2( 0, -30 )
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 9 )
+texture = ExtResource( 7 )
 
 [node name="Skill4" type="MarginContainer" parent="Popup/Grid/Player2"]
 margin_left = 345.0
@@ -367,15 +382,18 @@ texture = ExtResource( 4 )
 [node name="Cooldown" type="Sprite" parent="Popup/Grid/Player2/Skill4/Icon"]
 self_modulate = Color( 1, 1, 1, 0.764706 )
 texture = ExtResource( 5 )
+centered = false
+offset = Vector2( -24, -24 )
 
 [node name="Input" type="Sprite" parent="Popup/Grid/Player2/Skill4/Icon"]
 position = Vector2( 0, -30 )
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 8 )
+texture = ExtResource( 9 )
 
 [node name="Player3" type="GridContainer" parent="Popup/Grid"]
 visible = false
-margin_right = 445.0
+margin_left = 2545.0
+margin_right = 2990.0
 margin_bottom = 210.0
 custom_constants/vseparation = 140
 custom_constants/hseparation = 15
@@ -461,6 +479,8 @@ texture = ExtResource( 4 )
 [node name="Cooldown" type="Sprite" parent="Popup/Grid/Player3/Skill1/Icon"]
 self_modulate = Color( 1, 1, 1, 0.764706 )
 texture = ExtResource( 5 )
+centered = false
+offset = Vector2( -24, -24 )
 
 [node name="Input" type="Sprite" parent="Popup/Grid/Player3/Skill1/Icon"]
 position = Vector2( 0, -30 )
@@ -485,11 +505,13 @@ texture = ExtResource( 4 )
 [node name="Cooldown" type="Sprite" parent="Popup/Grid/Player3/Skill2/Icon"]
 self_modulate = Color( 1, 1, 1, 0.764706 )
 texture = ExtResource( 5 )
+centered = false
+offset = Vector2( -24, -24 )
 
 [node name="Input" type="Sprite" parent="Popup/Grid/Player3/Skill2/Icon"]
 position = Vector2( 0, -30 )
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 
 [node name="Skill3" type="MarginContainer" parent="Popup/Grid/Player3"]
 margin_left = 230.0
@@ -509,11 +531,13 @@ texture = ExtResource( 4 )
 [node name="Cooldown" type="Sprite" parent="Popup/Grid/Player3/Skill3/Icon"]
 self_modulate = Color( 1, 1, 1, 0.764706 )
 texture = ExtResource( 5 )
+centered = false
+offset = Vector2( -24, -24 )
 
 [node name="Input" type="Sprite" parent="Popup/Grid/Player3/Skill3/Icon"]
 position = Vector2( 0, -30 )
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 9 )
+texture = ExtResource( 7 )
 
 [node name="Skill4" type="MarginContainer" parent="Popup/Grid/Player3"]
 margin_left = 345.0
@@ -533,15 +557,18 @@ texture = ExtResource( 4 )
 [node name="Cooldown" type="Sprite" parent="Popup/Grid/Player3/Skill4/Icon"]
 self_modulate = Color( 1, 1, 1, 0.764706 )
 texture = ExtResource( 5 )
+centered = false
+offset = Vector2( -24, -24 )
 
 [node name="Input" type="Sprite" parent="Popup/Grid/Player3/Skill4/Icon"]
 position = Vector2( 0, -30 )
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 8 )
+texture = ExtResource( 9 )
 
 [node name="Player4" type="GridContainer" parent="Popup/Grid"]
 visible = false
-margin_right = 445.0
+margin_left = 2545.0
+margin_right = 2990.0
 margin_bottom = 210.0
 custom_constants/vseparation = 140
 custom_constants/hseparation = 15
@@ -627,6 +654,8 @@ texture = ExtResource( 4 )
 [node name="Cooldown" type="Sprite" parent="Popup/Grid/Player4/Skill1/Icon"]
 self_modulate = Color( 1, 1, 1, 0.764706 )
 texture = ExtResource( 5 )
+centered = false
+offset = Vector2( -24, -24 )
 
 [node name="Input" type="Sprite" parent="Popup/Grid/Player4/Skill1/Icon"]
 position = Vector2( 0, -30 )
@@ -651,11 +680,13 @@ texture = ExtResource( 4 )
 [node name="Cooldown" type="Sprite" parent="Popup/Grid/Player4/Skill2/Icon"]
 self_modulate = Color( 1, 1, 1, 0.764706 )
 texture = ExtResource( 5 )
+centered = false
+offset = Vector2( -24, -24 )
 
 [node name="Input" type="Sprite" parent="Popup/Grid/Player4/Skill2/Icon"]
 position = Vector2( 0, -30 )
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 
 [node name="Skill3" type="MarginContainer" parent="Popup/Grid/Player4"]
 margin_left = 230.0
@@ -675,11 +706,13 @@ texture = ExtResource( 4 )
 [node name="Cooldown" type="Sprite" parent="Popup/Grid/Player4/Skill3/Icon"]
 self_modulate = Color( 1, 1, 1, 0.764706 )
 texture = ExtResource( 5 )
+centered = false
+offset = Vector2( -24, -24 )
 
 [node name="Input" type="Sprite" parent="Popup/Grid/Player4/Skill3/Icon"]
 position = Vector2( 0, -30 )
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 9 )
+texture = ExtResource( 7 )
 
 [node name="Skill4" type="MarginContainer" parent="Popup/Grid/Player4"]
 margin_left = 345.0
@@ -699,8 +732,10 @@ texture = ExtResource( 4 )
 [node name="Cooldown" type="Sprite" parent="Popup/Grid/Player4/Skill4/Icon"]
 self_modulate = Color( 1, 1, 1, 0.764706 )
 texture = ExtResource( 5 )
+centered = false
+offset = Vector2( -24, -24 )
 
 [node name="Input" type="Sprite" parent="Popup/Grid/Player4/Skill4/Icon"]
 position = Vector2( 0, -30 )
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 8 )
+texture = ExtResource( 9 )
