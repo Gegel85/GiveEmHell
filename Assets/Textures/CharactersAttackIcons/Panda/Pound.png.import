@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Ball.png-daf49d768b5f24cc7858e8cfba19e412.stex"
+path="res://.import/Pound.png-42ae309b1b836a9063842f5338ba2376.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/CharactersIcons/CharactersAttackIcons/Panda/Ball.png"
-dest_files=[ "res://.import/Ball.png-daf49d768b5f24cc7858e8cfba19e412.stex" ]
+source_file="res://Assets/Textures/CharactersAttackIcons/Panda/Pound.png"
+dest_files=[ "res://.import/Pound.png-42ae309b1b836a9063842f5338ba2376.stex" ]
 
 [params]
 

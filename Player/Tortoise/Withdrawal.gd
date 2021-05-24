@@ -28,7 +28,6 @@ func bounce_balls(object):
 	var player_name = get_node("Collider").get_child(0).name
 	var obj_parent = object.get_parent()
 	if (object.is_in_group("Bullet")):
-		print(obj_parent.player + " (" + player_name)
 		if (obj_parent.player != player_name):
 			obj_parent.player = player_name
 			obj_parent.move_dir += PI

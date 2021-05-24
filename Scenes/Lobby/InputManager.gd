@@ -98,6 +98,8 @@ func hasDevice(dlist, device:Device):
 
 func findDevice(dlist, device: Device):
 	for i in range(dlist.size()):
+		if typeof(dlist[i]) == TYPE_INT:
+			continue
 		if device.eq(dlist[i]):
 			return i
 	return -1
@@ -173,6 +175,7 @@ func addPlayer(name:String, device: Device, i: int, player_nb: int) -> void:
 	c.name = "Player" + str(player_nb)
 	c.color = playerColors[i]
 	c.device = device
+	c.character = name
 	root.get_node("MainScene/Players").add_child(c)
 
 func _get_configuration_warning() -> String:

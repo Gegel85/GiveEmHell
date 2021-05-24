@@ -1,11 +1,16 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Assets/Theme/theme.tres" type="Theme" id=1]
-[ext_resource path="res://Scenes/InGame/Pause/PausePopup.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/InGame/Pause/UIRescale.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Textures/lifeFilled.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Textures/CharactersIcons/CharactersAttackIcons/Panda/Ball.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Textures/CharactersAttackIcons/Panda/Ball.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Textures/empty.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Textures/lifeBar.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Textures/ControllerIcon/RB.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Textures/ControllerIcon/LT.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Textures/ControllerIcon/LB.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Textures/ControllerIcon/RT.png" type="Texture" id=10]
+[ext_resource path="res://Scenes/InGame/Pause/PlayerUI.gd" type="Script" id=11]
 
 [node name="UIContainer" type="CanvasLayer"]
 pause_mode = 2
@@ -14,10 +19,10 @@ pause_mode = 2
 visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -1.49829
-margin_top = -1.49829
-margin_right = -1.49829
-margin_bottom = -1.49829
+margin_left = -0.23828
+margin_top = -2.75824
+margin_right = -0.238281
+margin_bottom = -2.75824
 focus_mode = 2
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
@@ -25,32 +30,27 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GridContainer" type="GridContainer" parent="Popup"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -94.8348
-margin_top = -53.5
-margin_right = 92.1652
-margin_bottom = 53.5
-focus_mode = 2
+[node name="Grid" type="GridContainer" parent="Popup"]
+margin_left = 60.0
+margin_top = 60.0
+rect_scale = Vector2( 0.4, 0.4 )
+custom_constants/vseparation = 1200
+custom_constants/hseparation = 2100
+columns = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlayerUI" type="GridContainer" parent="Popup/GridContainer"]
-margin_right = 430.0
-margin_bottom = 28.0
+[node name="Player1" type="GridContainer" parent="Popup/Grid"]
+visible = false
+margin_right = 445.0
+margin_bottom = 210.0
+custom_constants/vseparation = 140
+custom_constants/hseparation = 15
+columns = 4
+script = ExtResource( 11 )
 
-[node name="LifeBars" type="HBoxContainer" parent="Popup/GridContainer/PlayerUI"]
-margin_right = 430.0
-margin_bottom = 20.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
-custom_constants/separation = 10
-
-[node name="Life" type="MarginContainer" parent="Popup/GridContainer/PlayerUI/LifeBars"]
+[node name="Life1" type="MarginContainer" parent="Popup/Grid/Player1"]
 margin_right = 100.0
 margin_bottom = 20.0
 custom_constants/margin_right = 50
@@ -58,87 +58,649 @@ custom_constants/margin_top = 10
 custom_constants/margin_left = 50
 custom_constants/margin_bottom = 10
 
-[node name="Lifebar" type="Sprite" parent="Popup/GridContainer/PlayerUI/LifeBars/Life"]
+[node name="Lifebar" type="Sprite" parent="Popup/Grid/Player1/Life1"]
 position = Vector2( 0, -14 )
+scale = Vector2( 1, 0.8 )
 texture = ExtResource( 6 )
 
-[node name="Filled" type="Sprite" parent="Popup/GridContainer/PlayerUI/LifeBars/Life/Lifebar"]
-self_modulate = Color( 0.827451, 0, 1, 1 )
+[node name="Filled" type="Sprite" parent="Popup/Grid/Player1/Life1/Lifebar"]
 texture = ExtResource( 3 )
 
-[node name="Life2" type="MarginContainer" parent="Popup/GridContainer/PlayerUI/LifeBars"]
-margin_left = 110.0
-margin_right = 210.0
+[node name="Life2" type="MarginContainer" parent="Popup/Grid/Player1"]
+margin_left = 115.0
+margin_right = 215.0
 margin_bottom = 20.0
 custom_constants/margin_right = 50
 custom_constants/margin_top = 10
 custom_constants/margin_left = 50
 custom_constants/margin_bottom = 10
 
-[node name="Lifebar" type="Sprite" parent="Popup/GridContainer/PlayerUI/LifeBars/Life2"]
+[node name="Lifebar" type="Sprite" parent="Popup/Grid/Player1/Life2"]
 position = Vector2( 0, -14 )
+scale = Vector2( 1, 0.8 )
 texture = ExtResource( 6 )
 
-[node name="Filled" type="Sprite" parent="Popup/GridContainer/PlayerUI/LifeBars/Life2/Lifebar"]
-self_modulate = Color( 0.827451, 0, 1, 1 )
+[node name="Filled" type="Sprite" parent="Popup/Grid/Player1/Life2/Lifebar"]
 texture = ExtResource( 3 )
 
-[node name="Life3" type="MarginContainer" parent="Popup/GridContainer/PlayerUI/LifeBars"]
-margin_left = 220.0
-margin_right = 320.0
+[node name="Life3" type="MarginContainer" parent="Popup/Grid/Player1"]
+margin_left = 230.0
+margin_right = 330.0
 margin_bottom = 20.0
 custom_constants/margin_right = 50
 custom_constants/margin_left = 50
 
-[node name="Lifebar" type="Sprite" parent="Popup/GridContainer/PlayerUI/LifeBars/Life3"]
+[node name="Lifebar" type="Sprite" parent="Popup/Grid/Player1/Life3"]
 position = Vector2( 0, -14 )
+scale = Vector2( 1, 0.8 )
 texture = ExtResource( 6 )
 
-[node name="Filled" type="Sprite" parent="Popup/GridContainer/PlayerUI/LifeBars/Life3/Lifebar"]
-self_modulate = Color( 0.827451, 0, 1, 1 )
+[node name="Filled" type="Sprite" parent="Popup/Grid/Player1/Life3/Lifebar"]
 texture = ExtResource( 3 )
 
-[node name="Life4" type="MarginContainer" parent="Popup/GridContainer/PlayerUI/LifeBars"]
-margin_left = 330.0
-margin_right = 430.0
+[node name="Life4" type="MarginContainer" parent="Popup/Grid/Player1"]
+margin_left = 345.0
+margin_right = 445.0
 margin_bottom = 20.0
 custom_constants/margin_right = 50
 custom_constants/margin_left = 50
 
-[node name="Lifebar" type="Sprite" parent="Popup/GridContainer/PlayerUI/LifeBars/Life4"]
+[node name="Lifebar" type="Sprite" parent="Popup/Grid/Player1/Life4"]
 position = Vector2( 0, -14 )
+scale = Vector2( 1, 0.8 )
 texture = ExtResource( 6 )
 
-[node name="Filled" type="Sprite" parent="Popup/GridContainer/PlayerUI/LifeBars/Life4/Lifebar"]
-self_modulate = Color( 0.827451, 0, 1, 1 )
+[node name="Filled" type="Sprite" parent="Popup/Grid/Player1/Life4/Lifebar"]
 texture = ExtResource( 3 )
 
-[node name="SkillCooldowns" type="HBoxContainer" parent="Popup/GridContainer/PlayerUI"]
-margin_top = 24.0
-margin_right = 430.0
-margin_bottom = 24.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Skill1" type="MarginContainer" parent="Popup/Grid/Player1"]
+margin_top = 160.0
+margin_right = 100.0
+margin_bottom = 210.0
+custom_constants/margin_right = 25
+custom_constants/margin_top = 25
+custom_constants/margin_left = 25
+custom_constants/margin_bottom = 25
 
-[node name="Skill" type="MarginContainer" parent="Popup/GridContainer/PlayerUI/SkillCooldowns"]
-
-[node name="Icon" type="Sprite" parent="Popup/GridContainer/PlayerUI/SkillCooldowns/Skill"]
-self_modulate = Color( 0.921569, 0, 1, 1 )
-position = Vector2( 546.5, 302.5 )
+[node name="Icon" type="Sprite" parent="Popup/Grid/Player1/Skill1"]
+scale = Vector2( 2, 2 )
 texture = ExtResource( 4 )
 
-[node name="Cooldown" type="Sprite" parent="Popup/GridContainer/PlayerUI/SkillCooldowns/Skill/Icon"]
+[node name="Cooldown" type="Sprite" parent="Popup/Grid/Player1/Skill1/Icon"]
 self_modulate = Color( 1, 1, 1, 0.764706 )
 texture = ExtResource( 5 )
 
-[node name="Input" type="Sprite" parent="Popup/GridContainer/PlayerUI/SkillCooldowns/Skill/Icon"]
+[node name="Input" type="Sprite" parent="Popup/Grid/Player1/Skill1/Icon"]
+position = Vector2( 0, -30 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 10 )
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="Popup/GridContainer/PlayerUI"]
-margin_top = 28.0
-margin_right = 430.0
-margin_bottom = 28.0
+[node name="Skill2" type="MarginContainer" parent="Popup/Grid/Player1"]
+margin_left = 115.0
+margin_top = 160.0
+margin_right = 215.0
+margin_bottom = 210.0
+custom_constants/margin_right = 25
+custom_constants/margin_top = 25
+custom_constants/margin_left = 25
+custom_constants/margin_bottom = 25
 
-[node name="Victories" type="Sprite" parent="Popup/GridContainer/PlayerUI/HBoxContainer3"]
+[node name="Icon" type="Sprite" parent="Popup/Grid/Player1/Skill2"]
+self_modulate = Color( 0.921569, 0, 1, 1 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
 
-[node name="Victory" type="Sprite" parent="Popup/GridContainer/PlayerUI/HBoxContainer3/Victories"]
+[node name="Cooldown" type="Sprite" parent="Popup/Grid/Player1/Skill2/Icon"]
+self_modulate = Color( 1, 1, 1, 0.764706 )
+texture = ExtResource( 5 )
+
+[node name="Input" type="Sprite" parent="Popup/Grid/Player1/Skill2/Icon"]
+position = Vector2( 0, -30 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 7 )
+
+[node name="Skill3" type="MarginContainer" parent="Popup/Grid/Player1"]
+margin_left = 230.0
+margin_top = 160.0
+margin_right = 330.0
+margin_bottom = 210.0
+custom_constants/margin_right = 25
+custom_constants/margin_top = 25
+custom_constants/margin_left = 25
+custom_constants/margin_bottom = 25
+
+[node name="Icon" type="Sprite" parent="Popup/Grid/Player1/Skill3"]
+self_modulate = Color( 0.921569, 0, 1, 1 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
+
+[node name="Cooldown" type="Sprite" parent="Popup/Grid/Player1/Skill3/Icon"]
+self_modulate = Color( 1, 1, 1, 0.764706 )
+texture = ExtResource( 5 )
+
+[node name="Input" type="Sprite" parent="Popup/Grid/Player1/Skill3/Icon"]
+position = Vector2( 0, -30 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 9 )
+
+[node name="Skill4" type="MarginContainer" parent="Popup/Grid/Player1"]
+margin_left = 345.0
+margin_top = 160.0
+margin_right = 445.0
+margin_bottom = 210.0
+custom_constants/margin_right = 25
+custom_constants/margin_top = 25
+custom_constants/margin_left = 25
+custom_constants/margin_bottom = 25
+
+[node name="Icon" type="Sprite" parent="Popup/Grid/Player1/Skill4"]
+self_modulate = Color( 0.921569, 0, 1, 1 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
+
+[node name="Cooldown" type="Sprite" parent="Popup/Grid/Player1/Skill4/Icon"]
+self_modulate = Color( 1, 1, 1, 0.764706 )
+texture = ExtResource( 5 )
+
+[node name="Input" type="Sprite" parent="Popup/Grid/Player1/Skill4/Icon"]
+position = Vector2( 0, -30 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 8 )
+
+[node name="Player2" type="GridContainer" parent="Popup/Grid"]
+visible = false
+margin_right = 445.0
+margin_bottom = 210.0
+custom_constants/vseparation = 140
+custom_constants/hseparation = 15
+columns = 4
+script = ExtResource( 11 )
+
+[node name="Life1" type="MarginContainer" parent="Popup/Grid/Player2"]
+margin_right = 100.0
+margin_bottom = 20.0
+custom_constants/margin_right = 50
+custom_constants/margin_top = 10
+custom_constants/margin_left = 50
+custom_constants/margin_bottom = 10
+
+[node name="Lifebar" type="Sprite" parent="Popup/Grid/Player2/Life1"]
+position = Vector2( 0, -14 )
+scale = Vector2( 1, 0.8 )
+texture = ExtResource( 6 )
+
+[node name="Filled" type="Sprite" parent="Popup/Grid/Player2/Life1/Lifebar"]
+texture = ExtResource( 3 )
+
+[node name="Life2" type="MarginContainer" parent="Popup/Grid/Player2"]
+margin_left = 115.0
+margin_right = 215.0
+margin_bottom = 20.0
+custom_constants/margin_right = 50
+custom_constants/margin_top = 10
+custom_constants/margin_left = 50
+custom_constants/margin_bottom = 10
+
+[node name="Lifebar" type="Sprite" parent="Popup/Grid/Player2/Life2"]
+position = Vector2( 0, -14 )
+scale = Vector2( 1, 0.8 )
+texture = ExtResource( 6 )
+
+[node name="Filled" type="Sprite" parent="Popup/Grid/Player2/Life2/Lifebar"]
+texture = ExtResource( 3 )
+
+[node name="Life3" type="MarginContainer" parent="Popup/Grid/Player2"]
+margin_left = 230.0
+margin_right = 330.0
+margin_bottom = 20.0
+custom_constants/margin_right = 50
+custom_constants/margin_left = 50
+
+[node name="Lifebar" type="Sprite" parent="Popup/Grid/Player2/Life3"]
+position = Vector2( 0, -14 )
+scale = Vector2( 1, 0.8 )
+texture = ExtResource( 6 )
+
+[node name="Filled" type="Sprite" parent="Popup/Grid/Player2/Life3/Lifebar"]
+texture = ExtResource( 3 )
+
+[node name="Life4" type="MarginContainer" parent="Popup/Grid/Player2"]
+margin_left = 345.0
+margin_right = 445.0
+margin_bottom = 20.0
+custom_constants/margin_right = 50
+custom_constants/margin_left = 50
+
+[node name="Lifebar" type="Sprite" parent="Popup/Grid/Player2/Life4"]
+position = Vector2( 0, -14 )
+scale = Vector2( 1, 0.8 )
+texture = ExtResource( 6 )
+
+[node name="Filled" type="Sprite" parent="Popup/Grid/Player2/Life4/Lifebar"]
+texture = ExtResource( 3 )
+
+[node name="Skill1" type="MarginContainer" parent="Popup/Grid/Player2"]
+margin_top = 160.0
+margin_right = 100.0
+margin_bottom = 210.0
+custom_constants/margin_right = 25
+custom_constants/margin_top = 25
+custom_constants/margin_left = 25
+custom_constants/margin_bottom = 25
+
+[node name="Icon" type="Sprite" parent="Popup/Grid/Player2/Skill1"]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
+
+[node name="Cooldown" type="Sprite" parent="Popup/Grid/Player2/Skill1/Icon"]
+self_modulate = Color( 1, 1, 1, 0.764706 )
+texture = ExtResource( 5 )
+
+[node name="Input" type="Sprite" parent="Popup/Grid/Player2/Skill1/Icon"]
+position = Vector2( 0, -30 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 10 )
+
+[node name="Skill2" type="MarginContainer" parent="Popup/Grid/Player2"]
+margin_left = 115.0
+margin_top = 160.0
+margin_right = 215.0
+margin_bottom = 210.0
+custom_constants/margin_right = 25
+custom_constants/margin_top = 25
+custom_constants/margin_left = 25
+custom_constants/margin_bottom = 25
+
+[node name="Icon" type="Sprite" parent="Popup/Grid/Player2/Skill2"]
+self_modulate = Color( 0.921569, 0, 1, 1 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
+
+[node name="Cooldown" type="Sprite" parent="Popup/Grid/Player2/Skill2/Icon"]
+self_modulate = Color( 1, 1, 1, 0.764706 )
+texture = ExtResource( 5 )
+
+[node name="Input" type="Sprite" parent="Popup/Grid/Player2/Skill2/Icon"]
+position = Vector2( 0, -30 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 7 )
+
+[node name="Skill3" type="MarginContainer" parent="Popup/Grid/Player2"]
+margin_left = 230.0
+margin_top = 160.0
+margin_right = 330.0
+margin_bottom = 210.0
+custom_constants/margin_right = 25
+custom_constants/margin_top = 25
+custom_constants/margin_left = 25
+custom_constants/margin_bottom = 25
+
+[node name="Icon" type="Sprite" parent="Popup/Grid/Player2/Skill3"]
+self_modulate = Color( 0.921569, 0, 1, 1 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
+
+[node name="Cooldown" type="Sprite" parent="Popup/Grid/Player2/Skill3/Icon"]
+self_modulate = Color( 1, 1, 1, 0.764706 )
+texture = ExtResource( 5 )
+
+[node name="Input" type="Sprite" parent="Popup/Grid/Player2/Skill3/Icon"]
+position = Vector2( 0, -30 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 9 )
+
+[node name="Skill4" type="MarginContainer" parent="Popup/Grid/Player2"]
+margin_left = 345.0
+margin_top = 160.0
+margin_right = 445.0
+margin_bottom = 210.0
+custom_constants/margin_right = 25
+custom_constants/margin_top = 25
+custom_constants/margin_left = 25
+custom_constants/margin_bottom = 25
+
+[node name="Icon" type="Sprite" parent="Popup/Grid/Player2/Skill4"]
+self_modulate = Color( 0.921569, 0, 1, 1 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
+
+[node name="Cooldown" type="Sprite" parent="Popup/Grid/Player2/Skill4/Icon"]
+self_modulate = Color( 1, 1, 1, 0.764706 )
+texture = ExtResource( 5 )
+
+[node name="Input" type="Sprite" parent="Popup/Grid/Player2/Skill4/Icon"]
+position = Vector2( 0, -30 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 8 )
+
+[node name="Player3" type="GridContainer" parent="Popup/Grid"]
+visible = false
+margin_right = 445.0
+margin_bottom = 210.0
+custom_constants/vseparation = 140
+custom_constants/hseparation = 15
+columns = 4
+script = ExtResource( 11 )
+
+[node name="Life1" type="MarginContainer" parent="Popup/Grid/Player3"]
+margin_right = 100.0
+margin_bottom = 20.0
+custom_constants/margin_right = 50
+custom_constants/margin_top = 10
+custom_constants/margin_left = 50
+custom_constants/margin_bottom = 10
+
+[node name="Lifebar" type="Sprite" parent="Popup/Grid/Player3/Life1"]
+position = Vector2( 0, -14 )
+scale = Vector2( 1, 0.8 )
+texture = ExtResource( 6 )
+
+[node name="Filled" type="Sprite" parent="Popup/Grid/Player3/Life1/Lifebar"]
+texture = ExtResource( 3 )
+
+[node name="Life2" type="MarginContainer" parent="Popup/Grid/Player3"]
+margin_left = 115.0
+margin_right = 215.0
+margin_bottom = 20.0
+custom_constants/margin_right = 50
+custom_constants/margin_top = 10
+custom_constants/margin_left = 50
+custom_constants/margin_bottom = 10
+
+[node name="Lifebar" type="Sprite" parent="Popup/Grid/Player3/Life2"]
+position = Vector2( 0, -14 )
+scale = Vector2( 1, 0.8 )
+texture = ExtResource( 6 )
+
+[node name="Filled" type="Sprite" parent="Popup/Grid/Player3/Life2/Lifebar"]
+texture = ExtResource( 3 )
+
+[node name="Life3" type="MarginContainer" parent="Popup/Grid/Player3"]
+margin_left = 230.0
+margin_right = 330.0
+margin_bottom = 20.0
+custom_constants/margin_right = 50
+custom_constants/margin_left = 50
+
+[node name="Lifebar" type="Sprite" parent="Popup/Grid/Player3/Life3"]
+position = Vector2( 0, -14 )
+scale = Vector2( 1, 0.8 )
+texture = ExtResource( 6 )
+
+[node name="Filled" type="Sprite" parent="Popup/Grid/Player3/Life3/Lifebar"]
+texture = ExtResource( 3 )
+
+[node name="Life4" type="MarginContainer" parent="Popup/Grid/Player3"]
+margin_left = 345.0
+margin_right = 445.0
+margin_bottom = 20.0
+custom_constants/margin_right = 50
+custom_constants/margin_left = 50
+
+[node name="Lifebar" type="Sprite" parent="Popup/Grid/Player3/Life4"]
+position = Vector2( 0, -14 )
+scale = Vector2( 1, 0.8 )
+texture = ExtResource( 6 )
+
+[node name="Filled" type="Sprite" parent="Popup/Grid/Player3/Life4/Lifebar"]
+texture = ExtResource( 3 )
+
+[node name="Skill1" type="MarginContainer" parent="Popup/Grid/Player3"]
+margin_top = 160.0
+margin_right = 100.0
+margin_bottom = 210.0
+custom_constants/margin_right = 25
+custom_constants/margin_top = 25
+custom_constants/margin_left = 25
+custom_constants/margin_bottom = 25
+
+[node name="Icon" type="Sprite" parent="Popup/Grid/Player3/Skill1"]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
+
+[node name="Cooldown" type="Sprite" parent="Popup/Grid/Player3/Skill1/Icon"]
+self_modulate = Color( 1, 1, 1, 0.764706 )
+texture = ExtResource( 5 )
+
+[node name="Input" type="Sprite" parent="Popup/Grid/Player3/Skill1/Icon"]
+position = Vector2( 0, -30 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 10 )
+
+[node name="Skill2" type="MarginContainer" parent="Popup/Grid/Player3"]
+margin_left = 115.0
+margin_top = 160.0
+margin_right = 215.0
+margin_bottom = 210.0
+custom_constants/margin_right = 25
+custom_constants/margin_top = 25
+custom_constants/margin_left = 25
+custom_constants/margin_bottom = 25
+
+[node name="Icon" type="Sprite" parent="Popup/Grid/Player3/Skill2"]
+self_modulate = Color( 0.921569, 0, 1, 1 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
+
+[node name="Cooldown" type="Sprite" parent="Popup/Grid/Player3/Skill2/Icon"]
+self_modulate = Color( 1, 1, 1, 0.764706 )
+texture = ExtResource( 5 )
+
+[node name="Input" type="Sprite" parent="Popup/Grid/Player3/Skill2/Icon"]
+position = Vector2( 0, -30 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 7 )
+
+[node name="Skill3" type="MarginContainer" parent="Popup/Grid/Player3"]
+margin_left = 230.0
+margin_top = 160.0
+margin_right = 330.0
+margin_bottom = 210.0
+custom_constants/margin_right = 25
+custom_constants/margin_top = 25
+custom_constants/margin_left = 25
+custom_constants/margin_bottom = 25
+
+[node name="Icon" type="Sprite" parent="Popup/Grid/Player3/Skill3"]
+self_modulate = Color( 0.921569, 0, 1, 1 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
+
+[node name="Cooldown" type="Sprite" parent="Popup/Grid/Player3/Skill3/Icon"]
+self_modulate = Color( 1, 1, 1, 0.764706 )
+texture = ExtResource( 5 )
+
+[node name="Input" type="Sprite" parent="Popup/Grid/Player3/Skill3/Icon"]
+position = Vector2( 0, -30 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 9 )
+
+[node name="Skill4" type="MarginContainer" parent="Popup/Grid/Player3"]
+margin_left = 345.0
+margin_top = 160.0
+margin_right = 445.0
+margin_bottom = 210.0
+custom_constants/margin_right = 25
+custom_constants/margin_top = 25
+custom_constants/margin_left = 25
+custom_constants/margin_bottom = 25
+
+[node name="Icon" type="Sprite" parent="Popup/Grid/Player3/Skill4"]
+self_modulate = Color( 0.921569, 0, 1, 1 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
+
+[node name="Cooldown" type="Sprite" parent="Popup/Grid/Player3/Skill4/Icon"]
+self_modulate = Color( 1, 1, 1, 0.764706 )
+texture = ExtResource( 5 )
+
+[node name="Input" type="Sprite" parent="Popup/Grid/Player3/Skill4/Icon"]
+position = Vector2( 0, -30 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 8 )
+
+[node name="Player4" type="GridContainer" parent="Popup/Grid"]
+visible = false
+margin_right = 445.0
+margin_bottom = 210.0
+custom_constants/vseparation = 140
+custom_constants/hseparation = 15
+columns = 4
+script = ExtResource( 11 )
+
+[node name="Life1" type="MarginContainer" parent="Popup/Grid/Player4"]
+margin_right = 100.0
+margin_bottom = 20.0
+custom_constants/margin_right = 50
+custom_constants/margin_top = 10
+custom_constants/margin_left = 50
+custom_constants/margin_bottom = 10
+
+[node name="Lifebar" type="Sprite" parent="Popup/Grid/Player4/Life1"]
+position = Vector2( 0, -14 )
+scale = Vector2( 1, 0.8 )
+texture = ExtResource( 6 )
+
+[node name="Filled" type="Sprite" parent="Popup/Grid/Player4/Life1/Lifebar"]
+texture = ExtResource( 3 )
+
+[node name="Life2" type="MarginContainer" parent="Popup/Grid/Player4"]
+margin_left = 115.0
+margin_right = 215.0
+margin_bottom = 20.0
+custom_constants/margin_right = 50
+custom_constants/margin_top = 10
+custom_constants/margin_left = 50
+custom_constants/margin_bottom = 10
+
+[node name="Lifebar" type="Sprite" parent="Popup/Grid/Player4/Life2"]
+position = Vector2( 0, -14 )
+scale = Vector2( 1, 0.8 )
+texture = ExtResource( 6 )
+
+[node name="Filled" type="Sprite" parent="Popup/Grid/Player4/Life2/Lifebar"]
+texture = ExtResource( 3 )
+
+[node name="Life3" type="MarginContainer" parent="Popup/Grid/Player4"]
+margin_left = 230.0
+margin_right = 330.0
+margin_bottom = 20.0
+custom_constants/margin_right = 50
+custom_constants/margin_left = 50
+
+[node name="Lifebar" type="Sprite" parent="Popup/Grid/Player4/Life3"]
+position = Vector2( 0, -14 )
+scale = Vector2( 1, 0.8 )
+texture = ExtResource( 6 )
+
+[node name="Filled" type="Sprite" parent="Popup/Grid/Player4/Life3/Lifebar"]
+texture = ExtResource( 3 )
+
+[node name="Life4" type="MarginContainer" parent="Popup/Grid/Player4"]
+margin_left = 345.0
+margin_right = 445.0
+margin_bottom = 20.0
+custom_constants/margin_right = 50
+custom_constants/margin_left = 50
+
+[node name="Lifebar" type="Sprite" parent="Popup/Grid/Player4/Life4"]
+position = Vector2( 0, -14 )
+scale = Vector2( 1, 0.8 )
+texture = ExtResource( 6 )
+
+[node name="Filled" type="Sprite" parent="Popup/Grid/Player4/Life4/Lifebar"]
+texture = ExtResource( 3 )
+
+[node name="Skill1" type="MarginContainer" parent="Popup/Grid/Player4"]
+margin_top = 160.0
+margin_right = 100.0
+margin_bottom = 210.0
+custom_constants/margin_right = 25
+custom_constants/margin_top = 25
+custom_constants/margin_left = 25
+custom_constants/margin_bottom = 25
+
+[node name="Icon" type="Sprite" parent="Popup/Grid/Player4/Skill1"]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
+
+[node name="Cooldown" type="Sprite" parent="Popup/Grid/Player4/Skill1/Icon"]
+self_modulate = Color( 1, 1, 1, 0.764706 )
+texture = ExtResource( 5 )
+
+[node name="Input" type="Sprite" parent="Popup/Grid/Player4/Skill1/Icon"]
+position = Vector2( 0, -30 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 10 )
+
+[node name="Skill2" type="MarginContainer" parent="Popup/Grid/Player4"]
+margin_left = 115.0
+margin_top = 160.0
+margin_right = 215.0
+margin_bottom = 210.0
+custom_constants/margin_right = 25
+custom_constants/margin_top = 25
+custom_constants/margin_left = 25
+custom_constants/margin_bottom = 25
+
+[node name="Icon" type="Sprite" parent="Popup/Grid/Player4/Skill2"]
+self_modulate = Color( 0.921569, 0, 1, 1 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
+
+[node name="Cooldown" type="Sprite" parent="Popup/Grid/Player4/Skill2/Icon"]
+self_modulate = Color( 1, 1, 1, 0.764706 )
+texture = ExtResource( 5 )
+
+[node name="Input" type="Sprite" parent="Popup/Grid/Player4/Skill2/Icon"]
+position = Vector2( 0, -30 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 7 )
+
+[node name="Skill3" type="MarginContainer" parent="Popup/Grid/Player4"]
+margin_left = 230.0
+margin_top = 160.0
+margin_right = 330.0
+margin_bottom = 210.0
+custom_constants/margin_right = 25
+custom_constants/margin_top = 25
+custom_constants/margin_left = 25
+custom_constants/margin_bottom = 25
+
+[node name="Icon" type="Sprite" parent="Popup/Grid/Player4/Skill3"]
+self_modulate = Color( 0.921569, 0, 1, 1 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
+
+[node name="Cooldown" type="Sprite" parent="Popup/Grid/Player4/Skill3/Icon"]
+self_modulate = Color( 1, 1, 1, 0.764706 )
+texture = ExtResource( 5 )
+
+[node name="Input" type="Sprite" parent="Popup/Grid/Player4/Skill3/Icon"]
+position = Vector2( 0, -30 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 9 )
+
+[node name="Skill4" type="MarginContainer" parent="Popup/Grid/Player4"]
+margin_left = 345.0
+margin_top = 160.0
+margin_right = 445.0
+margin_bottom = 210.0
+custom_constants/margin_right = 25
+custom_constants/margin_top = 25
+custom_constants/margin_left = 25
+custom_constants/margin_bottom = 25
+
+[node name="Icon" type="Sprite" parent="Popup/Grid/Player4/Skill4"]
+self_modulate = Color( 0.921569, 0, 1, 1 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
+
+[node name="Cooldown" type="Sprite" parent="Popup/Grid/Player4/Skill4/Icon"]
+self_modulate = Color( 1, 1, 1, 0.764706 )
+texture = ExtResource( 5 )
+
+[node name="Input" type="Sprite" parent="Popup/Grid/Player4/Skill4/Icon"]
+position = Vector2( 0, -30 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 8 )
