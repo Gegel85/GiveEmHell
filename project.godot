@@ -34,7 +34,7 @@ _global_script_class_icons={
 
 config/name="GiveEmHell"
 run/main_scene="res://Scenes/TitleScreen/TitleScreen.tscn"
-config/icon="res://icon.png"
+config/icon="res://Assets/Textures/heart.png"
 
 [autoload]
 

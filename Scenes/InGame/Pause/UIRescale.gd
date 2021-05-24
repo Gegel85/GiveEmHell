@@ -1,32 +1,21 @@
 extends Popup
 
-onready var firstChild = $VerticalAlign.get_child(0)
-onready var lastFocus = firstChild
-
-func _input(event):
-	if Input.is_action_just_released("pause"):
-		get_tree().paused = !get_tree().paused
-		visible = !visible
-		if visible == true:
-			firstChild.grab_focus()
-		
-
+## onready var players = $VerticalAlign.get_child(0).get_children()
 
 func _ready():
-	var btns = $VerticalAlign.get_children()
-	
-	get_tree().get_root().connect("size_changed", self, "resize")
-	for b in btns:
-		b.connect("mouse_entered", self, "selfFocus", [b])
-		b.connect("focus_entered", self, "selfFocus", [b])
-	
+	visible = true
+
 func resize():
 	visible = !visible
 	visible = !visible
 	
 func selfFocus(b):
-	lastFocus = b
-	lastFocus.grab_focus()
+	visible = true
+	grab_focus()	
 	
 func reFocus():
-	lastFocus.grab_focus()
+	visible = true
+	grab_focus()
+
+func getUI(name):
+	return get_node("Grid").get_node(name)

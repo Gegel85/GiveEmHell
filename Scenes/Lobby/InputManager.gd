@@ -188,6 +188,7 @@ func addPlayer(name:String, device: Device, i: int, player_nb: int) -> void:
 	c.name = "Player" + str(player_nb)
 	c.color = playerColors[i]
 	c.device = device
+	c.character = name
 	root.get_node("MainScene/Players").add_child(c)
 
 func _get_configuration_warning() -> String:

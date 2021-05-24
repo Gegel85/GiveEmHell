@@ -9,8 +9,6 @@ func _input(event):
 		visible = !visible
 		if visible == true:
 			firstChild.grab_focus()
-		
-
 
 func _ready():
 	var btns = $VerticalAlign.get_children()

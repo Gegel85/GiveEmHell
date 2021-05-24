@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Roll.png-6ca37d00653f628ced190d78166f95e5.stex"
+path="res://.import/Claws.png-7766911af96cad6819046170f0b88391.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/CharactersIcons/CharactersAttackIcons/Panda/Roll.png"
-dest_files=[ "res://.import/Roll.png-6ca37d00653f628ced190d78166f95e5.stex" ]
+source_file="res://Assets/Textures/CharactersAttackIcons/Panda/Claws.png"
+dest_files=[ "res://.import/Claws.png-7766911af96cad6819046170f0b88391.stex" ]
 
 [params]
 
