@@ -44,7 +44,7 @@ func _ready() -> void:
 func join(device) -> void:
 	if nbOfPlayer > player.MAX || hasDevice(deviceList, device):
 		return
-	var i = deviceList.find(-1)
+	var i = findDeviceInt(deviceList, -1)
 	deviceList[i] = device
 	elapsedTime[0] = 0
 	if device.type == Device.DeviceType.MOUSE_KEYBOARD:
@@ -87,7 +87,7 @@ func _input(event: InputEvent) -> void:
 				get_tree().change_scene("res://Scenes/ModeSelection/ModeSelection.tscn")
 			if !hasDevice(playerRdy, device):
 				leave(device)
-				
+
 func hasDevice(dlist, device:Device):
 	for i in range(dlist.size()):
 		if typeof(dlist[i]) == TYPE_INT:
@@ -96,8 +96,18 @@ func hasDevice(dlist, device:Device):
 			return true
 	return false
 
+func findDeviceInt(dlist, n):
+	for i in range(dlist.size()):
+		if typeof(dlist[i]) != TYPE_INT:
+			continue
+		if dlist[i] == n:
+			return i
+	return -1
+
 func findDevice(dlist, device: Device):
 	for i in range(dlist.size()):
+		if typeof(dlist[i]) == TYPE_INT:
+			continue
 		if device.eq(dlist[i]):
 			return i
 	return -1
@@ -107,6 +117,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if hasDevice(deviceList, device):
 		var i = findDevice(deviceList, device)
+		if i == -1:
+			return
 #Rdy management
 		if Input.is_action_just_released("ui_accept") && !hasDevice(playerRdy, device):
 			toggleRdy(device)
@@ -114,6 +126,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			toggleRdy(device)
 #Swap character	
 		if !hasDevice(playerRdy, device) && (OS.get_ticks_msec() - elapsedTime[i]) >= TIME_BETWEEN_CHAR_CHANGE:
+			if event is InputEventJoypadMotion && abs(event.axis_value) <= 0.01:
+				return 
 			if Input.is_action_pressed("ui_right"):
 				panelList[i].rightChar()
 				elapsedTime[i] = OS.get_ticks_msec()
@@ -126,9 +140,10 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func toggleRdy(device) -> void: 
 	var i = findDevice(deviceList, device)
-	
+	var rdyIndex = findDevice(playerRdy, device)
+
 	if hasDevice(playerRdy, device):
-		playerRdy.remove(i)
+		playerRdy.remove(rdyIndex)
 	else:
 		playerRdy.append(device)
 	panelList[i].toggleRdy()

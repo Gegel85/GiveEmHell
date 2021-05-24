@@ -11,6 +11,7 @@ var size = 1
 var spawn_time = 0
 var vector
 var color = Color(255, 255, 255)
+var callback = null
 
 func _ready():
 	$Collider.connect("area_entered", self, "on_area_collision")
@@ -32,6 +33,10 @@ func set_values():
 
 func on_area_collision(object):
 	var obj_parent = object.get_parent()
+	
+	if callback != null:
+		if (obj_parent.name != player):
+			callback.call_func(object)	
 	if (object.is_in_group("Player")):
 		if (obj_parent.name != player):
 			obj_parent.take_damage(damage)

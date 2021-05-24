@@ -10,13 +10,12 @@ func _ready():
 	player = get_parent()
 
 func Aim():
-	var nb = player.number
+	var nb = player.device.id
 	if (player.device.type == Device.DeviceType.MOUSE_KEYBOARD):
 		mouseLastPos = get_global_mouse_position()
 		$Direction.look_at(mouseLastPos)
 		angle_aim = get_angle_to(mouseLastPos)
 	else:
-		nb = nb -1
 		var joyDir = Vector2(Input.get_joy_axis(nb, 2), Input.get_joy_axis(nb, 3))
 		if (abs(joyDir.x) < deadZone):
 			joyDir.x = 0
@@ -30,7 +29,7 @@ func Aim():
 		$Direction.rotation = angle_aim
 	
 func SkillActivator():
-	var nb = player.number
+	var nb = player.device.id + 1
 	if (player.device.type == Device.DeviceType.MOUSE_KEYBOARD):
 		nb = "KB"
 	var skills

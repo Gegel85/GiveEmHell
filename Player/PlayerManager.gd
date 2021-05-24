@@ -1,7 +1,7 @@
 extends Node2D
 
 var number
-var device = Device.new(0)
+var device = Device.new(-1)
 var invincible = false
 var invincibility_duration = 1000
 var start_invincible = 0

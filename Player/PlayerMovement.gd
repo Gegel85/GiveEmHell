@@ -20,7 +20,7 @@ func spawnAt(pos):
 
 func moveAround():
 	var obj = player
-	var nb = player.number
+	var nb = player.device.id + 1
 	if (player.device.type == Device.DeviceType.MOUSE_KEYBOARD):
 		nb = "KB"
 	velocity = Vector2(0, 0)
