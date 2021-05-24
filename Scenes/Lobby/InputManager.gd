@@ -143,9 +143,11 @@ func start() -> void:
 		return
 	var level = loadScene(next_scene_path)
 	get_tree().set_current_scene(level)
+	var player_nb = 1
 	for i in range(player.MAX):
 		if typeof(deviceList[i]) != TYPE_INT:
-			addPlayer(panelList[i].getChar(), deviceList[i].id, i)
+			addPlayer(panelList[i].getChar(), deviceList[i], i, player_nb)
+			player_nb += 1
 	root.get_node("MainScene/Map/SpawnSystem").spawn_players()
 	root.get_node("TitleScreenMusic").stop()
 	unloadScene("MainScreen")
@@ -164,12 +166,13 @@ func unloadScene(node: String) -> void:
 	root.remove_child(level)
 	level.call_deferred("free")
 
-func addPlayer(name:String, nb: int, i: int) -> void:
+func addPlayer(name:String, device: Device, i: int, player_nb: int) -> void:
 	var c = load("res://Prefabs/Characters/" + name + ".tscn").instance()
 	var root = get_tree().get_root()
 	
-	c.name = "Player" + str(nb + 1)
+	c.name = "Player" + str(player_nb)
 	c.color = playerColors[i]
+	c.device = device
 	root.get_node("MainScene/Players").add_child(c)
 
 func _get_configuration_warning() -> String:

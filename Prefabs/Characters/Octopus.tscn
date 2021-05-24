@@ -1,17 +1,17 @@
 [gd_scene load_steps=17 format=2]
 
-[ext_resource path="res://Assets/Textures/core.png" type="Texture" id=1]
-[ext_resource path="res://Player/PlayerManager.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Textures/CharactersIcons/Tortoise.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Textures/energy.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Textures/CharactersIcons/Tortoise.png" type="Texture" id=1]
+[ext_resource path="res://Player/Lifebar.gd" type="Script" id=2]
+[ext_resource path="res://Player/SkillManager.gd" type="Script" id=3]
+[ext_resource path="res://Assets/Textures/core.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Textures/life.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Textures/arrow.png" type="Texture" id=6]
-[ext_resource path="res://Player/PlayerMovement.gd" type="Script" id=7]
-[ext_resource path="res://Player/SkillManager.gd" type="Script" id=8]
+[ext_resource path="res://Assets/Textures/energy.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Textures/arrow.png" type="Texture" id=7]
+[ext_resource path="res://Player/Monkey/MonkeySniper.gd" type="Script" id=8]
 [ext_resource path="res://Player/Panda/PandaBasicShoot.gd" type="Script" id=9]
-[ext_resource path="res://Player/Monkey/MonkeySniper.gd" type="Script" id=10]
-[ext_resource path="res://Player/Panda/PandaRoll.gd" type="Script" id=11]
-[ext_resource path="res://Player/Lifebar.gd" type="Script" id=12]
+[ext_resource path="res://Player/Panda/PandaRoll.gd" type="Script" id=10]
+[ext_resource path="res://Player/PlayerMovement.gd" type="Script" id=11]
+[ext_resource path="res://Player/PlayerManager.gd" type="Script" id=12]
 
 [sub_resource type="GDScript" id=1]
 
@@ -22,7 +22,7 @@ radius = 5.92999
 
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
-"frames": [ ExtResource( 3 ) ],
+"frames": [ ExtResource( 1 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -31,7 +31,7 @@ animations = [ {
 [node name="Player" type="KinematicBody2D"]
 show_behind_parent = true
 collision_layer = 2147483649
-script = ExtResource( 2 )
+script = ExtResource( 12 )
 color = Color( 0.827451, 0, 1, 1 )
 
 [node name="Collider" type="Area2D" parent="." groups=[
@@ -57,21 +57,21 @@ scale = Vector2( 0.707674, 0.656633 )
 frames = SubResource( 4 )
 
 [node name="MovementModule" type="Node2D" parent="."]
-script = ExtResource( 7 )
+script = ExtResource( 11 )
 
 [node name="Core" type="Sprite" parent="MovementModule"]
 scale = Vector2( 0.6, 0.6 )
-texture = ExtResource( 1 )
+texture = ExtResource( 4 )
 
 [node name="SkillsModule" type="Node2D" parent="."]
-script = ExtResource( 8 )
+script = ExtResource( 3 )
 
 [node name="Direction" type="Sprite" parent="SkillsModule"]
 light_mask = -2147483641
 position = Vector2( 0.083627, -0.0848839 )
 scale = Vector2( 1.69424, 1.66801 )
 z_index = 1
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 
 [node name="SkillList" type="Node" parent="SkillsModule"]
 
@@ -79,17 +79,17 @@ texture = ExtResource( 6 )
 script = ExtResource( 9 )
 
 [node name="MonkeySniper" type="Node" parent="SkillsModule/SkillList"]
-script = ExtResource( 10 )
+script = ExtResource( 8 )
 
 [node name="PandaRoll" type="Node" parent="SkillsModule/SkillList"]
-script = ExtResource( 11 )
+script = ExtResource( 10 )
 
 [node name="Lifebar" type="Sprite" parent="."]
 self_modulate = Color( 1, 1, 1, 0.313726 )
 position = Vector2( -0.00855702, -31.3772 )
 scale = Vector2( 0.124419, 0.196637 )
 texture = ExtResource( 5 )
-script = ExtResource( 12 )
+script = ExtResource( 2 )
 
 [node name="Energy" type="Sprite" parent="Lifebar"]
 modulate = Color( 0, 1, 0.462745, 1 )
@@ -97,4 +97,4 @@ position = Vector2( -244.37, 0.100116 )
 scale = Vector2( -1.53791e-06, 0.779747 )
 z_index = 5
 z_as_relative = false
-texture = ExtResource( 4 )
+texture = ExtResource( 6 )
