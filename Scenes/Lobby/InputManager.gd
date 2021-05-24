@@ -14,7 +14,7 @@ const playerColors = [
 ]
 const UIPlayer = preload("res://Scenes/Lobby/Panel.tscn")
 const TIME_BETWEEN_CHAR_CHANGE:int = 150#in ms
-const THROTTLE_ACCEPT = 150
+const THROTTLE_ACCEPT = 500
 export(String, FILE) var next_scene_path = ""
 var nbOfPlayer: int = 0
 var deviceList = []
