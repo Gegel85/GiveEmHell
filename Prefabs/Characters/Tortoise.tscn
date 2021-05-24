@@ -110,6 +110,7 @@ shape = SubResource( 5 )
 disabled = true
 
 [node name="Lifebar" type="Sprite" parent="."]
+visible = false
 self_modulate = Color( 1, 1, 1, 0.313726 )
 position = Vector2( -0.00855702, -31.3772 )
 scale = Vector2( 0.124419, 0.196637 )

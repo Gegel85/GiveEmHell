@@ -5,9 +5,24 @@ var mouseLastPos = Vector2.ZERO
 var joyLastDir = Vector2.ZERO
 var deadZone = 0.1
 export var angle_aim = 0
+var skills
 
 func _ready():
 	player = get_parent()
+	if ($SkillList.is_inside_tree()):
+		 skills = $SkillList.get_children()
+
+func updateSkillsCooldown():
+	var actual_time = OS.get_ticks_msec()
+	for i in range(skills.size()):
+		var cd = skills[i].cd
+		var used_time = actual_time - skills[i].time_last_used
+		if (used_time > cd):
+			used_time = cd
+		player.playerUI.setCooldownSkill(cd, used_time, i)	
+
+func _process(delta):
+	updateSkillsCooldown()
 
 func Aim():
 	var nb = player.device.id
@@ -32,9 +47,6 @@ func SkillActivator():
 	var nb = player.device.id + 1
 	if (player.device.type == Device.DeviceType.MOUSE_KEYBOARD):
 		nb = "KB"
-	var skills
-	if ($SkillList.is_inside_tree()):
-		 skills = $SkillList.get_children()
 	var nb_skills = skills.size()
 	if (nb_skills > 0 && Input.is_action_pressed("basic_shoot_" + str(nb))):
 		$SkillList.get_child(0).useSkill()

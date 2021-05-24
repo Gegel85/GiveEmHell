@@ -24,8 +24,9 @@ func make_invincible_for(duration):
 func take_damage(dmg):
 	if (invincible):
 		return
-	$Lifebar.take_damage(dmg)
-	make_invincible_for(1000)
+	$Lifebar.take_damage(1)
+	playerUI.setLife($Lifebar.get_life())
+	make_invincible_for(1500)
 	$Appearance.modulate.a = 0.5
 
 func _physics_process(delta):

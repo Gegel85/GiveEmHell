@@ -16,10 +16,10 @@ func calculateOffsetZoom(players):
 	var bottomRight = map.get_node("BottomRightCorner")
 
 	for player in players:
-		minX = min(player.position.x - 40, minX)
-		minY = min(player.position.y - 40, minY)
-		maxX = max(player.position.x + 40, maxX)
-		maxY = max(player.position.y + 40, maxY)
+		minX = min(player.position.x - 50, minX)
+		minY = min(player.position.y - 320, minY)
+		maxX = max(player.position.x + 50, maxX)
+		maxY = max(player.position.y + 320, maxY)
 #	minX = max(minX, topLeft.position.x)
 #	minX = max(minY, topLeft.position.y)
 #	maxX = min(maxX, bottomRight.position.x)
