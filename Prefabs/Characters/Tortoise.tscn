@@ -12,7 +12,7 @@
 [ext_resource path="res://Assets/Textures/shield.png" type="Texture" id=10]
 [ext_resource path="res://Player/Tortoise/Circle.gd" type="Script" id=11]
 [ext_resource path="res://Player/Lifebar.gd" type="Script" id=12]
-[ext_resource path="res://Player/Tortoise/ShellBlast.gd" type="Script" id=13]
+[ext_resource path="res://Player/Tortoise/TurtleTripleShot.gd" type="Script" id=13]
 [ext_resource path="res://Assets/Textures/circle.png" type="Texture" id=14]
 
 [sub_resource type="GDScript" id=1]
@@ -80,10 +80,8 @@ texture = ExtResource( 6 )
 
 [node name="SkillList" type="Node" parent="SkillsModule"]
 
-[node name="ShellBlast" type="Node" parent="SkillsModule/SkillList"]
+[node name="BasicTripleShot" type="Node" parent="SkillsModule/SkillList"]
 script = ExtResource( 13 )
-
-[node name="Rotater" type="Node2D" parent="SkillsModule/SkillList/ShellBlast"]
 
 [node name="Circle" type="Node2D" parent="SkillsModule/SkillList"]
 script = ExtResource( 11 )
