@@ -6,7 +6,7 @@ onready var load_path = "res://Prefabs/Characters/Projectile.tscn"
 
 var time_last_used = 0
 var actual_time = 0
-onready var rotater = $Rotater
+onready var indicator = $MainIndicator
 
 const rotate_speed = 80
 const base_rotation = 0
@@ -16,47 +16,54 @@ const radius = 100
 var skill_manager
 var player
 var world
+var using = false
+var pressed = false
+var sized = 0
 
 func _ready():
 	world = get_tree().get_root().get_node("MainScene").get_node("Projectiles")
 	skill_manager = get_parent().get_parent()
 	player = skill_manager.get_parent()
-	var step = 2 * PI / spawn_point_count
-	
-	
-	for i in range(spawn_point_count):
-		var spawn_point = Node2D.new()
-		var pos = Vector2(radius, 0).rotated(step * i)
-		spawn_point.position = pos
-		spawn_point.rotation = pos.angle()
-		rotater.add_child(spawn_point)
 
 func getWorld():
 	if world:
 		return world
 	world = get_tree().get_root().get_node("MainScene").get_node("Projectiles")
 	return world
-	
+
 func skill():
-	for s in rotater.get_children():
+	var maximum = 8 + sized / 2
+
+	for i in range(maximum):
+		var angle = 2 * PI * i / maximum
 		var bullet = load(load_path).instance()
+
 		getWorld().add_child(bullet)
-#		bullet.duplicate(true)
-		bullet.position = player.position
+		bullet.position = player.position + 160 * (sized * 0.01) * Vector2(cos(angle), sin(angle))
 		bullet.player = player.name
-		bullet.size = 1
-		bullet.speed = 300
+		bullet.size = 0.75
+		bullet.speed = max(200, sized)
 		bullet.set_values()
-		bullet.move_dir = s.global_rotation
+		bullet.move_dir = angle
 
 func _process(delta):
-	actual_time = OS.get_ticks_msec()
-	var new_rotation = rotater.rotation_degrees + rotate_speed * delta
-	rotater.rotation_degrees = fmod(new_rotation, 360)
+	if using and not pressed:
+		indicator.modulate.a = 0
+		using = false
+		skill()
+		sized = 0
+		time_last_used = actual_time
+	if using:
+		sized += 1
+		indicator.position = player.position
+		indicator.scale = Vector2(sized * 0.01, sized * 0.01)
+		indicator.modulate = player.color
+		indicator.modulate.a = 1
+	pressed = false
 
 func useSkill():
 	actual_time = OS.get_ticks_msec()
 	if (actual_time - time_last_used < cd && time_last_used > 0):
 		return
-	time_last_used = actual_time
-	skill()
+	using = true
+	pressed = true
