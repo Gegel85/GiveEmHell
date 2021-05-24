@@ -138,7 +138,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			throttleLeave[i] = OS.get_ticks_msec()
 #Swap character	
 		if !hasDevice(playerRdy, device) && (OS.get_ticks_msec() - elapsedTime[i]) >= TIME_BETWEEN_CHAR_CHANGE:
-			if event is InputEventJoypadMotion && abs(event.axis_value) <= 0.01:
+			if event is InputEventJoypadMotion && abs(event.axis_value) <= 0.1:
 				return 
 			if Input.is_action_pressed("ui_right"):
 				panelList[i].rightChar()

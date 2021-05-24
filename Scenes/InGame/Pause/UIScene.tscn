@@ -13,7 +13,6 @@
 [ext_resource path="res://Scenes/InGame/Pause/PlayerUI.gd" type="Script" id=11]
 
 [node name="UIContainer" type="CanvasLayer"]
-pause_mode = 2
 
 [node name="Popup" type="Popup" parent="."]
 visible = true
@@ -42,7 +41,6 @@ __meta__ = {
 }
 
 [node name="Player1" type="GridContainer" parent="Popup/Grid"]
-visible = false
 margin_right = 445.0
 margin_bottom = 210.0
 custom_constants/vseparation = 140
@@ -114,7 +112,6 @@ texture = ExtResource( 6 )
 texture = ExtResource( 3 )
 
 [node name="Skill1" type="MarginContainer" parent="Popup/Grid/Player1"]
-margin_left = 345.0
 margin_top = 160.0
 margin_right = 100.0
 margin_bottom = 210.0
@@ -139,6 +136,7 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 10 )
 
 [node name="Skill2" type="MarginContainer" parent="Popup/Grid/Player1"]
+margin_left = 115.0
 margin_top = 160.0
 margin_right = 215.0
 margin_bottom = 210.0
@@ -190,7 +188,7 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 7 )
 
 [node name="Skill4" type="MarginContainer" parent="Popup/Grid/Player1"]
-margin_left = 115.0
+margin_left = 345.0
 margin_top = 160.0
 margin_right = 445.0
 margin_bottom = 210.0
