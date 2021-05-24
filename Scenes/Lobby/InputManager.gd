@@ -14,18 +14,22 @@ const playerColors = [
 ]
 const UIPlayer = preload("res://Scenes/Lobby/Panel.tscn")
 const TIME_BETWEEN_CHAR_CHANGE:int = 150#in ms
-
+const THROTTLE_ACCEPT = 150
 export(String, FILE) var next_scene_path = ""
 var nbOfPlayer: int = 0
 var deviceList = []
 var panelList = []
 var playerRdy = []
 var elapsedTime = []
+var throttleAccept = []
+var throttleLeave = []
 
 func _init() -> void:
 	panelList.resize(player.MAX)
 	deviceList.resize(player.MAX)
 	elapsedTime.resize(player.MAX)
+	throttleAccept.resize(player.MAX)
+	throttleLeave.resize(player.MAX)
 
 func disconnectJoy(device, connected) -> void:
 	if !connected && hasDevice(deviceList, Device.new(device)):
@@ -38,6 +42,8 @@ func _ready() -> void:
 		panelList[i] = UIPlayer.instance()
 		deviceList[i] = -1
 		elapsedTime[i] = 0
+		throttleLeave[i] = 0
+		throttleAccept[i] = 0
 		panelList[i].setColorTexture(playerColors[i])
 		add_child(panelList[i])
 
@@ -46,7 +52,8 @@ func join(device) -> void:
 		return
 	var i = findDeviceInt(deviceList, -1)
 	deviceList[i] = device
-	elapsedTime[0] = 0
+	elapsedTime[i] = 0
+	throttleAccept[i] = OS.get_ticks_msec()
 	if device.type == Device.DeviceType.MOUSE_KEYBOARD:
 		panelList[i].setIsOwner(true)
 	panelList[i].changeState()
@@ -60,6 +67,7 @@ func leave(device) -> void:
 	panelList[i].changeState()
 	panelList[i].setIsOwner(false)
 	elapsedTime[i] = 0
+	throttleAccept[i] = 0
 	if hasDevice(playerRdy, device):
 		toggleRdy(device)
 	deviceList[i] = -1
@@ -85,8 +93,10 @@ func _input(event: InputEvent) -> void:
 		elif Input.is_action_just_released("ui_cancel"):
 			if nbOfPlayer == 0:
 				get_tree().change_scene("res://Scenes/ModeSelection/ModeSelection.tscn")
-			if !hasDevice(playerRdy, device):
-				leave(device)
+			if !hasDevice(playerRdy, device) && hasDevice(deviceList, device):
+				var i = findDevice(deviceList, device)
+				if (OS.get_ticks_msec() - throttleLeave[i]) > THROTTLE_ACCEPT:
+					leave(device)
 
 func hasDevice(dlist, device:Device):
 	for i in range(dlist.size()):
@@ -120,10 +130,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		if i == -1:
 			return
 #Rdy management
-		if Input.is_action_just_released("ui_accept") && !hasDevice(playerRdy, device):
+		if Input.is_action_just_released("ui_accept") && !hasDevice(playerRdy, device) && (OS.get_ticks_msec() - elapsedTime[i]) > THROTTLE_ACCEPT:
 			toggleRdy(device)
+			throttleAccept[i] = OS.get_ticks_msec()
 		if Input.is_action_just_released("ui_cancel") && hasDevice(playerRdy, device):
 			toggleRdy(device)
+			throttleLeave[i] = OS.get_ticks_msec()
 #Swap character	
 		if !hasDevice(playerRdy, device) && (OS.get_ticks_msec() - elapsedTime[i]) >= TIME_BETWEEN_CHAR_CHANGE:
 			if event is InputEventJoypadMotion && abs(event.axis_value) <= 0.01:

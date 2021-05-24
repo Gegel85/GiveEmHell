@@ -40,6 +40,7 @@ config/icon="res://Assets/Textures/heart.png"
 
 TitleScreenMusic="*res://Assets/Musics/TitleScreenMusic.tscn"
 Settings="*res://Scenes/Settings/Settings.gd"
+Sfx="*res://Scenes/Singleton/Sfx.tscn"
 
 [display]
 
