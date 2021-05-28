@@ -1,11 +1,16 @@
 extends KinematicBody2D
 
 var player = ""
+
 var move_dir = 0
 var spawn_pos = Vector2.ZERO
 var speed = 300
+var acceleration = 0
+var speed_min_cap = 0
+var speed_max_cap = 999999
+
 var distance_max = 0
-var lifetime = 99999 
+var lifetime = 99999
 var size = 1
 var spawn_time = 0
 var vector
@@ -52,6 +57,7 @@ func _process(delta):
 	var actual_time = OS.get_ticks_msec()
 	vector = Vector2(cos(move_dir), sin(move_dir))
 	move_and_slide(vector  * speed)
+	speed = max(speed_min_cap, min(speed_max_cap, speed + speed.acceleration))
 	if (spawn_pos.distance_to(position) > distance_max && distance_max > 0):
 		queue_free()
 	if (actual_time - spawn_time >= lifetime):
