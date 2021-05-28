@@ -49,7 +49,6 @@ func _process(delta):
 	bullet.position = player.position	
 	bullet.player = player.name
 	bullet.lifetime = 50
-	bullet.damage = 40
 	bullet.size = 2.5
 	bullet.speed = 0
 	bullet.set_values()

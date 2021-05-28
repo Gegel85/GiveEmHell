@@ -36,7 +36,8 @@ func take_damage(dmg):
 func _physics_process(delta):
 	$MovementModule.moveAround()
 	$SkillsModule.Aim()
-	$SkillsModule.SkillActivator()
+	if (!invincible):
+		$SkillsModule.SkillActivator()
 	check_still_invincible()
 
 func check_still_invincible():

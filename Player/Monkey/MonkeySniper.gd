@@ -46,7 +46,6 @@ func skill():
 	bullet.move_dir = skill_manager.angle_aim
 	bullet.speed = 1000
 	bullet.distance_max = 2000
-	bullet.damage = 50
 	bullet.position = player.position
 	bullet.player = player.name
 	bullet.size = 1.5
