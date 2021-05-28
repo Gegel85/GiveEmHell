@@ -47,9 +47,9 @@ func ready():
 		panelList[i].setColorTexture(playerColors[i])
 		add_child(panelList[i])
 
-func join(device) -> void:
+func join(device) -> bool:
 	if nbOfPlayer > player.MAX || hasDevice(deviceList, device):
-		return
+		return false
 	var i = findDeviceInt(deviceList, -1)
 	deviceList[i] = device
 	elapsedTime[i] = 0
@@ -59,6 +59,7 @@ func join(device) -> void:
 	panelList[i].changeState()
 	nbOfPlayer += 1
 	get_tree().set_input_as_handled()
+	return true
 
 func leave(device) -> void:
 	if nbOfPlayer == 0 || !hasDevice(deviceList, device):

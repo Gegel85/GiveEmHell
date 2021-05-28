@@ -17,3 +17,8 @@ func _ready():
 		if settingsNode.get_setting("keybind", "controller"):
 			event_type = Device.DeviceType.KEYPAD
 		join(Device.new(0, event_type))
+
+func _connected_ok():
+	for i in range(4):
+		if join(Device.new(i)):
+			return

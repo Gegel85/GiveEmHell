@@ -8,8 +8,6 @@ func init():
 	elapsedTime.resize(player.MAX)
 	throttleAccept.resize(player.MAX)
 	throttleLeave.resize(player.MAX)
-	# warning-ignore:return_value_discarded
-	Input.connect("joy_connection_changed", self, "disconnectJoy")
 
 func _init() -> void:
 	init()
