@@ -8,7 +8,7 @@
 [ext_resource path="res://Assets/Textures/energy.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Textures/arrow.png" type="Texture" id=7]
 [ext_resource path="res://Player/Monkey/MonkeySniper.gd" type="Script" id=8]
-[ext_resource path="res://Player/Panda/PandaBasicShoot.gd" type="Script" id=9]
+[ext_resource path="res://Player/Octopus/OctoFrenzy.gd" type="Script" id=9]
 [ext_resource path="res://Player/Panda/PandaRoll.gd" type="Script" id=10]
 [ext_resource path="res://Player/PlayerMovement.gd" type="Script" id=11]
 [ext_resource path="res://Player/PlayerManager.gd" type="Script" id=12]
@@ -79,7 +79,7 @@ texture = ExtResource( 7 )
 
 [node name="SkillList" type="Node" parent="SkillsModule"]
 
-[node name="PandaBasicShoot" type="Node" parent="SkillsModule/SkillList"]
+[node name="OctoFrenzy" type="Node" parent="SkillsModule/SkillList"]
 script = ExtResource( 9 )
 
 [node name="MonkeySniper" type="Node" parent="SkillsModule/SkillList"]
