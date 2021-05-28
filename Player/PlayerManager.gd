@@ -16,6 +16,10 @@ func _ready():
 	playerUI = UI.getUI(self.get_name())
 	playerUI.init(self)
 
+func make_opacity(op):
+	$Appearance.modulate.a = op
+	$SkillsModule/Direction.modulate.a = op
+
 func make_invincible_for(duration):
 	invincible = true
 	start_invincible = OS.get_ticks_msec()

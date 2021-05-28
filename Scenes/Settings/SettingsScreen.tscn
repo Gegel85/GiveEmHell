@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Assets/Textures/background.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Textures/lavaBackground.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/ModeSelection/BackButtonContainer.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Theme/theme.tres" type="Theme" id=3]
 [ext_resource path="res://Scenes/Settings/SettingsOptionButton.gd" type="Script" id=4]
