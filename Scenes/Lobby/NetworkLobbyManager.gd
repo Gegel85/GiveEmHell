@@ -32,7 +32,7 @@ func _player_connected(id):
 		return
 	var new_player = add_player()
 	if get_tree().is_network_server():
-		rpc_id(id, "init_list", deviceList, new_player)
+		rpc_id(id, "init_list", deviceList, panelList, new_player)
 
 func _player_disconnected(id):
 	pass
@@ -43,6 +43,7 @@ func _connected_fail():
 func _server_disconnected():
 	pass
 
-remote func init_list(deviceL, index):
+remote func init_list(deviceL, panelList, index):
 	deviceList = deviceL
 	currI = index
+	panelList = panelList
