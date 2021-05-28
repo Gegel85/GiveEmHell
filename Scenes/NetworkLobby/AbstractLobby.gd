@@ -114,7 +114,7 @@ func toggleRdy(device) -> void:
 	if hasDevice(playerRdy, device):
 		playerRdy.remove(rdyIndex)
 	else:
-		playerRdy.append(device)
+		playerRdy.append(i)
 	panelList[i].toggleRdy()
 	
 func isRdy() -> bool:

@@ -32,7 +32,10 @@ func _player_connected(id):
 		return
 	var new_player = add_player()
 	if get_tree().is_network_server():
-		rpc_id(id, "init_list", deviceList, panelList, new_player)
+		var ui_array = []
+		for panel in panelList:
+			ui_array.append(panel.characterIndex)
+		rpc_id(id, "init_list", deviceList, ui_array, playerRdy, new_player)
 
 func _player_disconnected(id):
 	pass
@@ -43,7 +46,12 @@ func _connected_fail():
 func _server_disconnected():
 	pass
 
-remote func init_list(deviceL, panelList, index):
+remote func init_list(deviceL, ui_arr, rdyList, index):
 	deviceList = deviceL
 	currI = index
-	panelList = panelList
+	for i in range(player.MAX):
+		if deviceL[i] != -1:
+			panelList[i].characterIndex = ui_arr[i]
+			panelList[i].changeState()
+			if i in rdyList:
+				panelList[i].toggleRdy()
