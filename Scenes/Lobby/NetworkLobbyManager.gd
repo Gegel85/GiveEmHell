@@ -1,6 +1,7 @@
 extends AbstractLobby
 
 onready var settingsNode = get_node("/root/Settings")
+var currI = 0
 
 func _init():
 	init()
@@ -19,6 +20,29 @@ func _ready():
 		join(Device.new(0, event_type))
 
 func _connected_ok():
+	pass
+
+func add_player():
 	for i in range(4):
 		if join(Device.new(i)):
-			return
+			return i
+
+func _player_connected(id):
+	if get_tree().get_network_unique_id() == id:
+		return
+	var new_player = add_player()
+	if get_tree().is_network_server():
+		rpc_id(id, "init_list", deviceList, new_player)
+
+func _player_disconnected(id):
+	pass
+	
+func _connected_fail():
+	pass
+	
+func _server_disconnected():
+	pass
+
+remote func init_list(deviceL, index):
+	deviceList = deviceL
+	currI = index

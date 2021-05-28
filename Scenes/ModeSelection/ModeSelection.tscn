@@ -104,8 +104,6 @@ next_scene_path = "res://Scenes/Lobby/Lobby.tscn"
 
 [connection signal="button_up" from="MainButtonContainer/HostButton" to="MainButtonContainer/HostButton" method="_on_HostButton_button_up"]
 [connection signal="button_up" from="MainButtonContainer/JoinContainer/JoinButton" to="MainButtonContainer/JoinContainer" method="_on_JoinButton_button_up"]
-[connection signal="focus_exited" from="MainButtonContainer/JoinContainer/HostInfo" to="MainButtonContainer/JoinContainer" method="_on_HostInfo_focus_exited"]
 [connection signal="text_changed" from="MainButtonContainer/JoinContainer/HostInfo" to="MainButtonContainer/JoinContainer" method="_on_HostInfo_text_changed"]
 [connection signal="text_entered" from="MainButtonContainer/JoinContainer/HostInfo" to="MainButtonContainer/JoinContainer" method="_on_HostInfo_text_entered"]
-[connection signal="focus_exited" from="MainButtonContainer/JoinContainer/OptionButton" to="MainButtonContainer/JoinContainer" method="_on_OptionButton_focus_exited"]
 [connection signal="item_selected" from="MainButtonContainer/JoinContainer/OptionButton" to="MainButtonContainer/JoinContainer" method="_on_OptionButton_item_selected"]
