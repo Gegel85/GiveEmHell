@@ -80,7 +80,7 @@ margin_bottom = 97.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 max_length = 21
-placeholder_text = "127.0.0.1:4242"
+placeholder_text = "127.0.0.1"
 caret_blink = true
 
 [node name="OfflineButton" parent="MainButtonContainer" groups=[

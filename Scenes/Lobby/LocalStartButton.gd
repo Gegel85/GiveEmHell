@@ -1,7 +1,5 @@
 extends Button
 
-class_name InputManager
-
 var panelContainer
 
 func _ready() -> void:

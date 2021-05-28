@@ -9,15 +9,15 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "GridContainer",
+"class": "AbstractLobby",
+"language": "GDScript",
+"path": "res://Scenes/NetworkLobby/AbstractLobby.gd"
+}, {
 "base": "Reference",
 "class": "Device",
 "language": "GDScript",
 "path": "res://Scenes/Lobby/Device.gd"
-}, {
-"base": "Button",
-"class": "InputManager",
-"language": "GDScript",
-"path": "res://Scenes/Lobby/LocalStartButton.gd"
 }, {
 "base": "Node",
 "class": "Player",
@@ -25,8 +25,8 @@ _global_script_classes=[ {
 "path": "res://Scenes/Lobby/Player.gd"
 } ]
 _global_script_class_icons={
+"AbstractLobby": "",
 "Device": "",
-"InputManager": "",
 "Player": ""
 }
 
