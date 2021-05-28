@@ -50,7 +50,7 @@ remote func init_list(deviceL, ui_arr, rdyList, index):
 	deviceList = deviceL
 	currI = index
 	for i in range(player.MAX):
-		if deviceL[i] != -1:
+		if typeof(deviceL[i]) == TYPE_INT:
 			panelList[i].characterIndex = ui_arr[i]
 			panelList[i].changeState()
 			if i in rdyList:
