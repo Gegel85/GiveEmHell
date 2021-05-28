@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/aqua2.wav-6b5a093dcee837eb8ef0d49fe9831e05.sample"
+
+[deps]
+
+source_file="res://Assets/SoundEffects/Octopus/aqua2.wav"
+dest_files=[ "res://.import/aqua2.wav-6b5a093dcee837eb8ef0d49fe9831e05.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -61,7 +61,8 @@ __meta__ = {
 
 [node name="TriangleButton" parent="Container" instance=ExtResource( 5 )]
 visible = false
-margin_right = 103.0
+focus_mode = 0
+enabled_focus_mode = 0
 
 [node name="PanelContainer" type="ReferenceRect" parent="Container"]
 margin_right = 320.0
@@ -110,8 +111,10 @@ __meta__ = {
 
 [node name="TriangleButton2" parent="Container" instance=ExtResource( 5 )]
 visible = false
-margin_left = 245.0
+margin_left = 216.0
 margin_right = 320.0
+focus_mode = 0
+enabled_focus_mode = 0
 
 [node name="Polygon2D" parent="Container/TriangleButton2" index="0"]
 polygon = PoolVector2Array( 25, 0, -25, -50, -25, 50 )

@@ -1,34 +1,36 @@
 extends Node2D
 
-enum controlModes {
-	MOUSE,
-	JOYSTICK
-}
-
+var player
 var mouseLastPos = Vector2.ZERO
 var joyLastDir = Vector2.ZERO
 var deadZone = 0.1
-var actualMode = controlModes.JOYSTICK
 export var angle_aim = 0
+var skills
 
 func _ready():
-	pass # Replace with function body.
+	player = get_parent()
+	if ($SkillList.is_inside_tree()):
+		 skills = $SkillList.get_children()
 
-func _input(event):
-	if (event is InputEventJoypadButton) or (event is InputEventJoypadMotion):
-		actualMode = controlModes.JOYSTICK
-		
-func checkForInput():
-	var mouseActualPos = get_global_mouse_position()
-	if (mouseLastPos != mouseActualPos):
-		actualMode = controlModes.MOUSE
-	mouseLastPos = mouseActualPos
+func updateSkillsCooldown():
+	var actual_time = OS.get_ticks_msec()
+	for i in range(skills.size()):
+		var cd = skills[i].cd
+		var used_time = actual_time - skills[i].time_last_used
+		if (used_time > cd):
+			used_time = cd
+		player.playerUI.setCooldownSkill(cd, used_time, i)	
 
-func Aim(nb):
-	"""checkForInput()"""
-	if (actualMode == controlModes.MOUSE):
+func _process(delta):
+	updateSkillsCooldown()
+
+func Aim():
+	var nb = player.device.id
+	if (player.device.type == Device.DeviceType.MOUSE_KEYBOARD):
+		mouseLastPos = get_global_mouse_position()
 		$Direction.look_at(mouseLastPos)
-	if (actualMode == controlModes.JOYSTICK):
+		angle_aim = get_angle_to(mouseLastPos)
+	else:
 		var joyDir = Vector2(Input.get_joy_axis(nb, 2), Input.get_joy_axis(nb, 3))
 		if (abs(joyDir.x) < deadZone):
 			joyDir.x = 0
@@ -41,10 +43,10 @@ func Aim(nb):
 		angle_aim = atan2(joyDir.y, joyDir.x)
 		$Direction.rotation = angle_aim
 	
-func SkillActivator(nb):
-	var skills
-	if ($SkillList.is_inside_tree()):
-		 skills = $SkillList.get_children()
+func SkillActivator():
+	var nb = player.device.id + 1
+	if (player.device.type == Device.DeviceType.MOUSE_KEYBOARD):
+		nb = "KB"
 	var nb_skills = skills.size()
 	if (nb_skills > 0 && Input.is_action_pressed("basic_shoot_" + str(nb))):
 		$SkillList.get_child(0).useSkill()

@@ -14,21 +14,25 @@ const playerColors = [
 ]
 const UIPlayer = preload("res://Scenes/Lobby/Panel.tscn")
 const TIME_BETWEEN_CHAR_CHANGE:int = 150#in ms
-
+const THROTTLE_ACCEPT = 500
 export(String, FILE) var next_scene_path = ""
 var nbOfPlayer: int = 0
 var deviceList = []
 var panelList = []
 var playerRdy = []
 var elapsedTime = []
+var throttleAccept = []
+var throttleLeave = []
 
 func _init() -> void:
 	panelList.resize(player.MAX)
 	deviceList.resize(player.MAX)
 	elapsedTime.resize(player.MAX)
+	throttleAccept.resize(player.MAX)
+	throttleLeave.resize(player.MAX)
 
 func disconnectJoy(device, connected) -> void:
-	if !connected && deviceList.has(device):
+	if !connected && hasDevice(deviceList, Device.new(device)):
 		leave(device)
 		
 func _ready() -> void:
@@ -38,35 +42,48 @@ func _ready() -> void:
 		panelList[i] = UIPlayer.instance()
 		deviceList[i] = -1
 		elapsedTime[i] = 0
+		throttleLeave[i] = 0
+		throttleAccept[i] = 0
 		panelList[i].setColorTexture(playerColors[i])
 		add_child(panelList[i])
 
 func join(device) -> void:
-	if nbOfPlayer > player.MAX || deviceList.has(device):
+	if nbOfPlayer > player.MAX || hasDevice(deviceList, device):
 		return
-	var i = deviceList.find(-1)
+	var i = findDeviceInt(deviceList, -1)
 	deviceList[i] = device
-	elapsedTime[0] = 0
-	if device == 0:
-		panelList[0].setIsOwner(true)
+	elapsedTime[i] = 0
+	throttleAccept[i] = OS.get_ticks_msec()
+	if device.type == Device.DeviceType.MOUSE_KEYBOARD:
+		panelList[i].setIsOwner(true)
 	panelList[i].changeState()
 	nbOfPlayer += 1
 	get_tree().set_input_as_handled()
 
 func leave(device) -> void:
-	if nbOfPlayer == 0 || !deviceList.has(device):
+	if nbOfPlayer == 0 || !hasDevice(deviceList, device):
 		return
-	var i = deviceList.find(device)
+	var i = findDevice(deviceList, device)
 	panelList[i].changeState()
+	panelList[i].setIsOwner(false)
 	elapsedTime[i] = 0
-	if playerRdy.has(device):
+	throttleAccept[i] = 0
+	if hasDevice(playerRdy, device):
 		toggleRdy(device)
 	deviceList[i] = -1
 	nbOfPlayer -= 1
 	get_tree().set_input_as_handled()	
 
+func device_type_from_event(event):
+	if event is InputEventJoypadButton || event is InputEventJoypadMotion:
+			return Device.DeviceType.KEYPAD
+	elif event is InputEventKey:
+			return Device.DeviceType.MOUSE_KEYBOARD
+	else:
+			return Device.DeviceType.NON_RELEVANT
+
 func _input(event: InputEvent) -> void:
-	var device: int = event.device
+	var device = Device.new(event.device, device_type_from_event(event))
 
 	if (event is InputEventJoypadButton || event is InputEventKey):
 #Join the lobby
@@ -75,22 +92,54 @@ func _input(event: InputEvent) -> void:
 #Leave the lobby
 		elif Input.is_action_just_released("ui_cancel"):
 			if nbOfPlayer == 0:
-				get_tree().change_scene("res://Scenes/Menu.tscn")
-			if !playerRdy.has(device):
-				leave(device)
+				get_tree().change_scene("res://Scenes/ModeSelection/ModeSelection.tscn")
+			if !hasDevice(playerRdy, device) && hasDevice(deviceList, device):
+				var i = findDevice(deviceList, device)
+				if (OS.get_ticks_msec() - throttleLeave[i]) > THROTTLE_ACCEPT:
+					leave(device)
+
+func hasDevice(dlist, device:Device):
+	for i in range(dlist.size()):
+		if typeof(dlist[i]) == TYPE_INT:
+			continue
+		if device.eq(dlist[i]):
+			return true
+	return false
+
+func findDeviceInt(dlist, n):
+	for i in range(dlist.size()):
+		if typeof(dlist[i]) != TYPE_INT:
+			continue
+		if dlist[i] == n:
+			return i
+	return -1
+
+func findDevice(dlist, device: Device):
+	for i in range(dlist.size()):
+		if typeof(dlist[i]) == TYPE_INT:
+			continue
+		if device.eq(dlist[i]):
+			return i
+	return -1
 
 func _unhandled_input(event: InputEvent) -> void:
-	var device: int = event.device
-
-	if deviceList.has(device):
-		var i = deviceList.find(device)
+	var device: Device = Device.new(event.device, device_type_from_event(event))
+	
+	if hasDevice(deviceList, device):
+		var i = findDevice(deviceList, device)
+		if i == -1:
+			return
 #Rdy management
-		if Input.is_action_just_released("ui_accept") && !playerRdy.has(device):
+		if Input.is_action_just_released("ui_accept") && !hasDevice(playerRdy, device) && (OS.get_ticks_msec() - elapsedTime[i]) > THROTTLE_ACCEPT:
 			toggleRdy(device)
-		if Input.is_action_just_released("ui_cancel") && playerRdy.has(device):
+			throttleAccept[i] = OS.get_ticks_msec()
+		if Input.is_action_just_released("ui_cancel") && hasDevice(playerRdy, device):
 			toggleRdy(device)
+			throttleLeave[i] = OS.get_ticks_msec()
 #Swap character	
-		if !playerRdy.has(device) && (OS.get_ticks_msec() - elapsedTime[i]) >= TIME_BETWEEN_CHAR_CHANGE:
+		if !hasDevice(playerRdy, device) && (OS.get_ticks_msec() - elapsedTime[i]) >= TIME_BETWEEN_CHAR_CHANGE:
+			if event is InputEventJoypadMotion && abs(event.axis_value) <= 0.1:
+				return 
 			if Input.is_action_pressed("ui_right"):
 				panelList[i].rightChar()
 				elapsedTime[i] = OS.get_ticks_msec()
@@ -102,10 +151,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		start()
 
 func toggleRdy(device) -> void: 
-	var i = deviceList.find(device)
-	
-	if playerRdy.has(device):
-		playerRdy.erase(device)
+	var i = findDevice(deviceList, device)
+	var rdyIndex = findDevice(playerRdy, device)
+
+	if hasDevice(playerRdy, device):
+		playerRdy.remove(rdyIndex)
 	else:
 		playerRdy.append(device)
 	panelList[i].toggleRdy()
@@ -120,9 +170,11 @@ func start() -> void:
 		return
 	var level = loadScene(next_scene_path)
 	get_tree().set_current_scene(level)
+	var player_nb = 1
 	for i in range(player.MAX):
-		if deviceList[i] != -1:
-			addPlayer(panelList[i].getChar(), deviceList[i], i)
+		if typeof(deviceList[i]) != TYPE_INT:
+			addPlayer(panelList[i].getChar(), deviceList[i], i, player_nb)
+			player_nb += 1
 	root.get_node("MainScene/Map/SpawnSystem").spawn_players()
 	root.get_node("TitleScreenMusic").stop()
 	unloadScene("MainScreen")
@@ -141,12 +193,14 @@ func unloadScene(node: String) -> void:
 	root.remove_child(level)
 	level.call_deferred("free")
 
-func addPlayer(name:String, nb: int, i: int) -> void:
+func addPlayer(name:String, device: Device, i: int, player_nb: int) -> void:
 	var c = load("res://Prefabs/Characters/" + name + ".tscn").instance()
 	var root = get_tree().get_root()
 	
-	c.name = "Player" + str(nb + 1)
+	c.name = "Player" + str(player_nb)
 	c.color = playerColors[i]
+	c.device = device
+	c.character = name
 	root.get_node("MainScene/Players").add_child(c)
 
 func _get_configuration_warning() -> String:

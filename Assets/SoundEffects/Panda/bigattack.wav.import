@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/bigattack.wav-3cae6fe7cf6f23f7c2e1fb5bf372bdc6.sample"
+
+[deps]
+
+source_file="res://Assets/SoundEffects/Panda/bigattack.wav"
+dest_files=[ "res://.import/bigattack.wav-3cae6fe7cf6f23f7c2e1fb5bf372bdc6.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

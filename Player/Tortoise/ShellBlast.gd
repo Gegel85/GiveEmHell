@@ -23,6 +23,7 @@ func _ready():
 	player = skill_manager.get_parent()
 	var step = 2 * PI / spawn_point_count
 	
+	
 	for i in range(spawn_point_count):
 		var spawn_point = Node2D.new()
 		var pos = Vector2(radius, 0).rotated(step * i)

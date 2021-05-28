@@ -9,14 +9,20 @@ var instance
 var actualSpeed = 0
 var forcedSpeed = 0
 var useForcedSpeed = false 
+var player
 
 func _ready():
+	player = get_parent()
 	instance = instance_from_id(get_instance_id())
 
 func spawnAt(pos):
 	instance.set_pos(pos)
 
-func moveAround(obj, nb):
+func moveAround():
+	var obj = player
+	var nb = player.device.id + 1
+	if (player.device.type == Device.DeviceType.MOUSE_KEYBOARD):
+		nb = "KB"
 	velocity = Vector2(0, 0)
 	var horizontal = Input.get_action_strength("right_" + str(nb)) - Input.get_action_strength("left_" + str(nb))
 	var vertical = Input.get_action_strength("down_" + str(nb)) - Input.get_action_strength("up_" + str(nb))
