@@ -4,6 +4,6 @@ func _on_HostButton_button_up():
 	if get_tree().network_peer:
 		return
 	var peer = NetworkedMultiplayerENet.new()
-	peer.create_server(10800, 4)
+	peer.create_server(10800, AbstractLobby.player.MAX)
 	get_tree().network_peer = peer
 	get_tree().change_scene('res://Scenes/NetworkLobby/NetworkLobby.tscn')

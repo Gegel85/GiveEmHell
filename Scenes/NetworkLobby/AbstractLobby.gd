@@ -61,7 +61,7 @@ func join(device) -> bool:
 	get_tree().set_input_as_handled()
 	return true
 
-func leave(device) -> void:
+remote func leave(device) -> void:
 	if nbOfPlayer == 0 || !hasDevice(deviceList, device):
 		return
 	var i = findDevice(deviceList, device)
@@ -87,7 +87,7 @@ func hasDevice(dlist, device:Device):
 	for i in range(dlist.size()):
 		if typeof(dlist[i]) == TYPE_INT:
 			continue
-		if device.eq(dlist[i]):
+		if device && device.eq(dlist[i]):
 			return true
 	return false
 
@@ -103,15 +103,15 @@ func findDevice(dlist, device: Device):
 	for i in range(dlist.size()):
 		if typeof(dlist[i]) == TYPE_INT:
 			continue
-		if device.eq(dlist[i]):
+		if device && device.eq(dlist[i]):
 			return i
 	return -1
 
-func toggleRdy(device) -> void: 
+remotesync func toggleRdy(device) -> void:
 	var i = findDevice(deviceList, device)
-	var rdyIndex = findDevice(playerRdy, device)
+	var rdyIndex = playerRdy.find(i)
 
-	if hasDevice(playerRdy, device):
+	if playerRdy.has(i):
 		playerRdy.remove(rdyIndex)
 	else:
 		playerRdy.append(i)

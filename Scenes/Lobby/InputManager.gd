@@ -33,7 +33,7 @@ func _input(event: InputEvent) -> void:
 		elif Input.is_action_just_released("ui_cancel"):
 			if nbOfPlayer == 0:
 				get_tree().change_scene("res://Scenes/ModeSelection/ModeSelection.tscn")
-			if !hasDevice(playerRdy, device) && hasDevice(deviceList, device):
+			if !findDevice(deviceList, device) in playerRdy && hasDevice(deviceList, device):
 				var i = findDevice(deviceList, device)
 				if (OS.get_ticks_msec() - throttleLeave[i]) > THROTTLE_ACCEPT:
 					leave(device)
@@ -49,11 +49,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		if Input.is_action_just_released("ui_accept") && !hasDevice(playerRdy, device) && (OS.get_ticks_msec() - elapsedTime[i]) > THROTTLE_ACCEPT:
 			toggleRdy(device)
 			throttleAccept[i] = OS.get_ticks_msec()
-		if Input.is_action_just_released("ui_cancel") && hasDevice(playerRdy, device):
+		if Input.is_action_just_released("ui_cancel") && findDevice(deviceList, device) in playerRdy:
 			toggleRdy(device)
 			throttleLeave[i] = OS.get_ticks_msec()
 #Swap character	
-		if !hasDevice(playerRdy, device) && (OS.get_ticks_msec() - elapsedTime[i]) >= TIME_BETWEEN_CHAR_CHANGE:
+		if !findDevice(deviceList, device) in playerRdy && (OS.get_ticks_msec() - elapsedTime[i]) >= TIME_BETWEEN_CHAR_CHANGE:
 			if event is InputEventJoypadMotion && abs(event.axis_value) <= 0.1:
 				return 
 			if Input.is_action_pressed("ui_right"):
