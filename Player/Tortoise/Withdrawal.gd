@@ -1,7 +1,9 @@
 extends Node2D
 
 var cd = 5000
-
+var sounds
+export var soundeffect: AudioStream
+onready var sound_path = "res://Prefabs/SoundPlayer.tscn"
 var time_last_used = 0
 var actual_time = 0
 var use_time = 0
@@ -15,6 +17,12 @@ var shield_sprite
 var collision_shield
 var color_b = Vector2(150, 255)
 var opacity = Vector2(30, 95)
+
+func getSound():
+	if sounds:
+		return sounds
+	sounds = get_tree().get_root().get_node("MainScene").get_node("Sounds")
+	return sounds
 
 func _ready():
 	shield_sprite = get_node("Sprite")
@@ -42,6 +50,9 @@ func useSkill():
 	use_time = actual_time
 	time_last_used = actual_time
 	active_skill = true
+	var sound = load(sound_path).instance()
+	getSound().add_child(sound)
+	sound.init_player(soundeffect)
 
 func _process(delta):
 	position = player.position

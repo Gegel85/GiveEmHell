@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Assets/SoundEffects/Octopus/bubble4.wav" type="AudioStream" id=1]
+[ext_resource path="res://Assets/SoundEffects/Octopus/aquashoot.wav" type="AudioStream" id=1]
 [ext_resource path="res://Player/Octopus/TentacularMayhem.gd" type="Script" id=2]
 
 [node name="TentacularMayhem" type="Node"]

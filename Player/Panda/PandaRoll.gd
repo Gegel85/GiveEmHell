@@ -1,6 +1,10 @@
 extends Node
 
-var cd = 5000
+var cd = 8000
+var sounds
+export var soundeffect: AudioStream
+export var roar_soundeffect: AudioStream
+onready var sound_path = "res://Prefabs/SoundPlayer.tscn"
 onready var load_path = "res://Prefabs/Characters/Projectile.tscn"
 
 var time_last_used = 0
@@ -26,12 +30,24 @@ func useSkill():
 	use_time = actual_time
 	time_last_used = actual_time
 	active_skill = true
+	var sound = load(sound_path).instance()
+	getSound().add_child(sound)
+	sound.init_player(soundeffect)
+	sound = load(sound_path).instance()
+	getSound().add_child(sound)
+	sound.init_player(roar_soundeffect)
 
 func getWorld():
 	if world:
 		return world
 	world = get_tree().get_root().get_node("MainScene").get_node("Projectiles")
 	return world
+
+func getSound():
+	if sounds:
+		return sounds
+	sounds = get_tree().get_root().get_node("MainScene").get_node("Sounds")
+	return sounds
 
 func _process(delta):
 	if (!active_skill):

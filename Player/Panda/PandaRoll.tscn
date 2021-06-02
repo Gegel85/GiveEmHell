@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Player/Panda/PandaRoll.gd" type="Script" id=1]
+[ext_resource path="res://Assets/SoundEffects/Panda/dash2.wav" type="AudioStream" id=2]
+[ext_resource path="res://Assets/SoundEffects/Panda/smallroar.wav" type="AudioStream" id=3]
 
 [node name="PandaRoll" type="Node"]
 script = ExtResource( 1 )
+soundeffect = ExtResource( 2 )
+roar_soundeffect = ExtResource( 3 )

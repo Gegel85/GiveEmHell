@@ -1,6 +1,9 @@
 extends Node
 
 var cd = 500
+var sounds
+export var soundeffect: AudioStream
+onready var sound_path = "res://Prefabs/SoundPlayer.tscn"
 onready var load_path = "res://Prefabs/Characters/Projectile.tscn"
 
 var time_last_used = 0
@@ -30,7 +33,16 @@ func getWorld():
 	world = get_tree().get_root().get_node("MainScene").get_node("Projectiles")
 	return world
 
+func getSound():
+	if sounds:
+		return sounds
+	sounds = get_tree().get_root().get_node("MainScene").get_node("Sounds")
+	return sounds
+
 func skill():
+	var sound = load(sound_path).instance()
+	getSound().add_child(sound)
+	sound.init_player(soundeffect)
 	for i in range(3):
 		var bullet = load(load_path).instance()
 		getWorld().add_child(bullet)

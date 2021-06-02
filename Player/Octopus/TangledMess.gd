@@ -4,7 +4,7 @@ const cd = 5000
 const fire_rate = 400
 var use_time = 0
 var shoot_time = 0
-var rotate_time = 3200
+var rotate_time = 3800
 var active_time = 2400
 var active_skill = false
 var sounds
@@ -21,7 +21,11 @@ var instanceRotater
 var instanceRotater2
 
 
-const rotate_speed = 25
+const rotate_min = 0
+const rotate_max = 180
+var dir = 1
+var actual_rotate = 0
+const rotate_speed = 80
 const base_rotation = 0
 const spawn_point_count = 6
 const radius = 1000
@@ -92,14 +96,20 @@ func skill():
 func _process(delta):
 	actual_time = OS.get_ticks_msec()
 	
+	if (actual_rotate >= rotate_max):
+		dir = -1
+		actual_rotate = rotate_max
+	if (actual_rotate <= rotate_min):
+		dir = 1
+		actual_rotate = rotate_min
+	
 	if (instanceRotater):
 		instanceRotater.global_position = spawn_pos
-		var new_rotation_2 = instanceRotater.global_rotation_degrees + rotate_speed * delta
-		instanceRotater.global_rotation_degrees = fmod(new_rotation_2, 360)
+		instanceRotater.rotation_degrees = fmod(actual_rotate, 360)
 	if (instanceRotater2):
 		instanceRotater2.global_position = spawn_pos
-		var new_rotation_2 = instanceRotater2.global_rotation_degrees - rotate_speed * delta
-		instanceRotater2.global_rotation_degrees = fmod(new_rotation_2, 360)
+		instanceRotater2.rotation_degrees = fmod(actual_rotate * -1, 360)
+	actual_rotate += rotate_speed * delta * dir
 	
 	if (actual_time - time_last_used >= rotate_time):
 		if (instanceRotater):
@@ -129,9 +139,13 @@ func initOnSkillActivation():
 	instanceRotater = load(rotater_path).instance()
 	getWorld().add_child(instanceRotater)
 	instanceRotater.position = spawn_pos
+	instanceRotater.rotation_degrees = fmod(0, 360)
+	dir = 1
+	actual_rotate = 0
 	instanceRotater2 = load(rotater_path).instance()
 	getWorld().add_child(instanceRotater2)
 	instanceRotater2.position = spawn_pos
+	instanceRotater2.rotation_degrees = fmod(0, 360)
 
 func useSkill():
 	actual_time = OS.get_ticks_msec()

@@ -3,7 +3,7 @@ extends GridContainer
 var lives = []
 var skills = []
 var pos_max = 24
-
+const skill_order = [3, 0, 2, 1]
 var dir
 
 func _ready():
@@ -31,7 +31,7 @@ func setLife(nb):
 func setCooldownSkill(maxLength, actual, nb):
 	if (nb >= skills.size()):
 		return
-	var cooldown = skills[nb].get_child(0).get_child(0)
+	var cooldown = skills[skill_order[nb]].get_child(0).get_child(0)
 	var percent = float(actual) / maxLength
 	cooldown.scale.y = 1 - percent
 	cooldown.position.y = pos_max - pos_max * (1 - percent)

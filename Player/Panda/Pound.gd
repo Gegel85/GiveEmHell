@@ -1,21 +1,19 @@
-extends Node
+extends Node2D
 
-var cd = 4000
+var cd = 5000
+const fire_rate = 500
 var sounds
 export var soundeffect: AudioStream
+export var bounce_soundeffect: AudioStream
 onready var sound_path = "res://Prefabs/SoundPlayer.tscn"
-onready var load_path = "res://Prefabs/Characters/Projectile.tscn"
+onready var load_path = "res://Prefabs/Characters/ShockWave.tscn"
 
 var time_last_used = 0
-var actual_time = 0
-const fire_rate = 200
 var use_time = 0
 var shoot_time = 0
-var active_time = 600
+var actual_time = 0
+var active_time = 500
 var active_skill = false
-
-var waves_width = 4
-var angle_width = 0.8
 
 var skill_manager
 var player
@@ -37,6 +35,7 @@ func useSkill():
 	var sound = load(sound_path).instance()
 	getSound().add_child(sound)
 	sound.init_player(soundeffect)
+	skill()
 
 func getWorld():
 	if world:
@@ -50,24 +49,38 @@ func getSound():
 	sounds = get_tree().get_root().get_node("MainScene").get_node("Sounds")
 	return sounds
 
-func skill():
-	for i in range(waves_width):
-		var bullet = load(load_path).instance()
-		getWorld().add_child(bullet)
-#		bullet.duplicate(true)
-		bullet.move_dir = (skill_manager.angle_aim - float(angle_width) / 2) + (i * (float(angle_width) / (waves_width - 1)))
-		bullet.position = player.position
-		bullet.player = player.name
-		bullet.size = 1.2
-		bullet.set_values()
-
 func _process(delta):
+	actual_time = OS.get_ticks_msec()
+	
 	if (!active_skill):
 		return
-	actual_time = OS.get_ticks_msec()
 	if (actual_time - use_time >= active_time):
 		active_skill = false
 		return
 	if (actual_time - shoot_time >= fire_rate):
 		skill()
 		shoot_time = actual_time
+
+func onHit(object, bullet):
+	if (object.is_in_group("Player")):
+		if (object.get_name() != bullet.player):
+			var sound = load(sound_path).instance()
+			getSound().add_child(sound)
+			sound.init_player(bounce_soundeffect)
+			var direction = object.position - bullet.position
+			object.move_and_slide(object.position + (direction * 50))
+
+func skill():
+	var bullet = load(load_path).instance()
+	getWorld().add_child(bullet)
+	bullet.get_node("Appearance").modulate.a = 10
+	bullet.stay = true
+#	bullet.duplicate(true)
+	bullet.position = player.position	
+	bullet.player = player.name
+	bullet.lifetime = 500
+	bullet.size_min = 2
+	bullet.size_max = 10
+	bullet.speed = 0
+	bullet.set_values()
+	bullet.get_node("Collider").connect("body_entered", self, "onHit", [bullet])

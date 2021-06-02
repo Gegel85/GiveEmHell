@@ -63,8 +63,6 @@ frames = SubResource( 4 )
 
 [node name="MovementModule" type="Node2D" parent="."]
 script = ExtResource( 7 )
-speed = 200
-focusedSpeed = 100
 
 [node name="Core" type="Sprite" parent="MovementModule"]
 scale = Vector2( 0.6, 0.6 )

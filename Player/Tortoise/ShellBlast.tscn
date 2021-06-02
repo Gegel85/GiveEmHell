@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Player/Tortoise/ShellBlast.gd" type="Script" id=1]
+[ext_resource path="res://Assets/SoundEffects/Turtle/shield4.wav" type="AudioStream" id=2]
 
 [node name="ShellBlast" type="Node2D"]
 script = ExtResource( 1 )
+soundeffect = ExtResource( 2 )
 
 [node name="Rotater" type="Node2D" parent="."]

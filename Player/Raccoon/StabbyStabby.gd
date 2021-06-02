@@ -1,6 +1,9 @@
 extends Node
 
 var cd = 400
+var sounds
+export var soundeffect: AudioStream
+onready var sound_path = "res://Prefabs/SoundPlayer.tscn"
 onready var load_path = "res://Prefabs/Characters/Projectile.tscn"
 
 var time_last_used = 0
@@ -20,6 +23,9 @@ func useSkill():
 	if (actual_time - time_last_used < cd && time_last_used > 0):
 		return
 	time_last_used = actual_time
+	var sound = load(sound_path).instance()
+	getSound().add_child(sound)
+	sound.init_player(soundeffect)
 	skill()
 
 func getWorld():
@@ -27,6 +33,12 @@ func getWorld():
 		return world
 	world = get_tree().get_root().get_node("MainScene").get_node("Projectiles")
 	return world
+
+func getSound():
+	if sounds:
+		return sounds
+	sounds = get_tree().get_root().get_node("MainScene").get_node("Sounds")
+	return sounds
 
 func callback(object):
 	if (object.is_in_group("Bullet")):

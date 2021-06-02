@@ -28,7 +28,9 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" groups=[
+"Player",
+]]
 show_behind_parent = true
 position = Vector2( -3.36359, 0 )
 collision_layer = 2147483649
