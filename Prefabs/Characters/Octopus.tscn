@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Assets/Textures/CharactersIcons/Octopus.png" type="Texture" id=1]
 [ext_resource path="res://Player/Lifebar.gd" type="Script" id=2]
@@ -9,10 +9,11 @@
 [ext_resource path="res://Assets/Textures/arrow.png" type="Texture" id=7]
 [ext_resource path="res://Player/Monkey/MonkeySniper.gd" type="Script" id=8]
 [ext_resource path="res://Player/Panda/PandaBasicShoot.gd" type="Script" id=9]
-[ext_resource path="res://Player/Panda/PandaRoll.gd" type="Script" id=10]
+[ext_resource path="res://Player/Octopus/TangledMess.gd" type="Script" id=10]
 [ext_resource path="res://Player/PlayerMovement.gd" type="Script" id=11]
 [ext_resource path="res://Player/PlayerManager.gd" type="Script" id=12]
 [ext_resource path="res://Player/Octopus/TentacularMayhem.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Assets/SoundEffects/Octopus/bubble2.wav" type="AudioStream" id=14]
 
 [sub_resource type="GDScript" id=1]
 
@@ -86,10 +87,15 @@ script = ExtResource( 9 )
 [node name="MonkeySniper" type="Node" parent="SkillsModule/SkillList"]
 script = ExtResource( 8 )
 
-[node name="PandaRoll" type="Node" parent="SkillsModule/SkillList"]
-script = ExtResource( 10 )
-
 [node name="TentacularMayhem" parent="SkillsModule/SkillList" instance=ExtResource( 13 )]
+
+[node name="TangledMess" type="Node" parent="SkillsModule/SkillList"]
+script = ExtResource( 10 )
+soundeffect = ExtResource( 14 )
+
+[node name="Rotater" type="Node2D" parent="SkillsModule/SkillList/TangledMess"]
+
+[node name="Rotater2" type="Node2D" parent="SkillsModule/SkillList/TangledMess"]
 
 [node name="Lifebar" type="Sprite" parent="."]
 visible = false

@@ -4,12 +4,12 @@ const cd = 5000
 const fire_rate = 300
 var use_time = 0
 var shoot_time = 0
-var active_time = 1200
+var active_time = 2100
 var active_skill = false
+var sounds
 export var soundeffect: AudioStream
-
-onready var bullet_path = "res://Prefabs/Characters/Projectile.tscn"
 onready var sound_path = "res://Prefabs/SoundPlayer.tscn"
+onready var bullet_path = "res://Prefabs/Characters/Projectile.tscn"
 
 export var time_last_used = 0
 export var actual_time = 0
@@ -25,7 +25,6 @@ var spawn_pos
 var skill_manager
 var player
 var projectiles
-var sounds
 
 func _ready():
 	sounds = get_tree().get_root().get_node("MainScene").get_node("Sounds")
@@ -64,7 +63,7 @@ func skill():
 		bullet.size = 0.75
 		bullet.speed = 100
 		bullet.set_values()
-		bullet.move_dir = s.global_rotation	
+		bullet.move_dir = s.global_rotation
 
 func _process(delta):
 	if (!active_skill):
