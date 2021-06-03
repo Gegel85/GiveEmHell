@@ -52,9 +52,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -234.0
-margin_top = -150.0
+margin_top = -125.0
 margin_right = 234.0
-margin_bottom = 150.0
+margin_bottom = 125.0
 alignment = 1
 script = ExtResource( 6 )
 __meta__ = {
@@ -64,27 +64,17 @@ __meta__ = {
 [node name="PlayButton" parent="Menu" groups=[
 "Button",
 ] instance=ExtResource( 1 )]
-margin_bottom = 97.0
+margin_bottom = 123.0
 focus_neighbour_top = NodePath("../QuitButton")
 focus_neighbour_bottom = NodePath("../SettingsButton")
 keep_pressed_outside = true
-next_scene_path = "res://Scenes/ModeSelection/ModeSelection.tscn"
-
-[node name="SettingsButton" parent="Menu" groups=[
-"Button",
-] instance=ExtResource( 1 )]
-margin_top = 101.0
-margin_bottom = 198.0
-focus_neighbour_top = NodePath("../PlayButton")
-focus_neighbour_bottom = NodePath("../QuitButton")
-text = "Settings"
-next_scene_path = "res://Scenes/Settings/SettingsScreen.tscn"
+next_scene_path = "res://Scenes/Lobby/Lobby.tscn"
 
 [node name="QuitButton" parent="Menu" groups=[
 "Button",
 ] instance=ExtResource( 3 )]
-margin_top = 202.0
-margin_bottom = 300.0
+margin_top = 127.0
+margin_bottom = 250.0
 focus_neighbour_top = NodePath("../SettingsButton")
 focus_neighbour_bottom = NodePath("../PlayButton")
 
