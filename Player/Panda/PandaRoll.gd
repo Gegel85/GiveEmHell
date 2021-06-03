@@ -5,7 +5,6 @@ var sounds
 export var soundeffect: AudioStream
 export var roar_soundeffect: AudioStream
 onready var sound_path = "res://Prefabs/SoundPlayer.tscn"
-onready var load_path = "res://Prefabs/Characters/Projectile.tscn"
 
 var time_last_used = 0
 var actual_time = 0
@@ -36,6 +35,7 @@ func useSkill():
 	sound = load(sound_path).instance()
 	getSound().add_child(sound)
 	sound.init_player(roar_soundeffect)
+	player.make_invincible_for(active_time)
 
 func getWorld():
 	if world:
@@ -58,15 +58,5 @@ func _process(delta):
 		player.get_node("MovementModule").useForcedSpeed = false
 		player.get_node("MovementModule").forcedSpeed = 0
 		return
-	var bullet = load(load_path).instance()
-	getWorld().add_child(bullet)
-	bullet.get_node("Appearance").modulate.a = 0
-#	bullet.duplicate(true)
-	bullet.position = player.position	
-	bullet.player = player.name
-	bullet.lifetime = 50
-	bullet.size = 2.5
-	bullet.speed = 0
-	bullet.set_values()
 	player.get_node("MovementModule").useForcedSpeed = true
 	player.get_node("MovementModule").forcedSpeed = speed

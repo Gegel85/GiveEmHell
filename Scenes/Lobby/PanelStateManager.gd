@@ -54,9 +54,8 @@ func changeState() -> void:
 		label.visible = false
 		texture.visible = true
 		texture.texture = characterList[characterIndex]
-		if !settingsNode.get_setting("keybind", "controller") && _isOwner:
-			changeChar[0].visible = true
-			changeChar[1].visible = true
+		changeChar[0].visible = true
+		changeChar[1].visible = true
 	else:
 		state = Panel.IDLE
 		label.visible = true

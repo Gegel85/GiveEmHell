@@ -8,7 +8,7 @@ enum player {
 
 const playerColors = [
 	Color(1, 0.7, 0),
-	Color(0, 0, 1),
+	Color(0.3, 0.3, 1),
 	Color(0.4, 1, 0),
 	Color(1, 0, 0.8)
 ]
@@ -92,7 +92,7 @@ func _input(event: InputEvent) -> void:
 #Leave the lobby
 		elif Input.is_action_just_released("ui_cancel"):
 			if nbOfPlayer == 0:
-				get_tree().change_scene("res://Scenes/ModeSelection/ModeSelection.tscn")
+				get_tree().change_scene("res://Scenes/TitleScreen/TitleScreen.tscn")
 			if !hasDevice(playerRdy, device) && hasDevice(deviceList, device):
 				var i = findDevice(deviceList, device)
 				if (OS.get_ticks_msec() - throttleLeave[i]) > THROTTLE_ACCEPT:
