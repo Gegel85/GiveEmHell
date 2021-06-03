@@ -14,13 +14,15 @@ const rotate_speed = 80
 const base_rotation = 0
 const spawn_point_count = 4
 const radius = 100
+const size_min = 25
+const size_max = 175
 
 var skill_manager
 var player
 var world
 var using = false
 var pressed = false
-var sized = 0
+var sized = size_min
 
 func _ready():
 	world = get_tree().get_root().get_node("MainScene").get_node("Projectiles")
@@ -40,7 +42,7 @@ func getSound():
 	return sounds
 
 func skill():
-	var maximum = 8 + sized / 2
+	var maximum = 8 + sized / 4
 
 	var sound = load(sound_path).instance()
 	getSound().add_child(sound)
@@ -62,10 +64,13 @@ func _process(delta):
 		indicator.modulate.a = 0
 		using = false
 		skill()
-		sized = 0
+		sized = size_min
 		time_last_used = actual_time
 	if using:
-		sized += 1
+		if (sized < size_max):
+			sized += 1
+		else:
+			sized = size_max
 		indicator.position = player.position
 		indicator.scale = Vector2(sized * 0.01, sized * 0.01)
 		indicator.modulate = player.color
