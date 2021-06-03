@@ -4,7 +4,7 @@ var player = ""
 
 var move_dir = 0
 var spawn_pos = Vector2.ZERO
-var speed = 300
+var speed = 0
 var acceleration = 0
 var speed_min_cap = 0
 var speed_max_cap = 999999

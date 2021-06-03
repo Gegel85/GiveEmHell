@@ -48,4 +48,5 @@ func skill():
 	bullet.position = player.position
 	bullet.player = player.name
 	bullet.size = 0.75
+	bullet.speed = 400
 	bullet.set_values()

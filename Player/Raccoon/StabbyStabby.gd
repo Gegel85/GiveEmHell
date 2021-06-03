@@ -41,6 +41,7 @@ func getSound():
 	return sounds
 
 func callback(object):
+	var bullet = get_parent()
 	if (object.is_in_group("Bullet")):
 		var p = object.get_parent().queue_free()
 

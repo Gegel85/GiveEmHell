@@ -1,6 +1,6 @@
 extends Node
 
-const cd = 400
+const cd = 1000
 var sounds
 export var soundeffect: AudioStream
 onready var sound_path = "res://Prefabs/SoundPlayer.tscn"

@@ -70,5 +70,6 @@ func skill():
 	bullet.position.y = player.position.y + sin(skill_manager.angle_aim + bullets_angles[bullet_rotation - 1]) * aim_radius
 	bullet.player = player.name
 	bullet.size = 0.75
+	bullet.speed = 300
 	bullet.set_values()
 	bullet_rotation = (bullet_rotation % 4) + 1

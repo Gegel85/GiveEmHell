@@ -59,6 +59,7 @@ func skill():
 		bullet.position = player.position
 		bullet.player = player.name
 		bullet.size = 1.2
+		bullet.speed = 500
 		bullet.set_values()
 
 func _process(delta):

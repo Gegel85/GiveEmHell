@@ -9,10 +9,10 @@ var acceleration = 0
 var speed_min_cap = 0
 var speed_max_cap = 999999
 
-var size_min = 0.5
-var size_max = 2
+var size_min = 1
+var size_max = 1
 var distance_max = 0
-var lifetime = 99999
+var lifetime = 4000
 var size = 1
 var spawn_time = 0
 var vector

@@ -68,7 +68,7 @@ func onHit(object, bullet):
 			getSound().add_child(sound)
 			sound.init_player(bounce_soundeffect)
 			var direction = object.position - bullet.position
-			object.move_and_slide(object.position + (direction * 50))
+			object.move_and_slide(object.position + (direction * 75))
 
 func skill():
 	var bullet = load(load_path).instance()
@@ -80,7 +80,7 @@ func skill():
 	bullet.player = player.name
 	bullet.lifetime = 500
 	bullet.size_min = 2
-	bullet.size_max = 10
+	bullet.size_max = 20
 	bullet.speed = 0
 	bullet.set_values()
 	bullet.get_node("Collider").connect("body_entered", self, "onHit", [bullet])

@@ -1,15 +1,15 @@
 extends Node
 
-var cd = 500
+var cd = 5000
+const fire_rate = 500
 var sounds
 export var soundeffect: AudioStream
+export var bounce_soundeffect: AudioStream
 onready var sound_path = "res://Prefabs/SoundPlayer.tscn"
-onready var load_path = "res://Prefabs/Characters/Projectile.tscn"
+onready var load_path = "res://Prefabs/Area.tscn"
 
 var time_last_used = 0
 var actual_time = 0
-
-var shot_angle = 0.25
 
 var skill_manager
 var player
@@ -25,6 +25,9 @@ func useSkill():
 	if (actual_time - time_last_used < cd && time_last_used > 0):
 		return
 	time_last_used = actual_time
+	var sound = load(sound_path).instance()
+	getSound().add_child(sound)
+	sound.init_player(soundeffect)
 	skill()
 
 func getWorld():
@@ -40,16 +43,17 @@ func getSound():
 	return sounds
 
 func skill():
-	var sound = load(sound_path).instance()
-	getSound().add_child(sound)
-	sound.init_player(soundeffect)
-	for i in range(3):
-		var bullet = load(load_path).instance()
-		getWorld().add_child(bullet)
-#		bullet.duplicate(true)
-		bullet.move_dir = skill_manager.angle_aim - float(shot_angle) + (i * shot_angle)
-		bullet.position = player.position
-		bullet.player = player.name
-		bullet.speed = 300
-		bullet.size = 1
-		bullet.set_values()
+	var players = getWorld().get_parent().get_node("Players").get_children()
+	for pl in players:
+		if (pl.name != player.name):
+			var bullet = load(load_path).instance()
+			var projectiles = bullet.get_children()
+			for proj in projectiles:
+				if (proj.is_in_group("Bullet")):
+					proj.player = player.name
+					proj.get_node("Appearance").modulate = player.color
+			getWorld().add_child(bullet)
+		#	bullet.duplicate(true)
+			bullet.position = pl.position
+			bullet.player = player.name
+			bullet.speed = 0

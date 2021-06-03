@@ -1,10 +1,10 @@
 extends Node
 
 const cd = 5000
-const fire_rate = 300
+const fire_rate = 200
 var use_time = 0
 var shoot_time = 0
-var active_time = 2100
+var active_time = 600
 var active_skill = false
 var sounds
 export var soundeffect: AudioStream
@@ -15,9 +15,9 @@ export var time_last_used = 0
 export var actual_time = 0
 onready var rotater = $Rotater
 
-const rotate_speed = 120
+const rotate_speed = 1800
 const base_rotation = 0
-const spawn_point_count = 8
+const spawn_point_count = 6
 const radius = 100
 
 var spawn_pos
