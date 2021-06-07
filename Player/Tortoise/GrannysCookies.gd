@@ -1,33 +1,18 @@
 extends Node
 
-const cd = 5000
-const fire_rate = 300
-var use_time = 0
-var shoot_time = 0
-var active_time = 1200
-var active_skill = false
-var sounds
-export var soundeffect: AudioStream
-onready var sound_path = "res://Prefabs/SoundPlayer.tscn"
-onready var load_path = "res://Prefabs/Characters/Projectile.tscn"
-
-var time_last_used = 0
-var actual_time = 0
 onready var rotater = $Rotater
-
+var player
 const rotate_speed = 0
 const base_rotation = 0
 const spawn_point_count = 8
 const radius = 10
-
-var skill_manager
-var player
-var world
+var load_path
+var skill
 
 func _ready():
-	world = get_tree().get_root().get_node("MainScene").get_node("Projectiles")
-	skill_manager = get_parent().get_parent()
-	player = skill_manager.get_parent()
+	skill = get_parent()
+	player = skill.player
+	load_path = skill.load_path
 	var step = 2 * PI / spawn_point_count
 	
 	for i in range(spawn_point_count):
@@ -37,22 +22,10 @@ func _ready():
 		spawn_point.rotation = pos.angle()
 		rotater.add_child(spawn_point)
 
-func getWorld():
-	if world:
-		return world
-	world = get_tree().get_root().get_node("MainScene").get_node("Projectiles")
-	return world
-
-func getSound():
-	if sounds:
-		return sounds
-	sounds = get_tree().get_root().get_node("MainScene").get_node("Sounds")
-	return sounds
-
 func skill():
 	for s in rotater.get_children():
 		var bullet = load(load_path).instance()
-		getWorld().add_child(bullet)
+		skill.getWorld().add_child(bullet)
 #		bullet.duplicate(true)
 		bullet.position = player.position
 		bullet.player = player.name
@@ -62,26 +35,10 @@ func skill():
 		bullet.move_dir = s.global_rotation	
 
 func _process(delta):
-	if (!active_skill):
+	if (!skill.active_skill):
 		return
-	actual_time = OS.get_ticks_msec()
 	var new_rotation = rotater.rotation_degrees + rotate_speed * delta
 	rotater.rotation_degrees = fmod(new_rotation, 360)
-	if (actual_time - use_time >= active_time):
-		active_skill = false
-		return
-	if (actual_time - shoot_time >= fire_rate):
+	if (skill.actual_time - skill.shoot_time >= skill.fire_rate):
 		skill()
-		shoot_time = actual_time
-
-func useSkill():
-	actual_time = OS.get_ticks_msec()
-	if (actual_time - time_last_used < cd && time_last_used > 0):
-		return
-	time_last_used = actual_time
-	use_time = actual_time
-	shoot_time = 0
-	active_skill = true
-	var sound = load(sound_path).instance()
-	getSound().add_child(sound)
-	sound.init_player(soundeffect)
+		skill.shoot_time = skill.actual_time
