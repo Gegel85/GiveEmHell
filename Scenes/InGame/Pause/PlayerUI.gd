@@ -35,3 +35,7 @@ func setCooldownSkill(maxLength, actual, nb):
 	var percent = float(actual) / maxLength
 	cooldown.scale.y = 1 - percent
 	cooldown.position.y = pos_max - pos_max * (1 - percent)
+
+func set_transparent():
+	modulate = Color(128,128,128)
+	modulate.a = 0.5

@@ -3,6 +3,7 @@ extends Sprite
 var HP = 4
 var HP_max = 4
 
+var respawn = 4
 var heal_tic = 0
 var heal_val = 0
 
@@ -15,6 +16,27 @@ func _ready():
 	display_health_bar()
 	pass # Replace with function body.
 
+func navigate(scene):
+	var level = loadScene(scene)
+	get_tree().set_current_scene(level)
+	get_tree().get_root().get_node("TitleScreenMusic").play()	
+	unloadScene("MainScene")
+
+func loadScene(path: String):
+	var root = get_tree().get_root()
+	var next_level = load(path).instance()
+
+	root.add_child(next_level)
+	return next_level
+
+func unloadScene(node: String) -> void:
+	var root = get_tree().get_root()
+	var level = root.get_node(node)
+
+	root.remove_child(level)
+	level.call_deferred("free")
+
+
 func get_life():
 	return HP
 
@@ -24,6 +46,13 @@ func display_health_bar():
 	$Energy.position.x = pos_min + ((pos_max + (pos_min * -1)) * percent)
 
 func out_of_life():
+	respawn -= 1
+	if respawn == 0:
+		get_parent().playerUI.set_transparent()
+		get_parent().queue_free()
+		if get_parent().get_parent().get_child_count() == 2:
+			navigate("res://Scenes/Lobby/Lobby.tscn")
+		return
 	var spawner_pos = get_tree().get_root().get_node("MainScene/Map/SpawnSystem").get_random_spawn()
 	get_parent().position = spawner_pos
 	HP = HP_max
