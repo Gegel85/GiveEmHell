@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Claws.png-7766911af96cad6819046170f0b88391.stex"
+path="res://.import/2Stink.png-31802b23112d0969fbb267f7b05a8489.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/CharactersAttackIcons/Panda/Claws.png"
-dest_files=[ "res://.import/Claws.png-7766911af96cad6819046170f0b88391.stex" ]
+source_file="res://Assets/Textures/CharactersAttackIcons/Octopus/2Stink.png"
+dest_files=[ "res://.import/2Stink.png-31802b23112d0969fbb267f7b05a8489.stex" ]
 
 [params]
 
