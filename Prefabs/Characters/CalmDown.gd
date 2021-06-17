@@ -8,6 +8,7 @@ export var bounce_soundeffect: AudioStream
 onready var sound_path = "res://Prefabs/SoundPlayer.tscn"
 onready var load_path = "res://Prefabs/Area.tscn"
 
+var casting_time = 2000
 var time_last_used = 0
 var actual_time = 0
 
@@ -28,6 +29,7 @@ func useSkill():
 	var sound = load(sound_path).instance()
 	getSound().add_child(sound)
 	sound.init_player(soundeffect)
+	player.make_casting_for(casting_time, true)
 	skill()
 
 func getWorld():

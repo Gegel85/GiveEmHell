@@ -6,6 +6,7 @@ export var soundeffect: AudioStream
 onready var sound_path = "res://Prefabs/SoundPlayer.tscn"
 onready var load_path = "res://Prefabs/Characters/Projectile.tscn"
 
+var casting_time = 2000
 var active_time = 3000
 var nb_projectiles = 6
 var spawn_pos = Vector2.ZERO
@@ -28,6 +29,7 @@ func useSkill():
 	actual_time = OS.get_ticks_msec()
 	if (actual_time - time_last_used < cd && time_last_used > 0):
 		return
+	player.make_casting_for(casting_time, true)
 	time_last_used = actual_time
 	player.make_opacity(0)
 	spawn_pos = player.position
@@ -59,7 +61,7 @@ func _process(delta):
 		for i in range(projectiles.size()):
 			self.get_child(i).queue_free()
 		return
-
+	player.make_casting_for(0, true)
 	var dist = spawn_pos.distance_to(player.position)
 	var angle = spawn_pos.angle_to_point(player.position)
 	var step = 2 * PI / nb_projectiles

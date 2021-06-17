@@ -6,6 +6,7 @@ export var soundeffect: AudioStream
 onready var sound_path = "res://Prefabs/SoundPlayer.tscn"
 onready var load_path = "res://Prefabs/Characters/Projectile.tscn"
 
+var casting_time = 2000
 var time_last_used = 0
 var actual_time = 0
 onready var indicator = $MainIndicator
@@ -66,7 +67,9 @@ func _process(delta):
 		skill()
 		sized = size_min
 		time_last_used = actual_time
+		player.make_casting_for(casting_time, true)
 	if using:
+		player.make_casting_for(0, true)
 		if (sized < size_max):
 			sized += 1
 		else:

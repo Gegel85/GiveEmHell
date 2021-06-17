@@ -19,7 +19,7 @@ func updateSkillsCooldown():
 		var used_time = actual_time - skills[i].time_last_used
 		if (used_time > cd):
 			used_time = cd
-		player.playerUI.setCooldownSkill(cd, used_time, i)	
+		player.playerUI.setCooldownSkill(cd, used_time, i)
 
 func _process(delta):
 	updateSkillsCooldown()

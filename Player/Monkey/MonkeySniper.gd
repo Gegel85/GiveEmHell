@@ -5,6 +5,7 @@ onready var load_path = "res://Prefabs/Characters/Projectile.tscn"
 onready var sound_path = "res://Prefabs/SoundPlayer.tscn"
 export var soundeffect: AudioStream
 
+var casting_time = 1000
 var time_last_used = 0
 var actual_time = 0
 
@@ -22,6 +23,7 @@ func useSkill():
 	actual_time = OS.get_ticks_msec()
 	if (actual_time - time_last_used < cd && time_last_used > 0):
 		return
+	player.make_casting_for(casting_time, true)
 	time_last_used = actual_time
 	skill()
 

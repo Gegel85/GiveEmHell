@@ -6,6 +6,7 @@ export var soundeffect: AudioStream
 onready var sound_path = "res://Prefabs/SoundPlayer.tscn"
 onready var load_path = "res://Prefabs/Characters/Projectile.tscn"
 
+var casting_time = 2000
 var time_last_used = 0
 var actual_time = 0
 onready var rotater = $Rotater
@@ -67,6 +68,7 @@ func useSkill():
 	actual_time = OS.get_ticks_msec()
 	if (actual_time - time_last_used < cd && time_last_used > 0):
 		return
+	player.make_casting_for(casting_time, true)
 	time_last_used = actual_time
 	var sound = load(sound_path).instance()
 	getSound().add_child(sound)

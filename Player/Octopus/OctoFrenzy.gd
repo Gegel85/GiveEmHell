@@ -3,6 +3,7 @@ extends Node
 var cd = 200
 onready var load_path = "res://Prefabs/Characters/Projectile.tscn"
 
+var casting_time = 2000
 var time_last_used = 0
 var actual_time = 0
 var shoot_time = 0
@@ -48,6 +49,7 @@ func _process(delta):
 		bullet_rotation = 1
 		time_since_ramp = 0
 		time_last_used = actual_time
+		player.make_casting_for(10, true)
 	if using:
 		actual_time = OS.get_ticks_msec()
 		if (actual_time - time_since_ramp > ramp_up_time && bullet_spawn < max_bullet_swap):

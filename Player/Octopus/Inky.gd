@@ -5,6 +5,8 @@ var sounds
 export var soundeffect: AudioStream
 onready var sound_path = "res://Prefabs/SoundPlayer.tscn"
 onready var ink_path = "res://Prefabs/Ink.tscn"
+
+var casting_time = 2000
 var time_last_used = 0
 var actual_time = 0
 var use_time = 0
@@ -56,6 +58,7 @@ func useSkill():
 	actual_time = OS.get_ticks_msec()
 	if (actual_time - time_last_used < cd && time_last_used > 0):
 		return
+	player.make_casting_for(casting_time, true)
 	use_time = actual_time
 	time_last_used = actual_time
 	active_skill = true

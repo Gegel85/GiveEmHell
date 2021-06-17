@@ -1,6 +1,7 @@
 extends Node2D
 
 var velocity = Vector2(0,0)
+var base_speed = 200
 export var speed = 200
 export var focused = false
 export var focusedSpeed = 100

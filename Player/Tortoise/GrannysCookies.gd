@@ -8,6 +8,7 @@ const spawn_point_count = 8
 const radius = 10
 var load_path
 var skill
+var casting_time = 2000
 
 func _ready():
 	skill = get_parent()
@@ -37,6 +38,7 @@ func skill():
 func _process(delta):
 	if (!skill.active_skill):
 		return
+	player.make_casting_for(0, true)
 	var new_rotation = rotater.rotation_degrees + rotate_speed * delta
 	rotater.rotation_degrees = fmod(new_rotation, 360)
 	if (skill.actual_time - skill.shoot_time >= skill.fire_rate):
